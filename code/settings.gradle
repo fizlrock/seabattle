@@ -1,12 +1,25 @@
 
-
-
-
 pluginManagement{
-  plugins {
-      id ("io.freefair.lombok") version "8.10"
+    plugins {
+        id 'io.freefair.lombok' version '8.10'
+        id 'org.liquibase.gradle' version '3.0.0'
+    }
+}
+
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'org.liquibase:liquibase-core:4.29.1'
   }
 }
+
+
+
+
+
+
 
 rootProject.name = 'code'
 include('app')
