@@ -1,12 +1,8 @@
-
-
 plugins {
     id 'application'
     id 'io.freefair.lombok'
     id 'org.liquibase.gradle'
 }
-
-
 
 repositories {
     mavenCentral()
@@ -15,13 +11,9 @@ repositories {
 dependencies {
     testImplementation libs.junit.jupiter
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
-   
-    liquibaseRuntime 'org.liquibase:liquibase-core:4.26.1'
-    liquibaseRuntime 'org.liquibase:liquibase-groovy-dsl:3.0.2'
+    liquibaseRuntime 'org.liquibase:liquibase-core:4.29.0'
     liquibaseRuntime 'info.picocli:picocli:4.6.1'
-
-    implementation 'org.postgresql:postgresql:42.7.4'
+    liquibaseRuntime 'org.postgresql:postgresql:42.7.4'
 }
 
 java {
@@ -38,4 +30,16 @@ application {
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+
+liquibase {
+    activities {
+        main {
+          changelogFile './app/src/main/resources/db/changelog/db.changelog-master.yaml'
+    			url 'jdbc:postgresql://localhost:5432/trackerdb'
+          username "admin"
+          password "gracesecret"
+        }
+    }
 }

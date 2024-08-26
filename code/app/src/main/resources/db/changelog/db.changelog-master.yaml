@@ -1,0 +1,18 @@
+
+
+databaseChangeLog:
+  - changeSet:
+      id: '1'
+      author: 'fizlrock'
+      comment: Create table for users
+      changes:
+        - createTable:
+            tableName: app_user
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  startWith: 1
+                  constraints:
+                    primaryKey: true
