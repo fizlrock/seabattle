@@ -2,6 +2,7 @@ plugins {
     id 'application'
     id 'io.freefair.lombok'
     id 'org.liquibase.gradle'
+    id 'org.openapi.generator'
 }
 
 repositories {
@@ -31,6 +32,9 @@ tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+
+
+compileJava.dependsOn tasks.openApiGenerate
 
 
 liquibase {
