@@ -1,0 +1,52 @@
+
+openapi: 3.1.3
+info:
+  title: SUPhoto - OpenAPI 3.0
+  description: |-
+    Сервис для обмена фотографиями с мероприятий.
+ 
+
+  contact:
+    email: nirku0soft@yandex.ru
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.0.1
+  
+servers:
+  - url: https://petstore3.swagger.io/api/v3
+
+
+
+paths:
+  /event/create:
+    post:
+      summary: Создание нового мероприятия
+      tags: 
+        - Событие
+      operationId: createNewEvent
+      responses:
+          '200':
+            description: Успешный ответ со списком мероприятий
+            content:
+              application/json:
+                example: arst
+
+
+components:
+  schemas:
+    event:
+        type: object
+        properties:
+          event_title:
+              type: string
+              example: Прогулка по реке Сок
+          location:
+              type: string
+              example: село Старосемейкино
+          start_time:
+              type: string
+              example: 2005-08-09T18:31:42+03
+          end_time:
+              type: string
+              example: 2005-08-09T18:31:42+03
