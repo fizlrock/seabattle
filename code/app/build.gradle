@@ -56,12 +56,17 @@ tasks.named('test') {
 compileJava.dependsOn tasks.openApiGenerate
 
 openApiGenerate {
-	inputSpec='/home/fizlrock/temp/mycode/AppTemplate/JSON-RPC-Project-Template/code/app/src/main/resources/openapi.yaml'
+	inputSpec="${projectDir}/src/main/resources/openapi.yaml"
 	generatorName='spring'
 	additionalProperties = [
 		"useSpringBoot3":"true"	
 	]
 }
+
+openApiValidate{
+	inputSpec="${projectDir}/src/main/resources/openapi.yaml"
+}
+
 
 sourceSets {
     main {

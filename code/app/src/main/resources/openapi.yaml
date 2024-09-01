@@ -1,9 +1,9 @@
 
 openapi: 3.1.3
 info:
-  title: SUPhoto - OpenAPI 3.0
+  title: Base API - OpenAPI 3.0
   description: |-
-    Сервис для обмена фотографиями с мероприятий.
+    Base register and login application
  
 
   contact:
@@ -14,39 +14,45 @@ info:
   version: 0.0.1
   
 servers:
-  - url: https://petstore3.swagger.io/api/v3
-
-
+  - url: https://localhost:8080
 
 paths:
-  /event/create:
+  /api/register:
     post:
-      summary: Создание нового мероприятия
+      summary: Register new user request
       tags: 
         - Событие
       operationId: createNewEvent
       responses:
           '200':
             description: Успешный ответ со списком мероприятий
-            content:
-              application/json:
-                example: arst
+                  
 
 
 components:
+  securitySchemes:
+    bearerHttpAuthentication:
+          description: Bearer token using a JWT
+          type: http
+          scheme: Bearer
+          bearerFormat: JWT
+
   schemas:
-    event:
-        type: object
-        properties:
-          event_title:
-              type: string
-              example: Прогулка по реке Сок
-          location:
-              type: string
-              example: село Старосемейкино
-          start_time:
-              type: string
-              example: 2005-08-09T18:31:42+03
-          end_time:
-              type: string
-              example: 2005-08-09T18:31:42+03
+    registration_request:
+      type: object
+      properties:
+        username:
+          type: string
+          example: fizlrock
+        password:
+          type: string
+          example: moyparol123
+      required:
+        - username
+        - password
+    
+  # requestBodies:
+  #   registration_request:
+  #     type: object
+  #     content:
+        
