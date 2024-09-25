@@ -1,9 +1,9 @@
 
-openapi: 3.1.3
+openapi: 3.1.0
 info:
-  title: Base API - OpenAPI 3.0
+  title: Seabattle API 
   description: |-
-    Base register and login application
+    Сервис для игры в морской бой
  
 
   contact:
@@ -12,47 +12,334 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: 0.0.1
-  
+
+tags:
+  - name: pet
+    description: Everything about your Pets
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io 
+
 servers:
-  - url: https://localhost:8080
+  - url: https://localhost:8080/api
 
 paths:
-  /api/register:
-    post:
-      summary: Register new user request
-      tags: 
-        - Событие
-      operationId: createNewEvent
+  
+  /placement_strategy:
+    get:
+      tags:
+        - pet
+      summary: > 
+       Получить список стратегий создания карты
+       расстановкий кораблей
+
+      security:
+        - bearerAuth: []
+      operationId: getPlacementStrategies
+
       responses:
-          '200':
-            description: Успешный ответ со списком мероприятий
-                  
+        '200':
+          description: Список стратегий расстановки
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/placementStrategy'
+  
+  /boat_placement:
+    get:
+      summary: >
+        Сгенерировать расстановку кораблей по заданной стратегии
+      operationId: getGeneratedBoatSpec
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: strategy_id
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Расстановка кораблей
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/boatCords'
+                
+  /game/settings:
+    get:
+      operationId: getGameSettings
+      summary: >
+        Получить список параметров игры
+      responses:
+        '200':
+          description: Настройки игры
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/gameSettings'
+  /game/shot:
+    post:
+      summary: Сделать выстрел по полю противника
+      security:
+        - bearerAuth: []
+      requestBody:
+       content:
+        'application/json':
+           schema:
+             $ref: '#/components/schemas/shot'
+      responses:
+        '200':
+          description: Состояние карты
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/gameState'
+  /game:
+    get:
+      summary : Получить состояние игры, если оно изменилось(вебхук).
+      description: |
+        Получить состояние игры, если оно изменилось(вебхук).
+
+        В параметрах необходимо указать текущую версию состояния игры - currentState.
+
+        Если currentStateNumber не совпадет с stateNumber сервер вернет текущий gameState. 
+
+        Так же сервер вернет gameState если истечет таймаут. 
+
+      operationId: getUpdatedGameState
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: currentStateNumber
+          in : query
+          required: true
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+      responses:
+        200:
+          description: Новое состояние игры.
+          content:
+            applicaton/json:
+              schema:
+                $ref: '#/components/schemas/gameState'
+        208:
+          description: |
+            Cостояние игры с переданным currentStateNumber.
+            Такой ответ означает истечение таймаута.
+          content:
+            applicaton/json:
+              schema:
+                $ref: '#/components/schemas/gameState'
+
+                
+          
+    post:
+      summary: Начать новую игру
+      description: Начать новую игру
+      operationId: startNewGame
+
+      security:
+        - bearerAuth: []
+
+      requestBody:
+       content:
+        'application/json':
+           schema:
+             $ref: '#/components/schemas/boatCords'
+
+      responses:
+        '201':
+          description: Состояние игры
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/gameState'
+
 
 
 components:
   securitySchemes:
-    bearerHttpAuthentication:
+    bearerAuth:
           description: Bearer token using a JWT
           type: http
           scheme: Bearer
           bearerFormat: JWT
 
+
   schemas:
-    registration_request:
+
+    shot:
+      type: object
+      descriptioin: Координаты выстрела
+
+      required:
+        - x
+        - y
+
+      properties:
+        x:
+          type: integer
+          format: int32
+        y:
+          type: integer
+          format: int32
+
+    gameState:
+      type: object
+      description: Состояние игры
+
+      required:
+        - yourName
+        - status
+        - changeCount
+
+      properties:
+        changeCount:
+          type: integer
+          format: int64
+          minimum: 0
+          examples: [1, 2]
+        status:
+          type: string
+          description: Этап жизненного цикла игры
+          enum:
+            - Started
+            - WaitingSecondPlayer
+            - Ended
+            - Failed
+        oponentName:
+          type: string
+          examples : ['njenkins']
+        whoShoting:
+          description: Активный игрок
+          type: string
+          examples: ['fizlrock']
+        
+        yourField:
+          $ref: '#/components/schemas/fieldState'
+        oponentField:
+          $ref: '#/components/schemas/fieldState'
+          
+    fieldState:
+      type: string
+      description: >
+        Состояние игрового поля
+      examples: ['AAAABC...AAT']
+      
+
+    gameSettings:
+      type: object
+      description: Описание правил игры в морской бой
+      required:
+        - boatTypes
+        - gameMapSettings
+      properties:
+        boatTypes:
+          $ref: '#/components/schemas/boatTypesSettings'
+        gameMapSettings:
+          $ref : '#/components/schemas/gameMapSettings'
+
+    
+
+    
+    placementStrategy:
+      description: >
+        Стратегия расстановки кораблей
       type: object
       properties:
-        username:
+        id:
+          type: integer
+          format: int64
+          minimum: 0
+        name:
           type: string
-          example: fizlrock
-        password:
-          type: string
-          example: moyparol123
       required:
-        - username
-        - password
+        - id
+        - name
+      example:
+        - id: 1
+          name: Края
+        - id: 2
+          name: Гусиные лапки
+
+
+    boatCords:
+      type: array
+      description: Описание расположений кораблей на карте 
+      items:
+        $ref : '#/components/schemas/boatCord'
+
+    boatCord:
+      type: object
+      description: Описание расположения одного корабля на карте
+      properties:
+        xs:
+          type: integer
+          format: int32
+          description: Координата начала корабля по оси X
+        ys:
+          type: integer
+          format: int32
+          description: Координата начала корабля по оси Y
+        xe:
+          type: integer
+          format: int32
+          description: Координата конца корабля по оси X
+        ye:
+          type: integer
+          format: int32
+          description: Координата конца корабля по оси Y
+
+      examples:
+        - xs: 1
+          ys: 1
+          xe: 4
+          ye: 1
+
+    gameMapSettings:
+      type: object
+      description: Описание свойств игрового поля
+      required:
+        - width
+        - height
+      properties:
+        width:
+          type: integer
+          format: int32
+          description: Ширина поля в клетках
+        height:
+          type: integer
+          format: int32
+          description: Высота поля в клетках
+      examples:
+        - width: 10
+          height: 10
+
+
+    boatTypesSettings:
+      description: Список допустимых видов кораблей
+      type: array
+      items: 
+        $ref: '#/components/schemas/boatType'
+      
     
-  # requestBodies:
-  #   registration_request:
-  #     type: object
-  #     content:
-        
+    boatType:
+      type: object
+      description: Описание вида корабля
+      properties:
+        size:
+          type: integer
+          format: int32
+          description: Длина корабля в клетках
+        count:
+          type: integer
+          format: int32
+          description: Кол-во кораблей данного типа в игре
+      examples:
+        - size: 4
+          count: 1
+       
