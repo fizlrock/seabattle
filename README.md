@@ -11,6 +11,7 @@ Ship - S
 ShotIntoVoid - x
 ShotIntoShip - X 
 
+```
   0 1 2 3 4 5 6 7 8 9
 0 . . . . . . . . . .
 1 . . . . . . . . . .
@@ -22,6 +23,7 @@ ShotIntoShip - X
 7 . . . . . . . . . .
 8 . . . . . . . . . .
 9 . . . . . . . . . .
+```
 
 ### OpponentMap
 
@@ -30,6 +32,8 @@ CheckedEmpty - O
 UncheckedEmpty - O
 BlowedShip - X
 
+
+```
   0 1 2 3 4 5 6 7 8 9
 0 . . . . . . . . . .
 1 . . . . . . 0 . . .
@@ -41,4 +45,4 @@ BlowedShip - X
 7 . . . . . . . . . .
 8 . . . . . . . . . .
 9 . . . . . . . . . .
-
+```
