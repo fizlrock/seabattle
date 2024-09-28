@@ -1,10 +1,5 @@
 
-
-
-
-## Отображение кораблей в ASCII формате
-
-### OwnerMap
+OwnerMap
 
 Void - .
 Ship - S
@@ -23,7 +18,10 @@ ShotIntoShip - X
 8 . . . . . . . . . .
 9 . . . . . . . . . .
 
-### OpponentMap
+
+
+
+OpponentMap
 
 Unchecked - .
 CheckedEmpty - O

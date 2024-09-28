@@ -82,4 +82,12 @@ public class GameField {
   public int getWidth() {
     return width;
   }
+
+  public OwnerCageState[][] getOwnerMap() {
+    return ownerMap;
+  }
+
+  public OpponentCageState[][] getOpponentMap() {
+    return opponentMap;
+  }
 }

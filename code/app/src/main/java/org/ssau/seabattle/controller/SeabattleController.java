@@ -3,6 +3,7 @@ package org.ssau.seabattle.controller;
 import java.util.List;
 
 import org.openapitools.api.SeabattleApi;
+import org.openapitools.model.AuthData;
 import org.openapitools.model.BoatCord;
 import org.openapitools.model.GameSettings;
 import org.openapitools.model.GameState;
@@ -61,5 +62,11 @@ public class SeabattleController implements SeabattleApi {
 	public Mono<ResponseEntity<GameState>> startNewGame(@Valid Flux<BoatCord> boatCord, ServerWebExchange exchange) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'startNewGame'");
+	}
+
+	@Override
+	public Mono<ResponseEntity<String>> getToken(@Valid Mono<AuthData> authData, ServerWebExchange exchange) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getToken'");
 	}
 }
