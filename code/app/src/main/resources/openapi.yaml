@@ -4,8 +4,6 @@ info:
   title: Seabattle API 
   description: |-
     Сервис для игры в морской бой
- 
-
   contact:
     email: nirku0soft@yandex.ru
   license:
@@ -13,22 +11,37 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: 0.0.1
 
-tags:
-  - name: pet
-    description: Everything about your Pets
-    externalDocs:
-      description: Find out more
-      url: http://swagger.io 
+
 
 servers:
   - url: https://localhost:8080/api
 
 paths:
-  
-  /placement_strategy:
+
+  /seabattle/token:
     get:
-      tags:
-        - pet
+      summary: >
+        Получить токен авторизации
+      operationId: getToken
+      requestBody:
+       content:
+        'application/json':
+           schema:
+             $ref: '#/components/schemas/authData'
+      responses:
+        200:
+          description: Токен авторизации
+          content:
+            application/json:
+              schema:
+                type: string
+                examples:
+                  - Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvZSBEb2UiLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNTE2MjM5MDIyfQ.SdUMMAsFFk83SHyqGjfQ1pt8v_8t4WZku5Ty3CLMaH4
+
+
+  
+  /seabattle/placement_strategy:
+    get:
       summary: > 
        Получить список стратегий создания карты
        расстановкий кораблей
@@ -45,7 +58,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/placementStrategy'
   
-  /boat_placement:
+  /seabattle/boat_placement:
     get:
       summary: >
         Сгенерировать расстановку кораблей по заданной стратегии
@@ -67,7 +80,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/boatCords'
                 
-  /game/settings:
+  /seabattle/game/settings:
     get:
       operationId: getGameSettings
       summary: >
@@ -79,7 +92,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/gameSettings'
-  /game/shot:
+  /seabattle/game/shot:
     post:
       summary: Сделать выстрел по полю противника
       security:
@@ -96,7 +109,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/gameState'
-  /game:
+  /seabattle/game:
     get:
       summary : Получить состояние игры, если оно изменилось(вебхук).
       description: |
@@ -260,7 +273,7 @@ components:
       required:
         - id
         - name
-      example:
+      examples:
         - id: 1
           name: Края
         - id: 2
@@ -310,10 +323,12 @@ components:
         width:
           type: integer
           format: int32
+          minimum: 1
           description: Ширина поля в клетках
         height:
           type: integer
           format: int32
+          minimum: 1
           description: Высота поля в клетках
       examples:
         - width: 10
@@ -334,12 +349,29 @@ components:
         size:
           type: integer
           format: int32
+          minimum: 1
           description: Длина корабля в клетках
         count:
           type: integer
           format: int32
+          minimum: 1
           description: Кол-во кораблей данного типа в игре
       examples:
         - size: 4
           count: 1
+    authData:
+      type: object
+      description: Данные для аутентификации
+      properties:
+        login:
+          type: string
+          minLength: 4
+          maxLength: 8
+          examples: ['fizlrock', 'njenkins']
+        password:
+          type: string
+          minLength: 4
+          maxLength: 12
+          examples: ['mypass', '12345678']
+          
        
