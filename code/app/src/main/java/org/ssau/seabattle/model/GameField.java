@@ -1,5 +1,13 @@
 package org.ssau.seabattle.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
+
 import org.openapitools.model.BoatCord;
 import org.openapitools.model.GameSettings;
 
@@ -19,15 +27,37 @@ import org.openapitools.model.GameSettings;
  */
 public class GameField {
 
-  private final OwnerCageState[][] ownerMap;
-  private final OpponentCageState[][] opponentMap;
+  enum OwnerCageState {
+    Void, Ship, ShotIntoVoid, ShotIntoShip
+  }
+
+  enum OpponentCageState {
+    Unchecked, CheckedEmpty, UncheckedEmpty, BlowedShip
+  }
+
+  private static record Point(int x, int y) {
+  }
+
+  private final int[][] ownerMap;
+
+  private final int[][] opponentMap;
+
   private final int width, height;
+  private int aliveBoats = 0;
+
+  Map<Integer, Integer> stilBoats = new HashMap<>();
 
   public GameField(GameSettings gameSettings) {
     this.width = gameSettings.getGameMapSettings().getWidth();
     this.height = gameSettings.getGameMapSettings().getHeight();
-    ownerMap = new OwnerCageState[width][height];
-    opponentMap = new OpponentCageState[width][height];
+
+    gameSettings.getBoatTypes().stream()
+        .forEach(x -> stilBoats.put(x.getSize(), x.getCount()));
+
+    System.out.println(stilBoats);
+
+    ownerMap = new int[width][height];
+    opponentMap = new int[width][height];
   }
 
   /**
@@ -37,42 +67,116 @@ public class GameField {
    * @param y
    * @return
    */
-  public OwnerCageState makeShot(int x, int y) {
-    OwnerCageState prevState = ownerMap[x][y];
+  public int makeShot(int x, int y) {
+    OwnerCageState prevState = getOwnerState(x, y);
 
     switch (prevState) {
       case Void -> {
-        ownerMap[x][y] = OwnerCageState.ShotIntoVoid;
-        opponentMap[x][y] = OpponentCageState.CheckedEmpty;
+        setOwnerState(x, y, OwnerCageState.ShotIntoVoid);
+        setOpponentState(x, y, OpponentCageState.CheckedEmpty);
       }
       case Ship -> {
-        ownerMap[x][y] = OwnerCageState.ShotIntoShip;
-        opponentMap[x][y] = OpponentCageState.BlowedShip;
+        setOwnerState(x, y, OwnerCageState.ShotIntoShip);
+        setOpponentState(x, y, OpponentCageState.BlowedShip);
+        aliveBoats--;
         markEmptyCages(x, y);
       }
       case ShotIntoShip, ShotIntoVoid -> {
       }
     }
 
-    return ownerMap[x][y];
+    return aliveBoats;
   }
 
-  private void markEmptyCages(int x, int y) {
-    // TODO
+  public synchronized void placeBoat(BoatCord cords) {
+    List<Point> points = getPoints(cords);
+    var error = points.stream()
+        .map(this::checkPoint)
+        .filter(x -> x != null)
+        .findAny();
+    error.ifPresent(e -> {
+      throw e;
+    });
+
+    stilBoats.compute(points.size(), (Integer size, Integer still) -> still - 1);
+    points.stream().forEach(p -> setOwnerState(p.x, p.y, OwnerCageState.Ship));
+    aliveBoats += points.size();
+
   }
 
-  public void placeShip(BoatCord cords) {
+  /**
+   * Проверка корректности координат корабля и получение его точек
+   * 
+   * @param cords
+   * @return
+   */
+  public List<Point> getPoints(BoatCord cords) {
 
-    // TODO
-    throw new UnsupportedOperationException();
-  }
+    // Проверка на выход за границы
+    if (cords.getXs() < 0
+        || cords.getXs() > width
+        || cords.getXe() < 0
+        || cords.getXe() > width
+        || cords.getYs() < 0
+        || cords.getYs() > height
+        || cords.getYe() < 0
+        || cords.getYe() > height)
+      throw new IllegalArgumentException("Недопустимые корды");
 
-  enum OwnerCageState {
-    Void, Ship, ShotIntoVoid, ShotIntoShip
-  }
+    // Проверка на перепутанные координаты
+    if (cords.getXs() > cords.getXe()) {
+      var buffer = cords.getXe();
+      cords.setXe(cords.getXs());
+      cords.setXs(buffer);
+    }
+    if (cords.getYs() > cords.getYe()) {
+      var buffer = cords.getYe();
+      cords.setYe(cords.getYs());
+      cords.setYs(buffer);
+    }
 
-  enum OpponentCageState {
-    Unchecked, CheckedEmpty, UncheckedEmpty, BlowedShip
+    // Проверка на диагональные корабли и расчет длины
+    boolean horizontal = false;
+    boolean vertical = false;
+    int length;
+
+    if (cords.getYs() == cords.getYe())
+      horizontal = true;
+    if (cords.getXs() == cords.getXe())
+      vertical = true;
+
+    if (horizontal && !vertical)
+      // Горизонтальный корабль
+      length = cords.getXe() - cords.getXs() + 1;
+    else if (!horizontal && vertical)
+      // Вертикальный корабль
+      length = cords.getYs() - cords.getYe() + 1;
+    else if (horizontal && vertical)
+      // Корабль в одну клеточку
+      length = 1;
+    else
+      // Недопустимые корды
+      throw new IllegalArgumentException("Нельзя ставить корабли по диагонали");
+    System.out.println(length);
+
+    int stil = stilBoats.getOrDefault(length, -1);
+    switch (stil) {
+      case -1 -> throw new IllegalArgumentException("Недопустимая длина корабля: " + length);
+      case 0 -> throw new IllegalArgumentException("Достигнуто максимальное число кораблей длины " + length);
+    }
+
+    List<Point> points = new ArrayList<>();
+
+    if (horizontal && vertical)
+      points.add(new Point(cords.getXe(), cords.getYe()));
+    else if (horizontal)
+      for (int x = cords.getXs(); x <= cords.getXe(); x++)
+        points.add(new Point(x, cords.getYe()));
+    else if (vertical)
+      for (int Y = cords.getYs(); Y <= cords.getYe(); Y++)
+        points.add(new Point(cords.getXs(), Y));
+
+    return points;
   }
 
   public int getHeight() {
@@ -83,11 +187,70 @@ public class GameField {
     return width;
   }
 
-  public OwnerCageState[][] getOwnerMap() {
+  public int[][] getOwnerMap() {
     return ownerMap;
   }
 
-  public OpponentCageState[][] getOpponentMap() {
+  public int[][] getOpponentMap() {
     return opponentMap;
+  }
+
+  <T> void swap(Supplier<T> getterA, Consumer<T> setterA, Supplier<T> getterB, Consumer<T> setterB) {
+    T buffer = getterA.get();
+    setterA.accept(getterB.get());
+    setterB.accept(buffer);
+  }
+
+  private void setOwnerState(int x, int y, OwnerCageState state) {
+    ownerMap[x][y] = state.ordinal();
+  }
+
+  private void setOpponentState(int x, int y, OpponentCageState state) {
+    opponentMap[x][y] = state.ordinal();
+  }
+
+  private OwnerCageState getOwnerState(int x, int y) {
+    return OwnerCageState.values()[ownerMap[x][y]];
+  }
+
+  private OpponentCageState getOpponentState(int x, int y) {
+    return OpponentCageState.values()[opponentMap[x][y]];
+  }
+
+  private void markEmptyCages(int x, int y) {
+    // TODO
+  }
+
+  /**
+   * Возвращает исключение, если нельзя поставить корабль в указанных координатах
+   * 
+   * @return
+   */
+  private IllegalArgumentException checkPoint(Point point) {
+    int x = point.x;
+    int y = point.y;
+
+    if (getOwnerState(x, y) == OwnerCageState.Ship)
+      return formatExcepiton("В клетке с координатами %d:%d уже стоит корабль", x, y);
+
+    var sidePoint = Stream.of(
+        new Point(x, y + 1),
+        new Point(x + 1, y),
+        new Point(x, y - 1),
+        new Point(x - 1, y + 1),
+        new Point(x - 1, y - 1),
+        new Point(x + 1, y + 1),
+        new Point(x + 1, y - 1))
+        .filter(p -> p.x >= 0 & p.x < width & p.y >= 0 & p.y < height)
+        .filter(p -> getOwnerState(p.x, p.y) == OwnerCageState.Ship)
+        .findAny();
+    if (sidePoint.isPresent())
+      return formatExcepiton("Корабли соприкасаются в точках (%d:%d) (%d:%d)",
+          x, y, sidePoint.get().x, sidePoint.get().y);
+    return null;
+  }
+
+  private IllegalArgumentException formatExcepiton(String template, Object... args) {
+    return new IllegalArgumentException(String.format(template, args));
   }
 }

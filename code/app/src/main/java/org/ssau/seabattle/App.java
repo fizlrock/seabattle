@@ -3,29 +3,18 @@
  */
 package org.ssau.seabattle;
 
-import java.util.List;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
-import org.openapitools.model.BoatType;
-import org.openapitools.model.GameMapSettings;
-import org.openapitools.model.GameSettings;
-import org.ssau.seabattle.model.GameField;
-
-// @SpringBootApplication
-// @ComponentScan
+@SpringBootApplication
+@ComponentScan
 public class App {
 
   public static void main(String[] args) {
-    // var context = SpringApplication.run(App.class);
-    // // var filters = context.getBeansOfType(Filter.class);
-    // // filters.entrySet().stream().forEach(System.out::println);
-    GameSettings settings = new GameSettings(
-        List.of(new BoatType().size(3).count(2)),
-        new GameMapSettings(10, 10));
-
-    var field = new GameField(settings);
-    System.out.println(field.getOpponentMap());
-    System.out.println(field.getOwnerMap());
-
+    var context = SpringApplication.run(App.class);
+    // var filters = context.getBeansOfType(Filter.class);
+    // filters.entrySet().stream().forEach(System.out::println);
   }
 
 }
