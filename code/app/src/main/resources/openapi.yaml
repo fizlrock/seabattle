@@ -27,7 +27,7 @@ paths:
        content:
         'application/json':
            schema:
-             $ref: '#/components/schemas/authData'
+             $ref: '#/components/schemas/auth_data_dto'
       responses:
         200:
           description: Токен авторизации
@@ -56,7 +56,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/placementStrategy'
+                $ref: '#/components/schemas/placement_strategy_dto'
   
   /seabattle/boat_placement:
     get:
@@ -78,7 +78,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/boatCords'
+                $ref: '#/components/schemas/boat_cords_dto'
                 
   /seabattle/game/settings:
     get:
@@ -91,35 +91,33 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/gameSettings'
+                $ref: '#/components/schemas/game_settings_dto'
   /seabattle/game/shot:
     post:
       summary: Сделать выстрел по полю противника
+      operationId: makeShot
       security:
         - bearerAuth: []
       requestBody:
        content:
         'application/json':
            schema:
-             $ref: '#/components/schemas/shot'
+             $ref: '#/components/schemas/shot_dto'
       responses:
         '200':
           description: Состояние карты
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/gameState'
+                $ref: '#/components/schemas/game_state_dto'
   /seabattle/game:
     get:
       summary : Получить состояние игры, если оно изменилось(вебхук).
       description: |
         Получить состояние игры, если оно изменилось(вебхук).
-
         В параметрах необходимо указать текущую версию состояния игры - currentState.
-
-        Если currentStateNumber не совпадет с stateNumber сервер вернет текущий gameState. 
-
-        Так же сервер вернет gameState если истечет таймаут. 
+        Если currentStateNumber не совпадет с stateNumber сервер вернет текущий game_state_dto. 
+        Так же сервер вернет game_state_dto если истечет таймаут. 
 
       operationId: getUpdatedGameState
       security:
@@ -138,7 +136,7 @@ paths:
           content:
             applicaton/json:
               schema:
-                $ref: '#/components/schemas/gameState'
+                $ref: '#/components/schemas/game_state_dto'
         208:
           description: |
             Cостояние игры с переданным currentStateNumber.
@@ -146,7 +144,7 @@ paths:
           content:
             applicaton/json:
               schema:
-                $ref: '#/components/schemas/gameState'
+                $ref: '#/components/schemas/game_state_dto'
 
                 
           
@@ -162,7 +160,7 @@ paths:
        content:
         'application/json':
            schema:
-             $ref: '#/components/schemas/boatCords'
+             $ref: '#/components/schemas/boat_cords_dto'
 
       responses:
         '201':
@@ -170,7 +168,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/gameState'
+                $ref: '#/components/schemas/game_state_dto'
 
 
 
@@ -185,7 +183,7 @@ components:
 
   schemas:
 
-    shot:
+    shot_dto:
       type: object
       descriptioin: Координаты выстрела
 
@@ -201,7 +199,7 @@ components:
           type: integer
           format: int32
 
-    gameState:
+    game_state_dto:
       type: object
       description: Состояние игры
 
@@ -211,7 +209,7 @@ components:
         - changeCount
 
       properties:
-        changeCount:
+        change_count:
           type: integer
           format: int64
           minimum: 0
@@ -224,42 +222,41 @@ components:
             - WaitingSecondPlayer
             - Ended
             - Failed
-        oponentName:
+        oponent_name:
           type: string
           examples : ['njenkins']
-        whoShoting:
+        who_shoting:
           description: Активный игрок
           type: string
           examples: ['fizlrock']
-        
-        yourField:
-          $ref: '#/components/schemas/fieldState'
-        oponentField:
-          $ref: '#/components/schemas/fieldState'
+        your_field:
+          $ref: '#/components/schemas/field_state_dto'
+        oponent_field:
+          $ref: '#/components/schemas/field_state_dto'
           
-    fieldState:
+    field_state_dto:
       type: string
       description: >
         Состояние игрового поля
       examples: ['AAAABC...AAT']
       
 
-    gameSettings:
+    game_settings_dto:
       type: object
       description: Описание правил игры в морской бой
       required:
-        - boatTypes
-        - gameMapSettings
+        - boat_types_dto
+        - game_map_settings_dto
       properties:
-        boatTypes:
-          $ref: '#/components/schemas/boatTypesSettings'
-        gameMapSettings:
-          $ref : '#/components/schemas/gameMapSettings'
+        boat_types_dto:
+          $ref: '#/components/schemas/boat_types_settings_dto'
+        game_map_settings_dto:
+          $ref : '#/components/schemas/game_map_settings_dto'
 
     
 
     
-    placementStrategy:
+    placement_strategy_dto:
       description: >
         Стратегия расстановки кораблей
       type: object
@@ -280,13 +277,13 @@ components:
           name: Гусиные лапки
 
 
-    boatCords:
+    boat_cords_dto:
       type: array
       description: Описание расположений кораблей на карте 
       items:
-        $ref : '#/components/schemas/boatCord'
+        $ref : '#/components/schemas/boat_cord_dto'
 
-    boatCord:
+    boat_cord_dto:
       type: object
       description: Описание расположения одного корабля на карте
       properties:
@@ -313,7 +310,7 @@ components:
           xe: 4
           ye: 1
 
-    gameMapSettings:
+    game_map_settings_dto:
       type: object
       description: Описание свойств игрового поля
       required:
@@ -335,14 +332,14 @@ components:
           height: 10
 
 
-    boatTypesSettings:
+    boat_types_settings_dto:
       description: Список допустимых видов кораблей
       type: array
       items: 
-        $ref: '#/components/schemas/boatType'
+        $ref: '#/components/schemas/boat_type_dto'
       
     
-    boatType:
+    boat_type_dto:
       type: object
       description: Описание вида корабля
       properties:
@@ -359,7 +356,7 @@ components:
       examples:
         - size: 4
           count: 1
-    authData:
+    auth_data_dto:
       type: object
       description: Данные для аутентификации
       properties:
