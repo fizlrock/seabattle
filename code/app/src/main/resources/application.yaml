@@ -1,0 +1,11 @@
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/seabattle
+    username: admin
+    password: gracesecret
+
+jpa:
+  hibernate:
+    ddl-auto: validate
+

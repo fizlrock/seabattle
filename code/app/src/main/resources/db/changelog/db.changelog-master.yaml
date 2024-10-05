@@ -16,3 +16,16 @@ databaseChangeLog:
                   startWith: 1
                   constraints:
                     primaryKey: true
+              - column:
+                  remarks: Имя пользователя. Длина от 4 до 8 символов
+                  name: username
+                  type: varchar(8)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password_hash
+                  type: varchar(255)
+              - column:
+                  name: role
+                  type: varchar(20)
