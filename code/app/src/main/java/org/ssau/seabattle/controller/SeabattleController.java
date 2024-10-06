@@ -1,14 +1,12 @@
 package org.ssau.seabattle.controller;
 
-import java.util.List;
-
 import org.openapitools.api.SeabattleApi;
-import org.openapitools.model.AuthData;
-import org.openapitools.model.BoatCord;
-import org.openapitools.model.GameSettings;
-import org.openapitools.model.GameState;
-import org.openapitools.model.PlacementStrategy;
-import org.openapitools.model.Shot;
+import org.openapitools.model.AuthDataDto;
+import org.openapitools.model.BoatCordDto;
+import org.openapitools.model.GameSettingsDto;
+import org.openapitools.model.GameStateDto;
+import org.openapitools.model.PlacementStrategyDto;
+import org.openapitools.model.ShotDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
@@ -23,50 +21,47 @@ import reactor.core.publisher.Mono;
 public class SeabattleController implements SeabattleApi {
 
 	@Override
-	public Mono<ResponseEntity<GameSettings>> getGameSettings(ServerWebExchange exchange) {
+	public Mono<ResponseEntity<GameSettingsDto>> getGameSettings(ServerWebExchange exchange) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'getGameSettings'");
 	}
 
 	@Override
-	public Mono<ResponseEntity<Flux<BoatCord>>> getGeneratedBoatSpec(@NotNull @Valid Long strategyId,
+	public Mono<ResponseEntity<Flux<BoatCordDto>>> getGeneratedBoatSpec(@NotNull @Valid Long strategyId,
 			ServerWebExchange exchange) {
-		return Mono.just(
-				ResponseEntity.ok(Flux.fromIterable(List.of(
-						new BoatCord().xs(0).ys(0).xe(4).ye(0),
-						new BoatCord().xs(0).ys(0).xe(3).ye(0),
-						new BoatCord().xs(0).ys(0).xe(2).ye(0),
-						new BoatCord().xs(0).ys(0).xe(1).ye(0)))));
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getGeneratedBoatSpec'");
 	}
 
 	@Override
-	public Mono<ResponseEntity<PlacementStrategy>> getPlacementStrategies(ServerWebExchange exchange) {
+	public Mono<ResponseEntity<PlacementStrategyDto>> getPlacementStrategies(ServerWebExchange exchange) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'getPlacementStrategies'");
 	}
 
 	@Override
-	public Mono<ResponseEntity<GameState>> getUpdatedGameState(@NotNull @Min(0) @Valid Long currentStateNumber,
+	public Mono<ResponseEntity<String>> getToken(@Valid Mono<AuthDataDto> authDataDto, ServerWebExchange exchange) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getToken'");
+	}
+
+	@Override
+	public Mono<ResponseEntity<GameStateDto>> getUpdatedGameState(@NotNull @Min(0) @Valid Long currentStateNumber,
 			ServerWebExchange exchange) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'getUpdatedGameState'");
 	}
 
 	@Override
-	public Mono<ResponseEntity<GameState>> seabattleGameShotPost(@Valid Mono<Shot> shot, ServerWebExchange exchange) {
+	public Mono<ResponseEntity<GameStateDto>> makeShot(@Valid Mono<ShotDto> shotDto, ServerWebExchange exchange) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'seabattleGameShotPost'");
+		throw new UnsupportedOperationException("Unimplemented method 'makeShot'");
 	}
 
 	@Override
-	public Mono<ResponseEntity<GameState>> startNewGame(@Valid Flux<BoatCord> boatCord, ServerWebExchange exchange) {
+	public Mono<ResponseEntity<GameStateDto>> startNewGame(@Valid Flux<BoatCordDto> boatCordDto,
+			ServerWebExchange exchange) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'startNewGame'");
-	}
-
-	@Override
-	public Mono<ResponseEntity<String>> getToken(@Valid Mono<AuthData> authData, ServerWebExchange exchange) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getToken'");
 	}
 }

@@ -8,8 +8,8 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-import org.openapitools.model.BoatCord;
-import org.openapitools.model.GameSettings;
+import org.openapitools.model.BoatCordDto;
+
 
 /**
  * <p>
@@ -48,11 +48,11 @@ public class GameField {
   Map<Integer, Integer> stilBoats = new HashMap<>();
 
   public GameField(GameSettings gameSettings) {
-    this.width = gameSettings.getGameMapSettings().getWidth();
-    this.height = gameSettings.getGameMapSettings().getHeight();
+    this.width = gameSettings.mapSettings().width();
+    this.height = gameSettings.mapSettings().height();
 
-    gameSettings.getBoatTypes().stream()
-        .forEach(x -> stilBoats.put(x.getSize(), x.getCount()));
+    gameSettings.boatTypes().stream()
+        .forEach(x -> stilBoats.put(x.size(), x.count()));
 
     System.out.println(stilBoats);
 
@@ -113,44 +113,45 @@ public class GameField {
   public List<Point> getPoints(BoatCord cords) {
 
     // Проверка на выход за границы
-    if (cords.getXs() < 0
-        || cords.getXs() > width
-        || cords.getXe() < 0
-        || cords.getXe() > width
-        || cords.getYs() < 0
-        || cords.getYs() > height
-        || cords.getYe() < 0
-        || cords.getYe() > height)
+    if (cords.xs() < 0
+        || cords.xs() > width
+        || cords.xe() < 0
+        || cords.xe() > width
+        || cords.ys() < 0
+        || cords.ys() > height
+        || cords.ye() < 0
+        || cords.ye() > height)
       throw new IllegalArgumentException("Недопустимые корды");
 
-    // Проверка на перепутанные координаты
-    if (cords.getXs() > cords.getXe()) {
-      var buffer = cords.getXe();
-      cords.setXe(cords.getXs());
-      cords.setXs(buffer);
-    }
-    if (cords.getYs() > cords.getYe()) {
-      var buffer = cords.getYe();
-      cords.setYe(cords.getYs());
-      cords.setYs(buffer);
-    }
+    // TODO тут можно проебаться
+    // // Проверка на перепутанные координаты
+    // if (cords.xs() > cords.xe()) {
+    //   var buffer = cords.xe();
+    //   cords.xe(cords.xs());
+    //   cords.xs(buffer);
+    // }
+    // if (cords.ys() > cords.ye()) {
+    //   var buffer = cords.ye();
+    //   cords.ye(cords.ys());
+    //   cords.ys(buffer);
+    // }
 
     // Проверка на диагональные корабли и расчет длины
     boolean horizontal = false;
     boolean vertical = false;
     int length;
 
-    if (cords.getYs() == cords.getYe())
+    if (cords.ys() == cords.ye())
       horizontal = true;
-    if (cords.getXs() == cords.getXe())
+    if (cords.xs() == cords.xe())
       vertical = true;
 
     if (horizontal && !vertical)
       // Горизонтальный корабль
-      length = cords.getXe() - cords.getXs() + 1;
+      length = cords.xe() - cords.xs() + 1;
     else if (!horizontal && vertical)
       // Вертикальный корабль
-      length = cords.getYs() - cords.getYe() + 1;
+      length = cords.ys() - cords.ye() + 1;
     else if (horizontal && vertical)
       // Корабль в одну клеточку
       length = 1;
@@ -168,13 +169,13 @@ public class GameField {
     List<Point> points = new ArrayList<>();
 
     if (horizontal && vertical)
-      points.add(new Point(cords.getXe(), cords.getYe()));
+      points.add(new Point(cords.xe(), cords.ye()));
     else if (horizontal)
-      for (int x = cords.getXs(); x <= cords.getXe(); x++)
-        points.add(new Point(x, cords.getYe()));
+      for (int x = cords.xs(); x <= cords.xe(); x++)
+        points.add(new Point(x, cords.ye()));
     else if (vertical)
-      for (int Y = cords.getYs(); Y <= cords.getYe(); Y++)
-        points.add(new Point(cords.getXs(), Y));
+      for (int Y = cords.ys(); Y <= cords.ye(); Y++)
+        points.add(new Point(cords.xs(), Y));
 
     return points;
   }

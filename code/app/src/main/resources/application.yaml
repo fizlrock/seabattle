@@ -9,3 +9,8 @@ jpa:
   hibernate:
     ddl-auto: validate
 
+
+jwt:
+  secret: arst
+  experation: 3600
+  issuer: seabattle_service
