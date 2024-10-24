@@ -1,0 +1,15 @@
+
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/seabattle
+    username: admin
+    password: gracesecret
+
+jpa:
+  hibernate:
+    ddl-auto: validate
+
+jwt:
+  secret: B9+AWyF3OPMqs1PD6FSwj1LArLI63a3CehziWrOgYGk=
+  experation: 36000
+  issuer: seabattle_service

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration>
+
+
+<configuration>
+  <import class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"/>
+  <import class="ch.qos.logback.core.ConsoleAppender"/>
+
+
+  <appender name="STDOUT" class="ConsoleAppender">
+    <encoder>
+      <pattern>%highlight([%level]) - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+      <file>testFile.log</file>
+      <append>false</append>
+      <!-- set immediateFlush to false for much higher logging throughput -->
+      <immediateFlush>true</immediateFlush>
+      <!-- encoders are assigned the type
+           ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+      <encoder>
+        <pattern>%-4relative [%thread] %-5level %logger{35} -%kvp- %msg%n</pattern>
+      </encoder>
+  </appender>
+
+  <root level="debug">
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="FILE"/>
+  </root>
+
+</configuration>
