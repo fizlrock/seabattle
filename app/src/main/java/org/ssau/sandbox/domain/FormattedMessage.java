@@ -17,7 +17,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.rapha.spring.reactive.security.domain;
+package org.ssau.sandbox.domain;
 
 public class FormattedMessage {
 

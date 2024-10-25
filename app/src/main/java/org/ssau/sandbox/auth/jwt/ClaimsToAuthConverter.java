@@ -17,18 +17,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.rapha.spring.reactive.security.auth.jwt;
+package org.ssau.sandbox.auth.jwt;
 
-import com.nimbusds.jwt.SignedJWT;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import reactor.core.publisher.Mono;
-
-import java.text.ParseException;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Component;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.lang.Collections;
+import reactor.core.publisher.Mono;
 
 /**
  * This converter takes a SignedJWT and extracts all information
@@ -36,25 +40,22 @@ import java.util.stream.Stream;
  * The signed JWT has already been verified.
  *
  */
-public class UsernamePasswordAuthenticationBearer {
+@Component
+public class ClaimsToAuthConverter implements Function<Claims, Mono<Authentication>> {
 
-    public static Mono<Authentication> create(SignedJWT signedJWTMono) {
-        SignedJWT signedJWT = signedJWTMono;
-        String subject;
-        String auths;
-        List authorities;
+  @Override
+  public Mono<Authentication> apply(Claims claims) {
+    String username = claims.getSubject();
 
-        try {
-            subject = signedJWT.getJWTClaimsSet().getSubject();
-            auths = (String) signedJWT.getJWTClaimsSet().getClaim("roles");
-        } catch (ParseException e) {
-            return Mono.empty();
-        }
-        authorities = Stream.of(auths.split(","))
-                .map(a -> new SimpleGrantedAuthority(a))
-                .collect(Collectors.toList());
+    String[] roles = claims.get("roles", String.class)
+        .split(",");
 
-            return  Mono.justOrEmpty(new UsernamePasswordAuthenticationToken(subject, null, authorities));
+    var grantedAuthorities = Stream.of(roles)
+        .map(String::strip)
+        .map(SimpleGrantedAuthority::new)
+        .toList();
 
-    }
+    return Mono.just(new UsernamePasswordAuthenticationToken(username, null, grantedAuthorities));
+  }
+
 }

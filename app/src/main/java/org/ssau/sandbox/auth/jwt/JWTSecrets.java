@@ -1,33 +1,54 @@
-/*
- * Permission is hereby granted, free of charge, to any person obtaining a
- * copy of this software and associated documentation files (the "Software"),
- * to deal in the Software without restriction, including without limitation
- * the rights to use, copy, modify, merge, publish, distribute, sublicense,
- * and/or sell copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-package io.rapha.spring.reactive.security.auth.jwt;
+package org.ssau.sandbox.auth.jwt;
+
+import java.util.Base64;
+
+import javax.crypto.SecretKey;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import jakarta.annotation.PostConstruct;
+import lombok.Getter;
+import lombok.AccessLevel;
 
 /**
- * A a static class that abstracts a secret provider
- * Later this one can be changed with a better approach
- *
+ * JWTSecrets
  */
+@Component
+@Getter
 public class JWTSecrets {
 
-  /**
-   * A default secret for development purposes.
-   */
-  public final static  String DEFAULT_SECRET = "qwertyuiopasdfghjklzxcvbnmqwerty";
+  @Value("${jwt.secret}")
+  @Getter(AccessLevel.NONE)
+  private String key_base64;
+
+  @Value("${jwt.experation}")
+  private Integer expInSeconds;
+
+  @Value("${jwt.issuer}")
+  private String issuer;
+
+  private SecretKey key;
+
+  @PostConstruct
+  void init() {
+    byte[] decoded_key = Base64.getDecoder().decode(key_base64);
+
+    key = new SecretKey() {
+      @Override
+      public String getAlgorithm() {
+        return "HmacSHA256";
+      }
+
+      @Override
+      public byte[] getEncoded() {
+        return decoded_key;
+      }
+
+      @Override
+      public String getFormat() {
+        return "RAW";
+      }
+    };
+  }
 }

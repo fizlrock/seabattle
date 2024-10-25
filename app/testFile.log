@@ -1,291 +1,370 @@
-153461 [restartedMain] INFO  org.ssau.sandbox.App -- Starting App using Java 21.0.4 with PID 4950 (/home/fizlrock/code2/university/TP/fluxsecurity/app/build/classes/java/main started by fizlrock in /home/fizlrock/code2/university/TP/fluxsecurity/app)
-153462 [restartedMain] DEBUG org.ssau.sandbox.App -- Running with Spring Boot v3.3.3, Spring v6.1.12
-153462 [restartedMain] INFO  org.ssau.sandbox.App -- No active profile set, falling back to 1 default profile: "default"
-153462 [restartedMain] DEBUG o.s.boot.SpringApplication -- Loading source class org.ssau.sandbox.App
-153464 [restartedMain] DEBUG o.s.b.w.r.c.AnnotationConfigReactiveWebServerApplicationContext -- Refreshing org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext@3a72203e
-153465 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
-153465 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.internalCachingMetadataReaderFactory'
-153471 [restartedMain] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner -- Identified candidate component class: file [/home/fizlrock/code2/university/TP/fluxsecurity/app/build/classes/java/main/org/ssau/sandbox/configuration/SecurityConfiguration.class]
-153472 [restartedMain] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner -- Identified candidate component class: file [/home/fizlrock/code2/university/TP/fluxsecurity/app/build/classes/java/main/org/ssau/sandbox/controller/ApiExceptionHandler.class]
-153474 [restartedMain] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner -- Identified candidate component class: file [/home/fizlrock/code2/university/TP/fluxsecurity/app/build/classes/java/main/org/ssau/sandbox/controller/BrowserController.class]
-153475 [restartedMain] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner -- Identified candidate component class: file [/home/fizlrock/code2/university/TP/fluxsecurity/app/build/classes/java/main/org/ssau/sandbox/controller/TokenApiController.class]
-153477 [restartedMain] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner -- Identified candidate component class: file [/home/fizlrock/code2/university/TP/fluxsecurity/app/build/classes/java/main/org/ssau/sandbox/repository/InMemoryUserRepository.class]
-153478 [restartedMain] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner -- Identified candidate component class: file [/home/fizlrock/code2/university/TP/fluxsecurity/app/build/classes/java/main/org/ssau/sandbox/service/TokenService.class]
-153644 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'propertySourcesPlaceholderConfigurer'
-153645 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.sql.init.dependency.DatabaseInitializationDependencyConfigurer$DependsOnDatabaseInitializationPostProcessor'
-153646 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.context.event.internalEventListenerProcessor'
-153646 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'conversionServicePostProcessor'
-153646 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'forceAutoProxyCreatorToUseClassProxying'
-153647 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.context.event.internalEventListenerFactory'
-153647 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor'
-153648 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.context.annotation.internalCommonAnnotationProcessor'
-153648 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor'
-153648 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.context.internalConfigurationPropertiesBinder'
-153649 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.aop.config.internalAutoProxyCreator'
-153650 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'webServerFactoryCustomizerBeanPostProcessor'
-153651 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'nettyReactiveWebServerFactory'
-153651 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.ReactiveWebServerFactoryConfiguration$EmbeddedNetty'
-153652 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'reactorResourceFactory'
-153652 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.reactor.netty.ReactorNettyConfigurations$ReactorResourceFactoryConfiguration'
-153652 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.reactor.netty-org.springframework.boot.autoconfigure.reactor.netty.ReactorNettyProperties'
-153652 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.context.properties.BoundConfigurationProperties'
-153654 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'reactorResourceFactory' via factory method to bean named 'spring.reactor.netty-org.springframework.boot.autoconfigure.reactor.netty.ReactorNettyProperties'
-153655 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'nettyReactiveWebServerFactory' via factory method to bean named 'reactorResourceFactory'
-153656 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'reactiveWebServerFactoryCustomizer'
-153656 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.ReactiveWebServerFactoryAutoConfiguration'
-153657 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'server-org.springframework.boot.autoconfigure.web.ServerProperties'
-153664 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'reactiveWebServerFactoryCustomizer' via factory method to bean named 'server-org.springframework.boot.autoconfigure.web.ServerProperties'
-153664 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'sslBundleRegistry'
-153664 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.ssl.SslAutoConfiguration'
-153665 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.ssl-org.springframework.boot.autoconfigure.ssl.SslProperties'
-153666 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.ssl.SslAutoConfiguration' via constructor to bean named 'spring.ssl-org.springframework.boot.autoconfigure.ssl.SslProperties'
-153667 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'sslPropertiesSslBundleRegistrar'
-153667 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'fileWatcher'
-153667 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'sslPropertiesSslBundleRegistrar' via factory method to bean named 'fileWatcher'
-153668 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'nettyWebServerFactoryCustomizer'
-153668 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.embedded.EmbeddedWebServerFactoryCustomizerAutoConfiguration$NettyWebServerFactoryCustomizerConfiguration'
-153669 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'nettyWebServerFactoryCustomizer' via factory method to bean named 'environment'
-153669 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'nettyWebServerFactoryCustomizer' via factory method to bean named 'server-org.springframework.boot.autoconfigure.web.ServerProperties'
-153670 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'app'
-153671 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'securityConfiguration'
-153671 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'apiExceptionHandler'
-153672 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'browserController'
-153672 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'tokenApiController'
-153673 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'tokenService'
-153675 [restartedMain] DEBUG o.s.c.e.PropertySourcesPropertyResolver -- Found key 'jwt.secret' in PropertySource 'environmentProperties' with value of type String
-153676 [restartedMain] DEBUG o.s.c.e.PropertySourcesPropertyResolver -- Found key 'jwt.experation' in PropertySource 'environmentProperties' with value of type String
-153677 [restartedMain] DEBUG o.s.c.e.PropertySourcesPropertyResolver -- Found key 'jwt.issuer' in PropertySource 'environmentProperties' with value of type String
-153678 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'tokenApiController' via constructor to bean named 'tokenService'
-153678 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'inMemoryUserRepository'
-153679 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'getPasswordEncoder'
-153680 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'inMemoryUserRepository' via constructor to bean named 'getPasswordEncoder'
-153943 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.security.config.annotation.web.reactive.ServerHttpSecurityConfiguration'
-153945 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'webFluxAdapterRegistry'
-153945 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration$EnableWebFluxConfiguration'
-153945 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.webflux-org.springframework.boot.autoconfigure.web.reactive.WebFluxProperties'
-153947 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.web-org.springframework.boot.autoconfigure.web.WebProperties'
-153950 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration$EnableWebFluxConfiguration' via constructor to bean named 'spring.webflux-org.springframework.boot.autoconfigure.web.reactive.WebFluxProperties'
-153950 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration$EnableWebFluxConfiguration' via constructor to bean named 'spring.web-org.springframework.boot.autoconfigure.web.WebProperties'
-153950 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration$EnableWebFluxConfiguration' via constructor to bean named 'server-org.springframework.boot.autoconfigure.web.ServerProperties'
-153952 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'authenticationPrincipalArgumentResolverConfigurer'
-153952 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration$WebFluxConfig'
-153953 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration$WebFluxConfig' via constructor to bean named 'environment'
-153953 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration$WebFluxConfig' via constructor to bean named 'spring.web-org.springframework.boot.autoconfigure.web.WebProperties'
-153953 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration$WebFluxConfig' via constructor to bean named 'spring.webflux-org.springframework.boot.autoconfigure.web.reactive.WebFluxProperties'
-153953 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration$WebFluxConfig' via constructor to bean named 'org.springframework.beans.factory.support.DefaultListableBeanFactory@7a8d68cf'
-153958 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'userDetailsService'
-153958 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'userDetailsService' via factory method to bean named 'inMemoryUserRepository'
-153960 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'authenticationPrincipalArgumentResolver'
-153961 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'reactiveCurrentSecurityContextArgumentResolver'
-153961 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.security.config.annotation.web.reactive.WebFluxSecurityConfiguration'
-153963 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'securityWebFilterChain'
-153965 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'securityWebFilterChain' via factory method to bean named 'org.springframework.security.config.annotation.web.reactive.HttpSecurityConfiguration.httpSecurity'
-153966 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'requestMappingHandlerMapping'
-153966 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'webFluxContentTypeResolver'
-153967 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'requestMappingHandlerMapping' via factory method to bean named 'webFluxContentTypeResolver'
-153968 [restartedMain] DEBUG _.s.w.r.HandlerMapping.Mappings -- 
-	o.s.s.c.BrowserController:
+687  [restartedMain] INFO  org.ssau.sandbox.App -- Starting App using Java 21.0.4 with PID 25370 (/home/fizlrock/code2/university/TP/fluxsecurity/app/build/classes/java/main started by fizlrock in /home/fizlrock/code2/university/TP/fluxsecurity/app)
+689  [restartedMain] DEBUG org.ssau.sandbox.App -- Running with Spring Boot v3.3.3, Spring v6.1.12
+690  [restartedMain] INFO  org.ssau.sandbox.App -- No active profile set, falling back to 1 default profile: "default"
+690  [restartedMain] DEBUG o.s.boot.SpringApplication -- Loading source class org.ssau.sandbox.App
+754  [restartedMain] DEBUG o.s.b.d.restart.ChangeableUrls -- Matching URLs for reloading : [file:/home/fizlrock/code2/university/TP/fluxsecurity/app/build/classes/java/main/, file:/home/fizlrock/code2/university/TP/fluxsecurity/app/build/resources/main/]
+755  [restartedMain] DEBUG o.s.b.d.settings.DevToolsSettings -- Included patterns for restart : []
+755  [restartedMain] DEBUG o.s.b.d.settings.DevToolsSettings -- Excluded patterns for restart : [/spring-boot-starter-[\w-]+/, /spring-boot/(bin|build|out)/, /spring-boot-starter/(bin|build|out)/, /spring-boot-devtools/(bin|build|out)/, /spring-boot-actuator/(bin|build|out)/, /spring-boot-autoconfigure/(bin|build|out)/]
+755  [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -- Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+755  [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -- For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+755  [restartedMain] DEBUG o.s.b.w.r.c.AnnotationConfigReactiveWebServerApplicationContext -- Refreshing org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext@7cd9f7a8
+767  [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
+781  [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.internalCachingMetadataReaderFactory'
+841  [restartedMain] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner -- Identified candidate component class: file [/home/fizlrock/code2/university/TP/fluxsecurity/app/build/classes/java/main/org/ssau/sandbox/api/MessageController.class]
+842  [restartedMain] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner -- Identified candidate component class: file [/home/fizlrock/code2/university/TP/fluxsecurity/app/build/classes/java/main/org/ssau/sandbox/auth/basic/BasicAuthenticationSuccessHandler.class]
+842  [restartedMain] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner -- Identified candidate component class: file [/home/fizlrock/code2/university/TP/fluxsecurity/app/build/classes/java/main/org/ssau/sandbox/auth/bearer/ServerHttpBearerAuthenticationConverter.class]
+842  [restartedMain] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner -- Identified candidate component class: file [/home/fizlrock/code2/university/TP/fluxsecurity/app/build/classes/java/main/org/ssau/sandbox/auth/filter/BasicAuthenticationFilter.class]
+843  [restartedMain] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner -- Identified candidate component class: file [/home/fizlrock/code2/university/TP/fluxsecurity/app/build/classes/java/main/org/ssau/sandbox/auth/filter/BearerAuthenticationFilter.class]
+843  [restartedMain] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner -- Identified candidate component class: file [/home/fizlrock/code2/university/TP/fluxsecurity/app/build/classes/java/main/org/ssau/sandbox/auth/jwt/ClaimsToAuthConverter.class]
+844  [restartedMain] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner -- Identified candidate component class: file [/home/fizlrock/code2/university/TP/fluxsecurity/app/build/classes/java/main/org/ssau/sandbox/auth/jwt/JWTSecrets.class]
+844  [restartedMain] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner -- Identified candidate component class: file [/home/fizlrock/code2/university/TP/fluxsecurity/app/build/classes/java/main/org/ssau/sandbox/auth/jwt/JWTTokenService.class]
+845  [restartedMain] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner -- Identified candidate component class: file [/home/fizlrock/code2/university/TP/fluxsecurity/app/build/classes/java/main/org/ssau/sandbox/auth/jwt/TokenClaimsExtractor.class]
+845  [restartedMain] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner -- Identified candidate component class: file [/home/fizlrock/code2/university/TP/fluxsecurity/app/build/classes/java/main/org/ssau/sandbox/service/MessageService.class]
+1361 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'propertySourcesPlaceholderConfigurer'
+1367 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.sql.init.dependency.DatabaseInitializationDependencyConfigurer$DependsOnDatabaseInitializationPostProcessor'
+1375 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.context.event.internalEventListenerProcessor'
+1376 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'conversionServicePostProcessor'
+1398 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'forceAutoProxyCreatorToUseClassProxying'
+1399 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.context.event.internalEventListenerFactory'
+1404 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor'
+1406 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.context.annotation.internalCommonAnnotationProcessor'
+1409 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor'
+1409 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.context.internalConfigurationPropertiesBinder'
+1412 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.aop.config.internalAutoProxyCreator'
+1423 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'webServerFactoryCustomizerBeanPostProcessor'
+1425 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'nettyReactiveWebServerFactory'
+1425 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.ReactiveWebServerFactoryConfiguration$EmbeddedNetty'
+1430 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'reactorResourceFactory'
+1430 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.reactor.netty.ReactorNettyConfigurations$ReactorResourceFactoryConfiguration'
+1432 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.reactor.netty-org.springframework.boot.autoconfigure.reactor.netty.ReactorNettyProperties'
+1434 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.context.properties.BoundConfigurationProperties'
+1452 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'reactorResourceFactory' via factory method to bean named 'spring.reactor.netty-org.springframework.boot.autoconfigure.reactor.netty.ReactorNettyProperties'
+1456 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'nettyReactiveWebServerFactory' via factory method to bean named 'reactorResourceFactory'
+1463 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'reactiveWebServerFactoryCustomizer'
+1464 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.ReactiveWebServerFactoryAutoConfiguration'
+1467 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'server-org.springframework.boot.autoconfigure.web.ServerProperties'
+1496 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'reactiveWebServerFactoryCustomizer' via factory method to bean named 'server-org.springframework.boot.autoconfigure.web.ServerProperties'
+1498 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'sslBundleRegistry'
+1498 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.ssl.SslAutoConfiguration'
+1500 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.ssl-org.springframework.boot.autoconfigure.ssl.SslProperties'
+1503 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.ssl.SslAutoConfiguration' via constructor to bean named 'spring.ssl-org.springframework.boot.autoconfigure.ssl.SslProperties'
+1505 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'sslPropertiesSslBundleRegistrar'
+1506 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'fileWatcher'
+1507 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'sslPropertiesSslBundleRegistrar' via factory method to bean named 'fileWatcher'
+1513 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'nettyWebServerFactoryCustomizer'
+1513 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.embedded.EmbeddedWebServerFactoryCustomizerAutoConfiguration$NettyWebServerFactoryCustomizerConfiguration'
+1515 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'nettyWebServerFactoryCustomizer' via factory method to bean named 'environment'
+1515 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'nettyWebServerFactoryCustomizer' via factory method to bean named 'server-org.springframework.boot.autoconfigure.web.ServerProperties'
+1532 [restartedMain] DEBUG reactor.util.Loggers -- Using Slf4j logging framework
+1548 [restartedMain] DEBUG i.n.u.i.l.InternalLoggerFactory -- Using SLF4J as the default logging framework
+1551 [restartedMain] DEBUG i.n.u.internal.PlatformDependent0 -- -Dio.netty.noUnsafe: false
+1551 [restartedMain] DEBUG i.n.u.internal.PlatformDependent0 -- Java version: 21
+1553 [restartedMain] DEBUG i.n.u.internal.PlatformDependent0 -- sun.misc.Unsafe.theUnsafe: available
+1553 [restartedMain] DEBUG i.n.u.internal.PlatformDependent0 -- sun.misc.Unsafe base methods: all available
+1553 [restartedMain] DEBUG i.n.u.internal.PlatformDependent0 -- sun.misc.Unsafe.storeFence: available
+1554 [restartedMain] DEBUG i.n.u.internal.PlatformDependent0 -- java.nio.Buffer.address: available
+1554 [restartedMain] DEBUG i.n.u.internal.PlatformDependent0 -- direct buffer constructor: unavailable: Reflective setAccessible(true) disabled
+1555 [restartedMain] DEBUG i.n.u.internal.PlatformDependent0 -- java.nio.Bits.unaligned: available, true
+1556 [restartedMain] DEBUG i.n.u.internal.PlatformDependent0 -- jdk.internal.misc.Unsafe.allocateUninitializedArray(int): unavailable: class io.netty.util.internal.PlatformDependent0$7 cannot access class jdk.internal.misc.Unsafe (in module java.base) because module java.base does not export jdk.internal.misc to unnamed module @5b8bc155
+1556 [restartedMain] DEBUG i.n.u.internal.PlatformDependent0 -- java.nio.DirectByteBuffer.<init>(long, {int,long}): unavailable
+1557 [restartedMain] DEBUG i.n.util.internal.PlatformDependent -- sun.misc.Unsafe: available
+1557 [restartedMain] DEBUG i.n.util.internal.PlatformDependent -- -Dio.netty.tmpdir: /tmp (java.io.tmpdir)
+1557 [restartedMain] DEBUG i.n.util.internal.PlatformDependent -- -Dio.netty.bitMode: 64 (sun.arch.data.model)
+1557 [restartedMain] DEBUG i.n.util.internal.PlatformDependent -- -Dio.netty.maxDirectMemory: -1 bytes
+1557 [restartedMain] DEBUG i.n.util.internal.PlatformDependent -- -Dio.netty.uninitializedArrayAllocationThreshold: -1
+1558 [restartedMain] DEBUG i.netty.util.internal.CleanerJava9 -- java.nio.ByteBuffer.cleaner(): available
+1558 [restartedMain] DEBUG i.n.util.internal.PlatformDependent -- -Dio.netty.noPreferDirect: false
+1568 [restartedMain] DEBUG i.n.u.i.InternalThreadLocalMap -- -Dio.netty.threadLocalMap.stringBuilder.initialSize: 1024
+1568 [restartedMain] DEBUG i.n.u.i.InternalThreadLocalMap -- -Dio.netty.threadLocalMap.stringBuilder.maxSize: 4096
+1587 [restartedMain] DEBUG io.netty.util.ResourceLeakDetector -- -Dio.netty.leakDetection.level: simple
+1587 [restartedMain] DEBUG io.netty.util.ResourceLeakDetector -- -Dio.netty.leakDetection.targetRecords: 4
+1646 [restartedMain] DEBUG i.n.u.c.GlobalEventExecutor -- -Dio.netty.globalEventExecutor.quietPeriodSeconds: 1
+1652 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'app'
+1654 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'messageController'
+1660 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'messageService'
+1663 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'basicAuthenticationSuccessHandler'
+1664 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'JWTTokenService'
+1665 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'JWTSecrets'
+1668 [restartedMain] DEBUG o.s.c.e.PropertySourcesPropertyResolver -- Found key 'jwt.secret' in PropertySource 'environmentProperties' with value of type String
+1669 [restartedMain] DEBUG o.s.c.e.PropertySourcesPropertyResolver -- Found key 'jwt.experation' in PropertySource 'environmentProperties' with value of type String
+1670 [restartedMain] DEBUG o.s.c.e.PropertySourcesPropertyResolver -- Found key 'jwt.issuer' in PropertySource 'environmentProperties' with value of type String
+1672 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'JWTTokenService' via constructor to bean named 'JWTSecrets'
+1673 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'basicAuthenticationSuccessHandler' via constructor to bean named 'JWTTokenService'
+1673 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'serverHttpBearerAuthenticationConverter'
+1674 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'tokenClaimsExtractor'
+1675 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'tokenClaimsExtractor' via constructor to bean named 'JWTSecrets'
+1677 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'claimsToAuthConverter'
+1677 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'serverHttpBearerAuthenticationConverter' via constructor to bean named 'tokenClaimsExtractor'
+1677 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'serverHttpBearerAuthenticationConverter' via constructor to bean named 'claimsToAuthConverter'
+1678 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'basicAuthenticationFilter'
+1680 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'basicAuthManager'
+1680 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'userDetailsRepository'
+1681 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'passwordEncoder'
+1683 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'userDetailsRepository' via factory method to bean named 'passwordEncoder'
+1824 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'basicAuthManager' via factory method to bean named 'userDetailsRepository'
+1852 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'basicAuthenticationFilter' via constructor to bean named 'basicAuthManager'
+1852 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'basicAuthenticationFilter' via constructor to bean named 'basicAuthenticationSuccessHandler'
+1854 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'bearerAuthenticationFilter'
+1855 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'bearerAuthenticationFilter' via constructor to bean named 'serverHttpBearerAuthenticationConverter'
+1861 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.security.config.annotation.web.reactive.ServerHttpSecurityConfiguration'
+1916 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'webFluxAdapterRegistry'
+1916 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration$EnableWebFluxConfiguration'
+1917 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.webflux-org.springframework.boot.autoconfigure.web.reactive.WebFluxProperties'
+1921 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.web-org.springframework.boot.autoconfigure.web.WebProperties'
+1935 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration$EnableWebFluxConfiguration' via constructor to bean named 'spring.webflux-org.springframework.boot.autoconfigure.web.reactive.WebFluxProperties'
+1935 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration$EnableWebFluxConfiguration' via constructor to bean named 'spring.web-org.springframework.boot.autoconfigure.web.WebProperties'
+1935 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration$EnableWebFluxConfiguration' via constructor to bean named 'server-org.springframework.boot.autoconfigure.web.ServerProperties'
+1940 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'authenticationPrincipalArgumentResolverConfigurer'
+1941 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration$WebFluxConfig'
+1943 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration$WebFluxConfig' via constructor to bean named 'environment'
+1943 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration$WebFluxConfig' via constructor to bean named 'spring.web-org.springframework.boot.autoconfigure.web.WebProperties'
+1943 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration$WebFluxConfig' via constructor to bean named 'spring.webflux-org.springframework.boot.autoconfigure.web.reactive.WebFluxProperties'
+1943 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration$WebFluxConfig' via constructor to bean named 'org.springframework.beans.factory.support.DefaultListableBeanFactory@65761caf'
+1952 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'authenticationPrincipalArgumentResolver'
+1953 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'reactiveCurrentSecurityContextArgumentResolver'
+1954 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.security.config.annotation.web.reactive.WebFluxSecurityConfiguration'
+1956 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'springSecurityFilterChain'
+1977 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'springSecurityFilterChain' via factory method to bean named 'org.springframework.security.config.annotation.web.reactive.HttpSecurityConfiguration.httpSecurity'
+1977 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'springSecurityFilterChain' via factory method to bean named 'basicAuthenticationFilter'
+1977 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'springSecurityFilterChain' via factory method to bean named 'bearerAuthenticationFilter'
+1979 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'requestMappingHandlerMapping'
+1981 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'webFluxContentTypeResolver'
+1983 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'requestMappingHandlerMapping' via factory method to bean named 'webFluxContentTypeResolver'
+2022 [restartedMain] DEBUG _.s.w.r.HandlerMapping.Mappings -- 
+	o.s.s.a.MessageController:
+	{GET /}: hello()
 	{GET /login}: login()
-153970 [restartedMain] DEBUG _.s.w.r.HandlerMapping.Mappings -- 
-	o.s.s.c.TokenApiController:
-	{GET /api/token}: getToken(ServerWebExchange)
-	{GET /private}: priv()
-	{GET /share}: auth(ServerWebExchange)
-153972 [restartedMain] DEBUG o.s.w.r.r.m.a.RequestMappingHandlerMapping -- 4 mappings in 'requestMappingHandlerMapping'
-153975 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.security.config.annotation.web.reactive.WebFluxSecurityConfiguration.WebFilterChainFilter'
-153976 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'requestDataValueProcessor'
-153976 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.AutoConfigurationPackages'
-153976 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.context.PropertyPlaceholderAutoConfiguration'
-153977 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.context.properties.EnableConfigurationPropertiesRegistrar.methodValidationExcludeFilter'
-153978 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$Jackson2ObjectMapperBuilderCustomizerConfiguration'
-153978 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'standardJacksonObjectMapperBuilderCustomizer'
-153979 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.jackson-org.springframework.boot.autoconfigure.jackson.JacksonProperties'
-153982 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'standardJacksonObjectMapperBuilderCustomizer' via factory method to bean named 'spring.jackson-org.springframework.boot.autoconfigure.jackson.JacksonProperties'
-153983 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'parameterNamesModule'
-153983 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$ParameterNamesModuleConfiguration'
-153984 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'jsonMixinModule'
-153984 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonMixinConfiguration'
-153984 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'jsonMixinModuleEntries'
-153984 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'jsonMixinModuleEntries' via factory method to bean named 'org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext@3a72203e'
-153985 [restartedMain] DEBUG o.s.b.a.AutoConfigurationPackages -- @EnableAutoConfiguration was declared on a class in the package 'org.ssau.sandbox'. Automatic @Repository and @Entity scanning is enabled.
-153988 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'jsonMixinModule' via factory method to bean named 'org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext@3a72203e'
-153988 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'jsonMixinModule' via factory method to bean named 'jsonMixinModuleEntries'
-153989 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'jsonComponentModule'
-153989 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration'
-153991 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperBuilderConfiguration'
-153992 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperConfiguration'
-153992 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'jacksonObjectMapper'
-153993 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'jacksonObjectMapperBuilder' via factory method to bean named 'org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext@3a72203e'
-153993 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'jacksonObjectMapperBuilder' via factory method to bean named 'standardJacksonObjectMapperBuilderCustomizer'
-153994 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'jacksonObjectMapper' via factory method to bean named 'jacksonObjectMapperBuilder'
-153995 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.http.codec.CodecsAutoConfiguration$DefaultCodecsConfiguration'
-153995 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'defaultCodecCustomizer'
-153995 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.codec-org.springframework.boot.autoconfigure.codec.CodecProperties'
-153997 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'defaultCodecCustomizer' via factory method to bean named 'spring.codec-org.springframework.boot.autoconfigure.codec.CodecProperties'
-153997 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.http.codec.CodecsAutoConfiguration$JacksonCodecConfiguration'
-153997 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'jacksonCodecCustomizer'
-153998 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'jacksonCodecCustomizer' via factory method to bean named 'jacksonObjectMapper'
-153998 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.http.codec.CodecsAutoConfiguration'
-153998 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.ReactiveMultipartAutoConfiguration'
-153998 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'defaultPartHttpMessageReaderCustomizer'
-153999 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.webflux.multipart-org.springframework.boot.autoconfigure.web.reactive.ReactiveMultipartProperties'
-154001 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'defaultPartHttpMessageReaderCustomizer' via factory method to bean named 'spring.webflux.multipart-org.springframework.boot.autoconfigure.web.reactive.ReactiveMultipartProperties'
-154001 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.WebSessionIdResolverAutoConfiguration'
-154002 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.WebSessionIdResolverAutoConfiguration' via constructor to bean named 'server-org.springframework.boot.autoconfigure.web.ServerProperties'
-154002 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.WebSessionIdResolverAutoConfiguration' via constructor to bean named 'spring.webflux-org.springframework.boot.autoconfigure.web.reactive.WebFluxProperties'
-154002 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'webSessionIdResolver'
-154002 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.error.ErrorWebFluxAutoConfiguration'
-154003 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.error.ErrorWebFluxAutoConfiguration' via constructor to bean named 'server-org.springframework.boot.autoconfigure.web.ServerProperties'
-154003 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'errorWebExceptionHandler'
-154003 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'errorAttributes'
-154004 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'serverCodecConfigurer'
-154009 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'errorWebExceptionHandler' via factory method to bean named 'errorAttributes'
-154009 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'errorWebExceptionHandler' via factory method to bean named 'spring.web-org.springframework.boot.autoconfigure.web.WebProperties'
-154009 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'errorWebExceptionHandler' via factory method to bean named 'serverCodecConfigurer'
-154009 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'errorWebExceptionHandler' via factory method to bean named 'org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext@3a72203e'
-154010 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'webFluxConversionService'
-154012 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'webFluxValidator'
-154013 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'localeContextResolver'
-154014 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'webSessionManager'
-154015 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'webHandler'
-154015 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'routerFunctionMapping'
-154016 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'routerFunctionMapping' via factory method to bean named 'serverCodecConfigurer'
-154016 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'resourceHandlerMapping'
-154017 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'resourceUrlProvider'
-154017 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'resourceHandlerMapping' via factory method to bean named 'resourceUrlProvider'
-154018 [restartedMain] DEBUG _.s.w.r.HandlerMapping.Mappings -- 'resourceHandlerMapping' {/webjars/**=ResourceWebHandler [classpath [META-INF/resources/webjars/]], /**=ResourceWebHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/]]}
-154018 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'welcomePageRouterFunctionMapping'
-154018 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration$WelcomePageConfiguration'
-154019 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'welcomePageRouterFunctionMapping' via factory method to bean named 'org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext@3a72203e'
-154019 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'welcomePageRouterFunctionMapping' via factory method to bean named 'spring.webflux-org.springframework.boot.autoconfigure.web.reactive.WebFluxProperties'
-154019 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'welcomePageRouterFunctionMapping' via factory method to bean named 'spring.web-org.springframework.boot.autoconfigure.web.WebProperties'
-154021 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'requestMappingHandlerAdapter'
-154022 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'requestMappingHandlerAdapter' via factory method to bean named 'webFluxAdapterRegistry'
-154022 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'requestMappingHandlerAdapter' via factory method to bean named 'serverCodecConfigurer'
-154022 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'requestMappingHandlerAdapter' via factory method to bean named 'webFluxConversionService'
-154022 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'requestMappingHandlerAdapter' via factory method to bean named 'webFluxValidator'
-154026 [restartedMain] DEBUG o.s.w.r.r.m.a.ControllerMethodResolver -- ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 @ExceptionHandler
-154026 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'handlerFunctionAdapter'
-154027 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'simpleHandlerAdapter'
-154027 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'webFluxWebSocketHandlerAdapter'
-154027 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'responseEntityResultHandler'
-154028 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'responseEntityResultHandler' via factory method to bean named 'webFluxAdapterRegistry'
-154028 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'responseEntityResultHandler' via factory method to bean named 'serverCodecConfigurer'
-154028 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'responseEntityResultHandler' via factory method to bean named 'webFluxContentTypeResolver'
-154029 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'responseBodyResultHandler'
-154029 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'responseBodyResultHandler' via factory method to bean named 'webFluxAdapterRegistry'
-154029 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'responseBodyResultHandler' via factory method to bean named 'serverCodecConfigurer'
-154029 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'responseBodyResultHandler' via factory method to bean named 'webFluxContentTypeResolver'
-154030 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'viewResolutionResultHandler'
-154030 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'viewResolutionResultHandler' via factory method to bean named 'webFluxAdapterRegistry'
-154030 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'viewResolutionResultHandler' via factory method to bean named 'webFluxContentTypeResolver'
-154031 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'serverResponseResultHandler'
-154031 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'serverResponseResultHandler' via factory method to bean named 'serverCodecConfigurer'
-154031 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'responseStatusExceptionHandler'
-154032 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration'
-154032 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.HttpHandlerAutoConfiguration$AnnotationConfig'
-154032 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.HttpHandlerAutoConfiguration$AnnotationConfig' via constructor to bean named 'org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext@3a72203e'
-154032 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'httpHandler'
-154034 [restartedMain] DEBUG o.s.w.s.a.HttpWebHandlerAdapter -- enableLoggingRequestDetails='false': form data and headers will be masked to prevent unsafe logging of potentially sensitive data
-154034 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.HttpHandlerAutoConfiguration'
-154035 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.aop.AopAutoConfiguration$ClassProxyingConfiguration'
-154035 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.aop.AopAutoConfiguration'
-154035 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.availability.ApplicationAvailabilityAutoConfiguration'
-154035 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'applicationAvailability'
-154036 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.context.ConfigurationPropertiesAutoConfiguration'
-154036 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.context.LifecycleAutoConfiguration'
-154036 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'lifecycleProcessor'
-154036 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.lifecycle-org.springframework.boot.autoconfigure.context.LifecycleProperties'
-154037 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'lifecycleProcessor' via factory method to bean named 'spring.lifecycle-org.springframework.boot.autoconfigure.context.LifecycleProperties'
-154038 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration'
-154039 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.info-org.springframework.boot.autoconfigure.info.ProjectInfoProperties'
-154040 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration' via constructor to bean named 'spring.info-org.springframework.boot.autoconfigure.info.ProjectInfoProperties'
-154040 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.netty.NettyAutoConfiguration'
-154041 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.netty-org.springframework.boot.autoconfigure.netty.NettyProperties'
-154042 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.netty.NettyAutoConfiguration' via constructor to bean named 'spring.netty-org.springframework.boot.autoconfigure.netty.NettyProperties'
-154042 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.reactor.ReactorAutoConfiguration'
-154042 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.reactor-org.springframework.boot.autoconfigure.reactor.ReactorProperties'
-154043 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.reactor.ReactorAutoConfiguration' via constructor to bean named 'spring.reactor-org.springframework.boot.autoconfigure.reactor.ReactorProperties'
-154043 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.security.oauth2.resource.reactive.ReactiveOAuth2ResourceServerAutoConfiguration'
-154044 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.security.oauth2.resourceserver-org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties'
-154045 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration$SpringBootWebFluxSecurityConfiguration'
-154045 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration'
-154046 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration$SpringBootWebFluxSecurityConfiguration' via constructor to bean named 'org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration'
-154046 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.security-org.springframework.boot.autoconfigure.security.SecurityProperties'
-154047 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration'
-154047 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'authenticationEventPublisher'
-154048 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'authenticationEventPublisher' via factory method to bean named 'org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext@3a72203e'
-154048 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration'
-154048 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.sql.init-org.springframework.boot.autoconfigure.sql.init.SqlInitializationProperties'
-154051 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.task.TaskExecutorConfigurations$ThreadPoolTaskExecutorBuilderConfiguration'
-154051 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'threadPoolTaskExecutorBuilder'
-154052 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.task.execution-org.springframework.boot.autoconfigure.task.TaskExecutionProperties'
-154053 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'threadPoolTaskExecutorBuilder' via factory method to bean named 'spring.task.execution-org.springframework.boot.autoconfigure.task.TaskExecutionProperties'
-154054 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.task.TaskExecutorConfigurations$TaskExecutorBuilderConfiguration'
-154055 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'taskExecutorBuilder'
-154055 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'taskExecutorBuilder' via factory method to bean named 'spring.task.execution-org.springframework.boot.autoconfigure.task.TaskExecutionProperties'
-154055 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.task.TaskExecutorConfigurations$SimpleAsyncTaskExecutorBuilderConfiguration'
-154056 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.task.TaskExecutorConfigurations$SimpleAsyncTaskExecutorBuilderConfiguration' via constructor to bean named 'spring.task.execution-org.springframework.boot.autoconfigure.task.TaskExecutionProperties'
-154056 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'simpleAsyncTaskExecutorBuilder'
-154057 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.task.TaskExecutorConfigurations$TaskExecutorConfiguration'
-154058 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration'
-154058 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.task.TaskSchedulingConfigurations$ThreadPoolTaskSchedulerBuilderConfiguration'
-154058 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'threadPoolTaskSchedulerBuilder'
-154059 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.task.scheduling-org.springframework.boot.autoconfigure.task.TaskSchedulingProperties'
-154060 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'threadPoolTaskSchedulerBuilder' via factory method to bean named 'spring.task.scheduling-org.springframework.boot.autoconfigure.task.TaskSchedulingProperties'
-154061 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.task.TaskSchedulingConfigurations$TaskSchedulerBuilderConfiguration'
-154062 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'taskSchedulerBuilder'
-154062 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'taskSchedulerBuilder' via factory method to bean named 'spring.task.scheduling-org.springframework.boot.autoconfigure.task.TaskSchedulingProperties'
-154062 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.task.TaskSchedulingConfigurations$SimpleAsyncTaskSchedulerBuilderConfiguration'
-154063 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.task.TaskSchedulingConfigurations$SimpleAsyncTaskSchedulerBuilderConfiguration' via constructor to bean named 'spring.task.scheduling-org.springframework.boot.autoconfigure.task.TaskSchedulingProperties'
-154063 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'simpleAsyncTaskSchedulerBuilder'
-154064 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration'
-154064 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.embedded.EmbeddedWebServerFactoryCustomizerAutoConfiguration'
-154064 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.function.client.ClientHttpConnectorFactoryConfiguration$ReactorNetty'
-154064 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'reactorClientHttpConnectorFactory'
-154065 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'reactorClientHttpConnectorFactory' via factory method to bean named 'reactorResourceFactory'
-154065 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.function.client.ClientHttpConnectorAutoConfiguration'
-154065 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.function.client.WebClientAutoConfiguration$WebClientCodecsConfiguration'
-154065 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'exchangeStrategiesCustomizer'
-154066 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.function.client.WebClientAutoConfiguration'
-154067 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'webClientSsl'
-154068 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'webClientSsl' via factory method to bean named 'reactorClientHttpConnectorFactory'
-154068 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'webClientSsl' via factory method to bean named 'sslBundleRegistry'
-154068 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration$RestartConfiguration'
-154069 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.devtools-org.springframework.boot.devtools.autoconfigure.DevToolsProperties'
-154070 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration$RestartConfiguration' via constructor to bean named 'spring.devtools-org.springframework.boot.devtools.autoconfigure.DevToolsProperties'
-154070 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'restartingClassPathChangedEventListener'
-154071 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'fileSystemWatcherFactory'
-154071 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'restartingClassPathChangedEventListener' via factory method to bean named 'fileSystemWatcherFactory'
-154071 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'classPathFileSystemWatcher'
-154072 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'classPathRestartStrategy'
-154073 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'classPathFileSystemWatcher' via factory method to bean named 'fileSystemWatcherFactory'
-154073 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'classPathFileSystemWatcher' via factory method to bean named 'classPathRestartStrategy'
-154073 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'conditionEvaluationDeltaLoggingListener'
-154074 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration$LiveReloadConfiguration'
-154074 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'optionalLiveReloadServer'
-154075 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'optionalLiveReloadServer' via factory method to bean named 'liveReloadServer'
-154075 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -- LiveReload server is running on port 35729
-154075 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'liveReloadServerEventListener'
-154076 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'liveReloadServerEventListener' via factory method to bean named 'optionalLiveReloadServer'
-154076 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration'
-154082 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'applicationTaskExecutor'
-154083 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'applicationTaskExecutor' via factory method to bean named 'taskExecutorBuilder'
-154084 [restartedMain] DEBUG o.s.s.c.ThreadPoolTaskExecutor -- Initializing ExecutorService 'applicationTaskExecutor'
-154084 [restartedMain] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Starting beans in phase -2147483647
-154084 [restartedMain] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Successfully started bean 'springBootLoggingLifecycle'
-154085 [restartedMain] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Starting beans in phase 0
-154085 [restartedMain] DEBUG reactor.netty.tcp.TcpResources -- [http] resources will use the default LoopResources: DefaultLoopResources {prefix=reactor-http, daemon=true, selectCount=8, workerCount=8}
-154085 [restartedMain] DEBUG reactor.netty.tcp.TcpResources -- [http] resources will use the default ConnectionProvider: reactor.netty.resources.DefaultPooledConnectionProvider@620b628d
-154085 [restartedMain] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Successfully started bean 'reactorResourceFactory'
-154085 [restartedMain] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Starting beans in phase 2147481599
-154087 [reactor-http-epoll-1] DEBUG r.netty.transport.ServerTransport -- [fe6e96c5, L:/[0:0:0:0:0:0:0:0]:8080] Bound new server
-154087 [restartedMain] INFO  o.s.b.w.e.netty.NettyWebServer -- Netty started on port 8080 (http)
-154088 [restartedMain] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Successfully started bean 'webServerStartStop'
-154088 [restartedMain] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Starting beans in phase 2147482623
-154088 [restartedMain] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Successfully started bean 'webServerGracefulShutdown'
-154088 [restartedMain] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Starting beans in phase 2147483647
-154096 [restartedMain] DEBUG o.s.b.a.l.ConditionEvaluationReportLogger -- 
+	{GET /api/private}: privateMessage()
+	{GET /api/admin}: privateMessageAdmin()
+	{GET /api/guest}: privateMessageGuest()
+2039 [restartedMain] DEBUG o.s.w.r.r.m.a.RequestMappingHandlerMapping -- 5 mappings in 'requestMappingHandlerMapping'
+2046 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.security.config.annotation.web.reactive.WebFluxSecurityConfiguration.WebFilterChainFilter'
+2047 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'requestDataValueProcessor'
+2049 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.AutoConfigurationPackages'
+2050 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.context.PropertyPlaceholderAutoConfiguration'
+2050 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.context.properties.EnableConfigurationPropertiesRegistrar.methodValidationExcludeFilter'
+2055 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$Jackson2ObjectMapperBuilderCustomizerConfiguration'
+2055 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'standardJacksonObjectMapperBuilderCustomizer'
+2056 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.jackson-org.springframework.boot.autoconfigure.jackson.JacksonProperties'
+2059 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'standardJacksonObjectMapperBuilderCustomizer' via factory method to bean named 'spring.jackson-org.springframework.boot.autoconfigure.jackson.JacksonProperties'
+2060 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'parameterNamesModule'
+2060 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$ParameterNamesModuleConfiguration'
+2062 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'jsonMixinModule'
+2062 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonMixinConfiguration'
+2062 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'jsonMixinModuleEntries'
+2062 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'jsonMixinModuleEntries' via factory method to bean named 'org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext@7cd9f7a8'
+2063 [restartedMain] DEBUG o.s.b.a.AutoConfigurationPackages -- @EnableAutoConfiguration was declared on a class in the package 'org.ssau.sandbox'. Automatic @Repository and @Entity scanning is enabled.
+2067 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'jsonMixinModule' via factory method to bean named 'org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext@7cd9f7a8'
+2067 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'jsonMixinModule' via factory method to bean named 'jsonMixinModuleEntries'
+2068 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'jsonComponentModule'
+2069 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration'
+2072 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperBuilderConfiguration'
+2072 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperConfiguration'
+2072 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'jacksonObjectMapper'
+2074 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'jacksonObjectMapperBuilder' via factory method to bean named 'org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext@7cd9f7a8'
+2074 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'jacksonObjectMapperBuilder' via factory method to bean named 'standardJacksonObjectMapperBuilderCustomizer'
+2076 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'jacksonObjectMapper' via factory method to bean named 'jacksonObjectMapperBuilder'
+2084 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.http.codec.CodecsAutoConfiguration$DefaultCodecsConfiguration'
+2085 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'defaultCodecCustomizer'
+2085 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.codec-org.springframework.boot.autoconfigure.codec.CodecProperties'
+2087 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'defaultCodecCustomizer' via factory method to bean named 'spring.codec-org.springframework.boot.autoconfigure.codec.CodecProperties'
+2088 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.http.codec.CodecsAutoConfiguration$JacksonCodecConfiguration'
+2088 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'jacksonCodecCustomizer'
+2089 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'jacksonCodecCustomizer' via factory method to bean named 'jacksonObjectMapper'
+2090 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.http.codec.CodecsAutoConfiguration'
+2091 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.ReactiveMultipartAutoConfiguration'
+2091 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'defaultPartHttpMessageReaderCustomizer'
+2091 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.webflux.multipart-org.springframework.boot.autoconfigure.web.reactive.ReactiveMultipartProperties'
+2093 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'defaultPartHttpMessageReaderCustomizer' via factory method to bean named 'spring.webflux.multipart-org.springframework.boot.autoconfigure.web.reactive.ReactiveMultipartProperties'
+2094 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.WebSessionIdResolverAutoConfiguration'
+2094 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.WebSessionIdResolverAutoConfiguration' via constructor to bean named 'server-org.springframework.boot.autoconfigure.web.ServerProperties'
+2094 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.WebSessionIdResolverAutoConfiguration' via constructor to bean named 'spring.webflux-org.springframework.boot.autoconfigure.web.reactive.WebFluxProperties'
+2094 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'webSessionIdResolver'
+2096 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.error.ErrorWebFluxAutoConfiguration'
+2096 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.error.ErrorWebFluxAutoConfiguration' via constructor to bean named 'server-org.springframework.boot.autoconfigure.web.ServerProperties'
+2096 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'errorWebExceptionHandler'
+2097 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'errorAttributes'
+2099 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'serverCodecConfigurer'
+2126 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'errorWebExceptionHandler' via factory method to bean named 'errorAttributes'
+2126 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'errorWebExceptionHandler' via factory method to bean named 'spring.web-org.springframework.boot.autoconfigure.web.WebProperties'
+2126 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'errorWebExceptionHandler' via factory method to bean named 'serverCodecConfigurer'
+2127 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'errorWebExceptionHandler' via factory method to bean named 'org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext@7cd9f7a8'
+2137 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'webFluxConversionService'
+2140 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'webFluxValidator'
+2141 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'localeContextResolver'
+2143 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'webSessionManager'
+2145 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'webHandler'
+2146 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'routerFunctionMapping'
+2147 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'routerFunctionMapping' via factory method to bean named 'serverCodecConfigurer'
+2149 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'resourceHandlerMapping'
+2149 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'resourceUrlProvider'
+2151 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'resourceHandlerMapping' via factory method to bean named 'resourceUrlProvider'
+2158 [restartedMain] DEBUG _.s.w.r.HandlerMapping.Mappings -- 'resourceHandlerMapping' {/webjars/**=ResourceWebHandler [classpath [META-INF/resources/webjars/]], /**=ResourceWebHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/]]}
+2158 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'welcomePageRouterFunctionMapping'
+2158 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration$WelcomePageConfiguration'
+2159 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'welcomePageRouterFunctionMapping' via factory method to bean named 'org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext@7cd9f7a8'
+2159 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'welcomePageRouterFunctionMapping' via factory method to bean named 'spring.webflux-org.springframework.boot.autoconfigure.web.reactive.WebFluxProperties'
+2159 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'welcomePageRouterFunctionMapping' via factory method to bean named 'spring.web-org.springframework.boot.autoconfigure.web.WebProperties'
+2163 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'requestMappingHandlerAdapter'
+2164 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'requestMappingHandlerAdapter' via factory method to bean named 'webFluxAdapterRegistry'
+2164 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'requestMappingHandlerAdapter' via factory method to bean named 'serverCodecConfigurer'
+2164 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'requestMappingHandlerAdapter' via factory method to bean named 'webFluxConversionService'
+2164 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'requestMappingHandlerAdapter' via factory method to bean named 'webFluxValidator'
+2185 [restartedMain] DEBUG o.s.w.r.r.m.a.ControllerMethodResolver -- ControllerAdvice beans: none
+2186 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'handlerFunctionAdapter'
+2187 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'simpleHandlerAdapter'
+2188 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'webFluxWebSocketHandlerAdapter'
+2195 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'responseEntityResultHandler'
+2196 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'responseEntityResultHandler' via factory method to bean named 'webFluxAdapterRegistry'
+2196 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'responseEntityResultHandler' via factory method to bean named 'serverCodecConfigurer'
+2196 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'responseEntityResultHandler' via factory method to bean named 'webFluxContentTypeResolver'
+2199 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'responseBodyResultHandler'
+2200 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'responseBodyResultHandler' via factory method to bean named 'webFluxAdapterRegistry'
+2200 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'responseBodyResultHandler' via factory method to bean named 'serverCodecConfigurer'
+2200 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'responseBodyResultHandler' via factory method to bean named 'webFluxContentTypeResolver'
+2201 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'viewResolutionResultHandler'
+2202 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'viewResolutionResultHandler' via factory method to bean named 'webFluxAdapterRegistry'
+2202 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'viewResolutionResultHandler' via factory method to bean named 'webFluxContentTypeResolver'
+2206 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'serverResponseResultHandler'
+2207 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'serverResponseResultHandler' via factory method to bean named 'serverCodecConfigurer'
+2208 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'responseStatusExceptionHandler'
+2209 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration'
+2211 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.HttpHandlerAutoConfiguration$AnnotationConfig'
+2211 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.web.reactive.HttpHandlerAutoConfiguration$AnnotationConfig' via constructor to bean named 'org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext@7cd9f7a8'
+2212 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'httpHandler'
+2226 [restartedMain] DEBUG o.s.w.s.a.HttpWebHandlerAdapter -- enableLoggingRequestDetails='false': form data and headers will be masked to prevent unsafe logging of potentially sensitive data
+2227 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.HttpHandlerAutoConfiguration'
+2228 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.aop.AopAutoConfiguration$ClassProxyingConfiguration'
+2228 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.aop.AopAutoConfiguration'
+2228 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.availability.ApplicationAvailabilityAutoConfiguration'
+2228 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'applicationAvailability'
+2230 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.context.ConfigurationPropertiesAutoConfiguration'
+2230 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.context.LifecycleAutoConfiguration'
+2230 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'lifecycleProcessor'
+2231 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.lifecycle-org.springframework.boot.autoconfigure.context.LifecycleProperties'
+2232 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'lifecycleProcessor' via factory method to bean named 'spring.lifecycle-org.springframework.boot.autoconfigure.context.LifecycleProperties'
+2234 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration'
+2236 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.info-org.springframework.boot.autoconfigure.info.ProjectInfoProperties'
+2237 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration' via constructor to bean named 'spring.info-org.springframework.boot.autoconfigure.info.ProjectInfoProperties'
+2237 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.netty.NettyAutoConfiguration'
+2238 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.netty-org.springframework.boot.autoconfigure.netty.NettyProperties'
+2239 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.netty.NettyAutoConfiguration' via constructor to bean named 'spring.netty-org.springframework.boot.autoconfigure.netty.NettyProperties'
+2239 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.reactor.ReactorAutoConfiguration'
+2240 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.reactor-org.springframework.boot.autoconfigure.reactor.ReactorProperties'
+2241 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.reactor.ReactorAutoConfiguration' via constructor to bean named 'spring.reactor-org.springframework.boot.autoconfigure.reactor.ReactorProperties'
+2241 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.security.oauth2.resource.reactive.ReactiveOAuth2ResourceServerAutoConfiguration'
+2241 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.security.oauth2.resourceserver-org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties'
+2242 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration$SpringBootWebFluxSecurityConfiguration'
+2243 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration'
+2243 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration$SpringBootWebFluxSecurityConfiguration' via constructor to bean named 'org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration'
+2244 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.security-org.springframework.boot.autoconfigure.security.SecurityProperties'
+2245 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration'
+2246 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'authenticationEventPublisher'
+2246 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'authenticationEventPublisher' via factory method to bean named 'org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext@7cd9f7a8'
+2249 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration'
+2249 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.sql.init-org.springframework.boot.autoconfigure.sql.init.SqlInitializationProperties'
+2252 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.task.TaskExecutorConfigurations$ThreadPoolTaskExecutorBuilderConfiguration'
+2252 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'threadPoolTaskExecutorBuilder'
+2253 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.task.execution-org.springframework.boot.autoconfigure.task.TaskExecutionProperties'
+2255 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'threadPoolTaskExecutorBuilder' via factory method to bean named 'spring.task.execution-org.springframework.boot.autoconfigure.task.TaskExecutionProperties'
+2259 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.task.TaskExecutorConfigurations$TaskExecutorBuilderConfiguration'
+2260 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'taskExecutorBuilder'
+2260 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'taskExecutorBuilder' via factory method to bean named 'spring.task.execution-org.springframework.boot.autoconfigure.task.TaskExecutionProperties'
+2262 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.task.TaskExecutorConfigurations$SimpleAsyncTaskExecutorBuilderConfiguration'
+2263 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.task.TaskExecutorConfigurations$SimpleAsyncTaskExecutorBuilderConfiguration' via constructor to bean named 'spring.task.execution-org.springframework.boot.autoconfigure.task.TaskExecutionProperties'
+2263 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'simpleAsyncTaskExecutorBuilder'
+2264 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.task.TaskExecutorConfigurations$TaskExecutorConfiguration'
+2265 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration'
+2265 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.task.TaskSchedulingConfigurations$ThreadPoolTaskSchedulerBuilderConfiguration'
+2265 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'threadPoolTaskSchedulerBuilder'
+2266 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.task.scheduling-org.springframework.boot.autoconfigure.task.TaskSchedulingProperties'
+2273 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'threadPoolTaskSchedulerBuilder' via factory method to bean named 'spring.task.scheduling-org.springframework.boot.autoconfigure.task.TaskSchedulingProperties'
+2275 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.task.TaskSchedulingConfigurations$TaskSchedulerBuilderConfiguration'
+2275 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'taskSchedulerBuilder'
+2276 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'taskSchedulerBuilder' via factory method to bean named 'spring.task.scheduling-org.springframework.boot.autoconfigure.task.TaskSchedulingProperties'
+2277 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.task.TaskSchedulingConfigurations$SimpleAsyncTaskSchedulerBuilderConfiguration'
+2277 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.autoconfigure.task.TaskSchedulingConfigurations$SimpleAsyncTaskSchedulerBuilderConfiguration' via constructor to bean named 'spring.task.scheduling-org.springframework.boot.autoconfigure.task.TaskSchedulingProperties'
+2277 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'simpleAsyncTaskSchedulerBuilder'
+2279 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration'
+2280 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.embedded.EmbeddedWebServerFactoryCustomizerAutoConfiguration'
+2280 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.function.client.ClientHttpConnectorFactoryConfiguration$ReactorNetty'
+2281 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'reactorClientHttpConnectorFactory'
+2281 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'reactorClientHttpConnectorFactory' via factory method to bean named 'reactorResourceFactory'
+2283 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.function.client.ClientHttpConnectorAutoConfiguration'
+2284 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.function.client.WebClientAutoConfiguration$WebClientCodecsConfiguration'
+2284 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'exchangeStrategiesCustomizer'
+2285 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.web.reactive.function.client.WebClientAutoConfiguration'
+2285 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'webClientSsl'
+2288 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'webClientSsl' via factory method to bean named 'reactorClientHttpConnectorFactory'
+2288 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'webClientSsl' via factory method to bean named 'sslBundleRegistry'
+2289 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration$RestartConfiguration'
+2290 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'spring.devtools-org.springframework.boot.devtools.autoconfigure.DevToolsProperties'
+2292 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration$RestartConfiguration' via constructor to bean named 'spring.devtools-org.springframework.boot.devtools.autoconfigure.DevToolsProperties'
+2293 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'restartingClassPathChangedEventListener'
+2293 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'fileSystemWatcherFactory'
+2294 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'restartingClassPathChangedEventListener' via factory method to bean named 'fileSystemWatcherFactory'
+2295 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'classPathFileSystemWatcher'
+2296 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'classPathRestartStrategy'
+2297 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'classPathFileSystemWatcher' via factory method to bean named 'fileSystemWatcherFactory'
+2297 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'classPathFileSystemWatcher' via factory method to bean named 'classPathRestartStrategy'
+2303 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'conditionEvaluationDeltaLoggingListener'
+2304 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration$LiveReloadConfiguration'
+2305 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'optionalLiveReloadServer'
+2306 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'liveReloadServer' via factory method to bean named 'spring.devtools-org.springframework.boot.devtools.autoconfigure.DevToolsProperties'
+2308 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'optionalLiveReloadServer' via factory method to bean named 'liveReloadServer'
+2309 [restartedMain] DEBUG o.s.b.d.livereload.LiveReloadServer -- Starting live reload server on port 35729
+2315 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -- LiveReload server is running on port 35729
+2315 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'liveReloadServerEventListener'
+2316 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'liveReloadServerEventListener' via factory method to bean named 'optionalLiveReloadServer'
+2316 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration'
+2325 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Creating shared instance of singleton bean 'applicationTaskExecutor'
+2326 [restartedMain] DEBUG o.s.b.f.s.DefaultListableBeanFactory -- Autowiring by type from bean name 'applicationTaskExecutor' via factory method to bean named 'taskExecutorBuilder'
+2332 [restartedMain] DEBUG o.s.s.c.ThreadPoolTaskExecutor -- Initializing ExecutorService 'applicationTaskExecutor'
+2335 [restartedMain] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Starting beans in phase -2147483647
+2336 [restartedMain] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Successfully started bean 'springBootLoggingLifecycle'
+2336 [restartedMain] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Starting beans in phase 0
+2351 [restartedMain] DEBUG reactor.netty.tcp.TcpResources -- [http] resources will use the default LoopResources: DefaultLoopResources {prefix=reactor-http, daemon=true, selectCount=8, workerCount=8}
+2352 [restartedMain] DEBUG reactor.netty.tcp.TcpResources -- [http] resources will use the default ConnectionProvider: reactor.netty.resources.DefaultPooledConnectionProvider@4b3a176
+2352 [restartedMain] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Successfully started bean 'reactorResourceFactory'
+2352 [restartedMain] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Starting beans in phase 2147481599
+2363 [restartedMain] DEBUG r.n.resources.DefaultLoopIOUring -- Default io_uring support : false
+2377 [restartedMain] DEBUG i.n.u.internal.NativeLibraryLoader -- -Dio.netty.native.workdir: /tmp (io.netty.tmpdir)
+2377 [restartedMain] DEBUG i.n.u.internal.NativeLibraryLoader -- -Dio.netty.native.deleteLibAfterLoading: true
+2377 [restartedMain] DEBUG i.n.u.internal.NativeLibraryLoader -- -Dio.netty.native.tryPatchShadedId: true
+2377 [restartedMain] DEBUG i.n.u.internal.NativeLibraryLoader -- -Dio.netty.native.detectNativeLibraryDuplicates: true
+2389 [restartedMain] DEBUG i.n.u.internal.NativeLibraryLoader -- Successfully loaded the library /tmp/libnetty_transport_native_epoll_x86_6417494524045404415673.so
+2393 [restartedMain] DEBUG io.netty.util.NetUtil -- -Djava.net.preferIPv4Stack: false
+2393 [restartedMain] DEBUG io.netty.util.NetUtil -- -Djava.net.preferIPv6Addresses: false
+2395 [restartedMain] DEBUG i.netty.util.NetUtilInitializations -- Loopback interface: lo (lo, 0:0:0:0:0:0:0:1%lo)
+2396 [restartedMain] DEBUG io.netty.util.NetUtil -- /proc/sys/net/core/somaxconn: 4096
+2396 [restartedMain] DEBUG r.netty.resources.DefaultLoopEpoll -- Default Epoll support : true
+2399 [restartedMain] DEBUG i.n.c.MultithreadEventLoopGroup -- -Dio.netty.eventLoopThreads: 16
+2408 [restartedMain] DEBUG i.n.util.internal.PlatformDependent -- org.jctools-core.MpscChunkedArrayQueue: available
+2426 [restartedMain] DEBUG io.netty.channel.DefaultChannelId -- -Dio.netty.processId: 25370 (auto-detected)
+2427 [restartedMain] DEBUG io.netty.channel.DefaultChannelId -- -Dio.netty.machineId: 24:41:8c:ff:fe:6a:70:fc (auto-detected)
+2440 [restartedMain] DEBUG i.n.buffer.PooledByteBufAllocator -- -Dio.netty.allocator.numHeapArenas: 16
+2440 [restartedMain] DEBUG i.n.buffer.PooledByteBufAllocator -- -Dio.netty.allocator.numDirectArenas: 16
+2440 [restartedMain] DEBUG i.n.buffer.PooledByteBufAllocator -- -Dio.netty.allocator.pageSize: 8192
+2440 [restartedMain] DEBUG i.n.buffer.PooledByteBufAllocator -- -Dio.netty.allocator.maxOrder: 9
+2440 [restartedMain] DEBUG i.n.buffer.PooledByteBufAllocator -- -Dio.netty.allocator.chunkSize: 4194304
+2440 [restartedMain] DEBUG i.n.buffer.PooledByteBufAllocator -- -Dio.netty.allocator.smallCacheSize: 256
+2440 [restartedMain] DEBUG i.n.buffer.PooledByteBufAllocator -- -Dio.netty.allocator.normalCacheSize: 64
+2440 [restartedMain] DEBUG i.n.buffer.PooledByteBufAllocator -- -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+2440 [restartedMain] DEBUG i.n.buffer.PooledByteBufAllocator -- -Dio.netty.allocator.cacheTrimInterval: 8192
+2440 [restartedMain] DEBUG i.n.buffer.PooledByteBufAllocator -- -Dio.netty.allocator.cacheTrimIntervalMillis: 0
+2440 [restartedMain] DEBUG i.n.buffer.PooledByteBufAllocator -- -Dio.netty.allocator.useCacheForAllThreads: false
+2440 [restartedMain] DEBUG i.n.buffer.PooledByteBufAllocator -- -Dio.netty.allocator.maxCachedByteBuffersPerChunk: 1023
+2440 [restartedMain] DEBUG i.n.buffer.PooledByteBufAllocator -- -Dio.netty.allocator.disableCacheFinalizersForFastThreadLocalThreads: false
+2447 [restartedMain] DEBUG io.netty.buffer.ByteBufUtil -- -Dio.netty.allocator.type: pooled
+2447 [restartedMain] DEBUG io.netty.buffer.ByteBufUtil -- -Dio.netty.threadLocalDirectBufferSize: 0
+2447 [restartedMain] DEBUG io.netty.buffer.ByteBufUtil -- -Dio.netty.maxThreadLocalCharBufferSize: 16384
+2460 [reactor-http-epoll-1] DEBUG r.netty.transport.ServerTransport -- [5966e6ff, L:/[0:0:0:0:0:0:0:0]:8080] Bound new server
+2461 [restartedMain] INFO  o.s.b.w.e.netty.NettyWebServer -- Netty started on port 8080 (http)
+2463 [restartedMain] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Successfully started bean 'webServerStartStop'
+2463 [restartedMain] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Starting beans in phase 2147482623
+2463 [restartedMain] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Successfully started bean 'webServerGracefulShutdown'
+2463 [restartedMain] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Starting beans in phase 2147483647
+2482 [restartedMain] DEBUG o.s.b.a.l.ConditionEvaluationReportLogger -- 
 
 
 ============================
@@ -1026,7 +1105,7 @@ Negative matches:
 
    ReactiveSecurityAutoConfiguration.SpringBootWebFluxSecurityConfiguration#denyAllAuthenticationManager:
       Did not match:
-         - @ConditionalOnMissingBean (types: org.springframework.security.authentication.ReactiveAuthenticationManager,org.springframework.security.core.userdetails.ReactiveUserDetailsService,org.springframework.security.web.server.SecurityWebFilterChain; SearchStrategy: all) found beans of type 'org.springframework.security.core.userdetails.ReactiveUserDetailsService' userDetailsService and found beans of type 'org.springframework.security.web.server.SecurityWebFilterChain' securityWebFilterChain (OnBeanCondition)
+         - @ConditionalOnMissingBean (types: org.springframework.security.authentication.ReactiveAuthenticationManager,org.springframework.security.core.userdetails.ReactiveUserDetailsService,org.springframework.security.web.server.SecurityWebFilterChain; SearchStrategy: all) found beans of type 'org.springframework.security.core.userdetails.ReactiveUserDetailsService' userDetailsRepository and found beans of type 'org.springframework.security.web.server.SecurityWebFilterChain' springSecurityFilterChain and found beans of type 'org.springframework.security.authentication.ReactiveAuthenticationManager' basicAuthManager (OnBeanCondition)
 
    ReactiveSecurityAutoConfiguration.SpringBootWebFluxSecurityConfiguration.EnableWebFluxSecurityConfiguration:
       Did not match:
@@ -1034,7 +1113,7 @@ Negative matches:
 
    ReactiveUserDetailsServiceAutoConfiguration:
       Did not match:
-         - @ConditionalOnMissingBean (types: org.springframework.security.authentication.ReactiveAuthenticationManager,org.springframework.security.core.userdetails.ReactiveUserDetailsService,org.springframework.security.authentication.ReactiveAuthenticationManagerResolver,org.springframework.security.oauth2.jwt.ReactiveJwtDecoder; SearchStrategy: all) found beans of type 'org.springframework.security.core.userdetails.ReactiveUserDetailsService' userDetailsService (OnBeanCondition)
+         - @ConditionalOnMissingBean (types: org.springframework.security.authentication.ReactiveAuthenticationManager,org.springframework.security.core.userdetails.ReactiveUserDetailsService,org.springframework.security.authentication.ReactiveAuthenticationManagerResolver,org.springframework.security.oauth2.jwt.ReactiveJwtDecoder; SearchStrategy: all) found beans of type 'org.springframework.security.core.userdetails.ReactiveUserDetailsService' userDetailsRepository and found beans of type 'org.springframework.security.authentication.ReactiveAuthenticationManager' basicAuthManager (OnBeanCondition)
       Matched:
          - @ConditionalOnClass found required class 'org.springframework.security.authentication.ReactiveAuthenticationManager' (OnClassCondition)
          - AnyNestedCondition 1 matched 2 did not; NestedCondition on ReactiveUserDetailsServiceAutoConfiguration.MissingAlternativeOrUserPropertiesConfigured.PasswordConfigured @ConditionalOnProperty (spring.security.user.password) did not find property 'password'; NestedCondition on ReactiveUserDetailsServiceAutoConfiguration.MissingAlternativeOrUserPropertiesConfigured.NameConfigured @ConditionalOnProperty (spring.security.user.name) did not find property 'name'; NestedCondition on ReactiveUserDetailsServiceAutoConfiguration.MissingAlternativeOrUserPropertiesConfigured.MissingAlternative @ConditionalOnMissingClass did not find unwanted classes 'org.springframework.security.oauth2.client.registration.ClientRegistrationRepository', 'org.springframework.security.oauth2.server.resource.introspection.ReactiveOpaqueTokenIntrospector' (ReactiveUserDetailsServiceAutoConfiguration.MissingAlternativeOrUserPropertiesConfigured)
@@ -1241,182 +1320,23 @@ Unconditional classes:
 
 
 
-154098 [restartedMain] INFO  org.ssau.sandbox.App -- Started App in 0.661 seconds (process running for 154.216)
-154098 [restartedMain] DEBUG o.s.b.a.ApplicationAvailabilityBean -- Application availability state LivenessState changed to CORRECT
-154100 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener -- Condition evaluation unchanged
-154100 [restartedMain] DEBUG o.s.b.a.ApplicationAvailabilityBean -- Application availability state ReadinessState changed to ACCEPTING_TRAFFIC
-912741 [reactor-http-epoll-2] DEBUG r.n.h.server.HttpServerOperations -- [a29846b9, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52930] New http connection, requesting read
-912741 [reactor-http-epoll-2] DEBUG r.netty.transport.TransportConfig -- [a29846b9, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52930] Initialized pipeline DefaultChannelPipeline{(reactor.left.httpCodec = io.netty.handler.codec.http.HttpServerCodec), (reactor.left.httpTrafficHandler = reactor.netty.http.server.HttpTrafficHandler), (reactor.right.reactiveBridge = reactor.netty.channel.ChannelOperationsHandler)}
-912744 [reactor-http-epoll-2] DEBUG r.n.h.server.HttpServerOperations -- [a29846b9, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52930] Increasing pending responses count: 1
-912744 [reactor-http-epoll-2] DEBUG r.netty.http.server.HttpServer -- [a29846b9-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52930] Handler is being applied: org.springframework.http.server.reactive.ReactorHttpHandlerAdapter@c9d2b6b
-912745 [reactor-http-epoll-2] DEBUG o.s.w.s.a.HttpWebHandlerAdapter -- [a29846b9-4] HTTP GET "/api/token"
-912841 [parallel-4] DEBUG o.s.w.s.s.DefaultWebSessionManager -- Created new WebSession.
-912842 [parallel-4] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
-912842 [parallel-4] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'GET /api/token' doesn't match 'POST /logout'
-912842 [parallel-4] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- No matches found
-912842 [parallel-4] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/private', method=null}
-912842 [parallel-4] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'GET /api/token' doesn't match 'null /private'
-912842 [parallel-4] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- No matches found
-912842 [parallel-4] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/share', method=null}
-912842 [parallel-4] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'GET /api/token' doesn't match 'null /share'
-912842 [parallel-4] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- No matches found
-912842 [parallel-4] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/token', method=null}
-912842 [parallel-4] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Checking match of request : '/api/token'; against '/api/token'
-912842 [parallel-4] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- matched
-912842 [parallel-4] DEBUG o.s.s.w.s.a.DelegatingReactiveAuthorizationManager -- Checking authorization on '/api/token' using org.springframework.security.config.web.server.ServerHttpSecurity$AuthorizeExchangeSpec$Access$$Lambda/0x00007c3f8040f7a0@5c3431cc
-912842 [parallel-4] DEBUG o.s.s.w.s.a.AuthorizationWebFilter -- Authorization successful
-912843 [parallel-4] DEBUG o.s.w.r.r.m.a.RequestMappingHandlerMapping -- [a29846b9-4] Mapped to org.ssau.sandbox.controller.TokenApiController#getToken(ServerWebExchange)
-912844 [parallel-4] INFO  o.s.s.controller.TokenApiController -- auth MonoMapFuseable
-912845 [parallel-4] DEBUG o.s.w.r.r.m.a.ResponseBodyResultHandler -- [a29846b9-4] Using 'text/plain;charset=UTF-8' given [*/*] and supported [text/plain;charset=UTF-8, text/event-stream, text/plain;charset=UTF-8, */*]
-912845 [parallel-4] DEBUG o.s.w.r.r.m.a.ResponseBodyResultHandler -- [a29846b9-4] 0..1 [java.lang.String]
-912845 [parallel-4] INFO  o.ssau.sandbox.service.TokenService -- Token generated for fizlrock with role Player
-912943 [parallel-4] DEBUG o.s.core.codec.CharSequenceEncoder -- [a29846b9-4] Writing "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWFiYXR0bGVfc2VydmljZSIsImlkIjowLCJyb2xlIjoiUGxheWVyIiwiaWF0IjoxNzI (truncated)..."
-912945 [parallel-4] DEBUG r.n.h.server.HttpServerOperations -- [a29846b9-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52930] Last HTTP response frame
-912945 [parallel-4] DEBUG r.n.h.server.HttpServerOperations -- [a29846b9-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52930] Headers are not sent before onComplete().
-912945 [parallel-4] DEBUG o.s.w.s.a.HttpWebHandlerAdapter -- [a29846b9-4] Completed 200 OK
-912945 [reactor-http-epoll-2] DEBUG r.n.h.server.HttpServerOperations -- [a29846b9-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52930] Decreasing pending responses count: 0
-912945 [reactor-http-epoll-2] DEBUG r.n.h.server.HttpServerOperations -- [a29846b9-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52930] Last HTTP packet was sent, terminating the channel
-912945 [reactor-http-epoll-2] DEBUG r.netty.channel.ChannelOperations -- [a29846b9-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52930] [HttpServer] Channel inbound receiver cancelled (subscription disposed).
-914976 [reactor-http-epoll-3] DEBUG r.n.h.server.HttpServerOperations -- [e136ac6c, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52938] New http connection, requesting read
-914977 [reactor-http-epoll-3] DEBUG r.netty.transport.TransportConfig -- [e136ac6c, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52938] Initialized pipeline DefaultChannelPipeline{(reactor.left.httpCodec = io.netty.handler.codec.http.HttpServerCodec), (reactor.left.httpTrafficHandler = reactor.netty.http.server.HttpTrafficHandler), (reactor.right.reactiveBridge = reactor.netty.channel.ChannelOperationsHandler)}
-914977 [reactor-http-epoll-3] DEBUG r.n.h.server.HttpServerOperations -- [e136ac6c, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52938] Increasing pending responses count: 1
-914977 [reactor-http-epoll-3] DEBUG r.netty.http.server.HttpServer -- [e136ac6c-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52938] Handler is being applied: org.springframework.http.server.reactive.ReactorHttpHandlerAdapter@c9d2b6b
-914978 [reactor-http-epoll-3] DEBUG o.s.w.s.a.HttpWebHandlerAdapter -- [e136ac6c-5] HTTP GET "/api/token"
-915066 [parallel-5] DEBUG o.s.w.s.s.DefaultWebSessionManager -- Created new WebSession.
-915067 [parallel-5] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
-915067 [parallel-5] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'GET /api/token' doesn't match 'POST /logout'
-915067 [parallel-5] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- No matches found
-915067 [parallel-5] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/private', method=null}
-915067 [parallel-5] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'GET /api/token' doesn't match 'null /private'
-915067 [parallel-5] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- No matches found
-915067 [parallel-5] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/share', method=null}
-915067 [parallel-5] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'GET /api/token' doesn't match 'null /share'
-915067 [parallel-5] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- No matches found
-915067 [parallel-5] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/token', method=null}
-915067 [parallel-5] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Checking match of request : '/api/token'; against '/api/token'
-915067 [parallel-5] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- matched
-915067 [parallel-5] DEBUG o.s.s.w.s.a.DelegatingReactiveAuthorizationManager -- Checking authorization on '/api/token' using org.springframework.security.config.web.server.ServerHttpSecurity$AuthorizeExchangeSpec$Access$$Lambda/0x00007c3f8040f7a0@5c3431cc
-915067 [parallel-5] DEBUG o.s.s.w.s.a.AuthorizationWebFilter -- Authorization successful
-915067 [parallel-5] DEBUG o.s.w.r.r.m.a.RequestMappingHandlerMapping -- [e136ac6c-5] Mapped to org.ssau.sandbox.controller.TokenApiController#getToken(ServerWebExchange)
-915068 [parallel-5] INFO  o.s.s.controller.TokenApiController -- auth MonoMapFuseable
-915068 [parallel-5] DEBUG o.s.w.r.r.m.a.ResponseBodyResultHandler -- [e136ac6c-5] Using 'text/plain;charset=UTF-8' given [*/*] and supported [text/plain;charset=UTF-8, text/event-stream, text/plain;charset=UTF-8, */*]
-915068 [parallel-5] DEBUG o.s.w.r.r.m.a.ResponseBodyResultHandler -- [e136ac6c-5] 0..1 [java.lang.String]
-915068 [parallel-5] INFO  o.ssau.sandbox.service.TokenService -- Token generated for fizlrock with role Player
-915069 [parallel-5] DEBUG o.s.core.codec.CharSequenceEncoder -- [e136ac6c-5] Writing "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWFiYXR0bGVfc2VydmljZSIsImlkIjowLCJyb2xlIjoiUGxheWVyIiwiaWF0IjoxNzI (truncated)..."
-915071 [parallel-5] DEBUG r.n.h.server.HttpServerOperations -- [e136ac6c-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52938] Last HTTP response frame
-915071 [parallel-5] DEBUG r.n.h.server.HttpServerOperations -- [e136ac6c-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52938] Headers are not sent before onComplete().
-915071 [parallel-5] DEBUG o.s.w.s.a.HttpWebHandlerAdapter -- [e136ac6c-5] Completed 200 OK
-915071 [reactor-http-epoll-3] DEBUG r.n.h.server.HttpServerOperations -- [e136ac6c-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52938] Decreasing pending responses count: 0
-915071 [reactor-http-epoll-3] DEBUG r.n.h.server.HttpServerOperations -- [e136ac6c-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52938] Last HTTP packet was sent, terminating the channel
-915071 [reactor-http-epoll-3] DEBUG r.netty.channel.ChannelOperations -- [e136ac6c-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52938] [HttpServer] Channel inbound receiver cancelled (subscription disposed).
-920176 [reactor-http-epoll-4] DEBUG r.n.h.server.HttpServerOperations -- [12b1e6ed, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52134] New http connection, requesting read
-920176 [reactor-http-epoll-4] DEBUG r.netty.transport.TransportConfig -- [12b1e6ed, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52134] Initialized pipeline DefaultChannelPipeline{(reactor.left.httpCodec = io.netty.handler.codec.http.HttpServerCodec), (reactor.left.httpTrafficHandler = reactor.netty.http.server.HttpTrafficHandler), (reactor.right.reactiveBridge = reactor.netty.channel.ChannelOperationsHandler)}
-920178 [reactor-http-epoll-4] DEBUG r.n.h.server.HttpServerOperations -- [12b1e6ed, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52134] Increasing pending responses count: 1
-920179 [reactor-http-epoll-4] DEBUG r.netty.http.server.HttpServer -- [12b1e6ed-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52134] Handler is being applied: org.springframework.http.server.reactive.ReactorHttpHandlerAdapter@c9d2b6b
-920179 [reactor-http-epoll-4] DEBUG o.s.w.s.a.HttpWebHandlerAdapter -- [12b1e6ed-6] HTTP GET "/api/token"
-920264 [boundedElastic-3] DEBUG o.s.s.w.s.a.AuthenticationWebFilter -- Authentication failed: Invalid Credentials
-org.springframework.security.authentication.BadCredentialsException: Invalid Credentials
-	at org.springframework.security.authentication.AbstractUserDetailsReactiveAuthenticationManager.lambda$authenticate$1(AbstractUserDetailsReactiveAuthenticationManager.java:108)
-	at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:45)
-	at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
-	at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onComplete(FluxSwitchIfEmpty.java:82)
-	at reactor.core.publisher.FluxFilter$FilterSubscriber.onComplete(FluxFilter.java:166)
-	at reactor.core.publisher.MonoPublishOn$PublishOnSubscriber.run(MonoPublishOn.java:182)
-	at reactor.core.scheduler.SchedulerTask.call(SchedulerTask.java:68)
-	at reactor.core.scheduler.SchedulerTask.call(SchedulerTask.java:28)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
-920267 [boundedElastic-3] DEBUG o.s.s.w.s.DelegatingServerAuthenticationEntryPoint -- Trying to match using org.springframework.security.config.web.server.ServerHttpSecurity$HttpBasicSpec$$Lambda/0x00007c3f805229f8@132d8c7f
-920268 [boundedElastic-3] DEBUG o.s.s.w.s.DelegatingServerAuthenticationEntryPoint -- No match found. Using default entry point org.springframework.security.web.server.authentication.HttpBasicServerAuthenticationEntryPoint@3d4fe980
-920268 [boundedElastic-3] DEBUG o.s.w.s.a.HttpWebHandlerAdapter -- [12b1e6ed-6] Completed 401 UNAUTHORIZED
-920268 [boundedElastic-3] DEBUG r.n.h.server.HttpServerOperations -- [12b1e6ed-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52134] Last HTTP response frame
-920268 [boundedElastic-3] DEBUG r.n.h.server.HttpServerOperations -- [12b1e6ed-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52134] Headers are not sent before onComplete().
-920269 [reactor-http-epoll-4] DEBUG r.n.h.server.HttpServerOperations -- [12b1e6ed-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52134] Decreasing pending responses count: 0
-920269 [reactor-http-epoll-4] DEBUG r.n.h.server.HttpServerOperations -- [12b1e6ed-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52134] Last HTTP packet was sent, terminating the channel
-920269 [reactor-http-epoll-4] DEBUG r.netty.channel.ChannelOperations -- [12b1e6ed-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52134] [HttpServer] Channel inbound receiver cancelled (subscription disposed).
-927456 [reactor-http-epoll-5] DEBUG r.n.h.server.HttpServerOperations -- [96deb21d, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52148] New http connection, requesting read
-927456 [reactor-http-epoll-5] DEBUG r.netty.transport.TransportConfig -- [96deb21d, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52148] Initialized pipeline DefaultChannelPipeline{(reactor.left.httpCodec = io.netty.handler.codec.http.HttpServerCodec), (reactor.left.httpTrafficHandler = reactor.netty.http.server.HttpTrafficHandler), (reactor.right.reactiveBridge = reactor.netty.channel.ChannelOperationsHandler)}
-927458 [reactor-http-epoll-5] DEBUG r.n.h.server.HttpServerOperations -- [96deb21d, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52148] Increasing pending responses count: 1
-927458 [reactor-http-epoll-5] DEBUG r.netty.http.server.HttpServer -- [96deb21d-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52148] Handler is being applied: org.springframework.http.server.reactive.ReactorHttpHandlerAdapter@c9d2b6b
-927458 [reactor-http-epoll-5] DEBUG o.s.w.s.a.HttpWebHandlerAdapter -- [96deb21d-7] HTTP GET "/api/token"
-927549 [parallel-6] DEBUG o.s.w.s.s.DefaultWebSessionManager -- Created new WebSession.
-927549 [parallel-6] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
-927549 [parallel-6] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'GET /api/token' doesn't match 'POST /logout'
-927549 [parallel-6] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- No matches found
-927549 [parallel-6] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/private', method=null}
-927549 [parallel-6] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'GET /api/token' doesn't match 'null /private'
-927549 [parallel-6] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- No matches found
-927549 [parallel-6] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/share', method=null}
-927549 [parallel-6] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'GET /api/token' doesn't match 'null /share'
-927549 [parallel-6] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- No matches found
-927550 [parallel-6] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/token', method=null}
-927550 [parallel-6] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Checking match of request : '/api/token'; against '/api/token'
-927550 [parallel-6] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- matched
-927550 [parallel-6] DEBUG o.s.s.w.s.a.DelegatingReactiveAuthorizationManager -- Checking authorization on '/api/token' using org.springframework.security.config.web.server.ServerHttpSecurity$AuthorizeExchangeSpec$Access$$Lambda/0x00007c3f8040f7a0@5c3431cc
-927550 [parallel-6] DEBUG o.s.s.w.s.a.AuthorizationWebFilter -- Authorization successful
-927550 [parallel-6] DEBUG o.s.w.r.r.m.a.RequestMappingHandlerMapping -- [96deb21d-7] Mapped to org.ssau.sandbox.controller.TokenApiController#getToken(ServerWebExchange)
-927550 [parallel-6] INFO  o.s.s.controller.TokenApiController -- auth MonoMapFuseable
-927550 [parallel-6] DEBUG o.s.w.r.r.m.a.ResponseBodyResultHandler -- [96deb21d-7] Using 'text/plain;charset=UTF-8' given [*/*] and supported [text/plain;charset=UTF-8, text/event-stream, text/plain;charset=UTF-8, */*]
-927550 [parallel-6] DEBUG o.s.w.r.r.m.a.ResponseBodyResultHandler -- [96deb21d-7] 0..1 [java.lang.String]
-927551 [parallel-6] INFO  o.ssau.sandbox.service.TokenService -- Token generated for fizlrock with role Player
-927551 [parallel-6] DEBUG o.s.core.codec.CharSequenceEncoder -- [96deb21d-7] Writing "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWFiYXR0bGVfc2VydmljZSIsImlkIjowLCJyb2xlIjoiUGxheWVyIiwiaWF0IjoxNzI (truncated)..."
-927553 [parallel-6] DEBUG r.n.h.server.HttpServerOperations -- [96deb21d-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52148] Last HTTP response frame
-927553 [parallel-6] DEBUG r.n.h.server.HttpServerOperations -- [96deb21d-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52148] Headers are not sent before onComplete().
-927553 [parallel-6] DEBUG o.s.w.s.a.HttpWebHandlerAdapter -- [96deb21d-7] Completed 200 OK
-927553 [reactor-http-epoll-5] DEBUG r.n.h.server.HttpServerOperations -- [96deb21d-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52148] Decreasing pending responses count: 0
-927553 [reactor-http-epoll-5] DEBUG r.n.h.server.HttpServerOperations -- [96deb21d-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52148] Last HTTP packet was sent, terminating the channel
-927553 [reactor-http-epoll-5] DEBUG r.netty.channel.ChannelOperations -- [96deb21d-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:52148] [HttpServer] Channel inbound receiver cancelled (subscription disposed).
-932919 [reactor-http-epoll-6] DEBUG r.n.h.server.HttpServerOperations -- [28f41cf9, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:51596] New http connection, requesting read
-932920 [reactor-http-epoll-6] DEBUG r.netty.transport.TransportConfig -- [28f41cf9, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:51596] Initialized pipeline DefaultChannelPipeline{(reactor.left.httpCodec = io.netty.handler.codec.http.HttpServerCodec), (reactor.left.httpTrafficHandler = reactor.netty.http.server.HttpTrafficHandler), (reactor.right.reactiveBridge = reactor.netty.channel.ChannelOperationsHandler)}
-932922 [reactor-http-epoll-6] DEBUG r.n.h.server.HttpServerOperations -- [28f41cf9, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:51596] Increasing pending responses count: 1
-932923 [reactor-http-epoll-6] DEBUG r.netty.http.server.HttpServer -- [28f41cf9-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:51596] Handler is being applied: org.springframework.http.server.reactive.ReactorHttpHandlerAdapter@c9d2b6b
-932923 [reactor-http-epoll-6] DEBUG o.s.w.s.a.HttpWebHandlerAdapter -- [28f41cf9-8] HTTP GET "/api/token"
-933007 [parallel-7] DEBUG o.s.w.s.s.DefaultWebSessionManager -- Created new WebSession.
-933008 [parallel-7] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
-933008 [parallel-7] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'GET /api/token' doesn't match 'POST /logout'
-933008 [parallel-7] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- No matches found
-933008 [parallel-7] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/private', method=null}
-933008 [parallel-7] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'GET /api/token' doesn't match 'null /private'
-933008 [parallel-7] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- No matches found
-933008 [parallel-7] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/share', method=null}
-933008 [parallel-7] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'GET /api/token' doesn't match 'null /share'
-933008 [parallel-7] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- No matches found
-933008 [parallel-7] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/token', method=null}
-933008 [parallel-7] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Checking match of request : '/api/token'; against '/api/token'
-933008 [parallel-7] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- matched
-933008 [parallel-7] DEBUG o.s.s.w.s.a.DelegatingReactiveAuthorizationManager -- Checking authorization on '/api/token' using org.springframework.security.config.web.server.ServerHttpSecurity$AuthorizeExchangeSpec$Access$$Lambda/0x00007c3f8040f7a0@5c3431cc
-933008 [parallel-7] DEBUG o.s.s.w.s.a.AuthorizationWebFilter -- Authorization successful
-933009 [parallel-7] DEBUG o.s.w.r.r.m.a.RequestMappingHandlerMapping -- [28f41cf9-8] Mapped to org.ssau.sandbox.controller.TokenApiController#getToken(ServerWebExchange)
-933009 [parallel-7] INFO  o.s.s.controller.TokenApiController -- auth MonoMapFuseable
-933009 [parallel-7] DEBUG o.s.w.r.r.m.a.ResponseBodyResultHandler -- [28f41cf9-8] Using 'text/plain;charset=UTF-8' given [*/*] and supported [text/plain;charset=UTF-8, text/event-stream, text/plain;charset=UTF-8, */*]
-933009 [parallel-7] DEBUG o.s.w.r.r.m.a.ResponseBodyResultHandler -- [28f41cf9-8] 0..1 [java.lang.String]
-933010 [parallel-7] INFO  o.ssau.sandbox.service.TokenService -- Token generated for fizlrock with role Player
-933011 [parallel-7] DEBUG o.s.core.codec.CharSequenceEncoder -- [28f41cf9-8] Writing "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWFiYXR0bGVfc2VydmljZSIsImlkIjowLCJyb2xlIjoiUGxheWVyIiwiaWF0IjoxNzI (truncated)..."
-933013 [parallel-7] DEBUG r.n.h.server.HttpServerOperations -- [28f41cf9-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:51596] Last HTTP response frame
-933013 [parallel-7] DEBUG r.n.h.server.HttpServerOperations -- [28f41cf9-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:51596] Headers are not sent before onComplete().
-933013 [parallel-7] DEBUG o.s.w.s.a.HttpWebHandlerAdapter -- [28f41cf9-8] Completed 200 OK
-933013 [reactor-http-epoll-6] DEBUG r.n.h.server.HttpServerOperations -- [28f41cf9-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:51596] Decreasing pending responses count: 0
-933013 [reactor-http-epoll-6] DEBUG r.n.h.server.HttpServerOperations -- [28f41cf9-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:51596] Last HTTP packet was sent, terminating the channel
-933013 [reactor-http-epoll-6] DEBUG r.netty.channel.ChannelOperations -- [28f41cf9-1, L:/[0:0:0:0:0:0:0:1]:8080 - R:/[0:0:0:0:0:0:0:1]:51596] [HttpServer] Channel inbound receiver cancelled (subscription disposed).
-1218517 [SpringApplicationShutdownHook] DEBUG o.s.b.a.ApplicationAvailabilityBean -- Application availability state ReadinessState changed from ACCEPTING_TRAFFIC to REFUSING_TRAFFIC
-1218517 [SpringApplicationShutdownHook] DEBUG o.s.b.w.r.c.AnnotationConfigReactiveWebServerApplicationContext -- Closing org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext@3a72203e, started on Thu Oct 24 06:57:04 AZT 2024
-1218518 [SpringApplicationShutdownHook] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Stopping beans in phase 2147483647
-1218519 [SpringApplicationShutdownHook] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Bean 'applicationTaskExecutor' completed its stop procedure
-1218519 [SpringApplicationShutdownHook] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Stopping beans in phase 2147482623
-1218519 [SpringApplicationShutdownHook] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Bean 'webServerGracefulShutdown' completed its stop procedure
-1218519 [SpringApplicationShutdownHook] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Stopping beans in phase 2147481599
-1218519 [SpringApplicationShutdownHook] DEBUG r.netty.transport.ServerTransport -- [fe6e96c5, L:/[0:0:0:0:0:0:0:0]:8080] Server is about to be disposed with timeout: PT3S
-1218520 [SpringApplicationShutdownHook] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Bean 'webServerStartStop' completed its stop procedure
-1218520 [SpringApplicationShutdownHook] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Stopping beans in phase 0
-1218521 [reactor-http-epoll-3] DEBUG io.netty.buffer.PoolThreadCache -- Freed 3 thread-local buffer(s) from thread: reactor-http-epoll-3
-1218521 [reactor-http-epoll-4] DEBUG io.netty.buffer.PoolThreadCache -- Freed 3 thread-local buffer(s) from thread: reactor-http-epoll-4
-1218521 [reactor-http-epoll-5] DEBUG io.netty.buffer.PoolThreadCache -- Freed 3 thread-local buffer(s) from thread: reactor-http-epoll-5
-1218521 [reactor-http-epoll-2] DEBUG io.netty.buffer.PoolThreadCache -- Freed 3 thread-local buffer(s) from thread: reactor-http-epoll-2
-1218521 [reactor-http-epoll-6] DEBUG io.netty.buffer.PoolThreadCache -- Freed 3 thread-local buffer(s) from thread: reactor-http-epoll-6
-1218522 [SpringApplicationShutdownHook] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Bean 'reactorResourceFactory' completed its stop procedure
-1218522 [SpringApplicationShutdownHook] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Stopping beans in phase -2147483647
-1218522 [SpringApplicationShutdownHook] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Bean 'springBootLoggingLifecycle' completed its stop procedure
-1218522 [SpringApplicationShutdownHook] DEBUG o.s.s.c.ThreadPoolTaskExecutor -- Shutting down ExecutorService 'applicationTaskExecutor'
+2485 [restartedMain] INFO  org.ssau.sandbox.App -- Started App in 2.158 seconds (process running for 2.585)
+2487 [restartedMain] DEBUG o.s.b.a.ApplicationAvailabilityBean -- Application availability state LivenessState changed to CORRECT
+2490 [restartedMain] DEBUG o.s.boot.devtools.restart.Restarter -- Creating new Restarter for thread Thread[#1,main,5,main]
+2490 [restartedMain] DEBUG o.s.boot.devtools.restart.Restarter -- Immediately restarting application
+2490 [restartedMain] DEBUG o.s.boot.devtools.restart.Restarter -- Starting application org.ssau.sandbox.App with URLs [file:/home/fizlrock/code2/university/TP/fluxsecurity/app/build/classes/java/main/, file:/home/fizlrock/code2/university/TP/fluxsecurity/app/build/resources/main/]
+2491 [restartedMain] DEBUG o.s.b.a.ApplicationAvailabilityBean -- Application availability state ReadinessState changed to ACCEPTING_TRAFFIC
+12385 [SpringApplicationShutdownHook] DEBUG o.s.b.a.ApplicationAvailabilityBean -- Application availability state ReadinessState changed from ACCEPTING_TRAFFIC to REFUSING_TRAFFIC
+12397 [SpringApplicationShutdownHook] DEBUG o.s.b.w.r.c.AnnotationConfigReactiveWebServerApplicationContext -- Closing org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext@7cd9f7a8, started on Fri Oct 25 15:08:06 AZT 2024
+12398 [SpringApplicationShutdownHook] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Stopping beans in phase 2147483647
+12399 [SpringApplicationShutdownHook] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Bean 'applicationTaskExecutor' completed its stop procedure
+12399 [SpringApplicationShutdownHook] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Stopping beans in phase 2147482623
+12400 [SpringApplicationShutdownHook] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Bean 'webServerGracefulShutdown' completed its stop procedure
+12400 [SpringApplicationShutdownHook] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Stopping beans in phase 2147481599
+12401 [SpringApplicationShutdownHook] DEBUG r.netty.transport.ServerTransport -- [5966e6ff, L:/[0:0:0:0:0:0:0:0]:8080] Server is about to be disposed with timeout: PT3S
+12403 [SpringApplicationShutdownHook] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Bean 'webServerStartStop' completed its stop procedure
+12403 [SpringApplicationShutdownHook] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Stopping beans in phase 0
+12411 [SpringApplicationShutdownHook] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Bean 'reactorResourceFactory' completed its stop procedure
+12411 [SpringApplicationShutdownHook] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Stopping beans in phase -2147483647
+12412 [SpringApplicationShutdownHook] DEBUG o.s.c.s.DefaultLifecycleProcessor -- Bean 'springBootLoggingLifecycle' completed its stop procedure
+12412 [SpringApplicationShutdownHook] DEBUG o.s.s.c.ThreadPoolTaskExecutor -- Shutting down ExecutorService 'applicationTaskExecutor'
