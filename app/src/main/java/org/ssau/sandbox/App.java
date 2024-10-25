@@ -29,8 +29,6 @@ import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.ssau.sandbox.auth.filter.BasicAuthenticationFilter;
 import org.ssau.sandbox.auth.filter.BearerAuthenticationFilter;
@@ -50,25 +48,33 @@ public class App {
     SpringApplication.run(App.class, args);
   }
 
+  // @Bean
+  // public PasswordEncoder passwordEncoder() {
+  // return new BCryptPasswordEncoder();
+  // }
+
   @Bean
-  public MapReactiveUserDetailsService userDetailsRepository(PasswordEncoder encoder) {
-    UserDetails user = User.builder()
+  public MapReactiveUserDetailsService userDetailsRepository() {
+    UserDetails user = User
+        .withDefaultPasswordEncoder()
         .username("user")
-        .password(encoder.encode("user"))
+        .password("user")
         .roles("USER", "ADMIN")
         .build();
+
     return new MapReactiveUserDetailsService(user);
-  }
-  
-  @Bean
-  public UserDetailsRepositoryReactiveAuthenticationManager basicAuthManager(
-      MapReactiveUserDetailsService userDetailsService) {
-    return new UserDetailsRepositoryReactiveAuthenticationManager(userDetailsService);
   }
 
   @Bean
-  public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
+  public UserDetailsRepositoryReactiveAuthenticationManager basicAuthManager(
+      MapReactiveUserDetailsService userDetailsService) {
+    return new UserDetailsRepositoryReactiveAuthenticationManager(userDetailsService) {
+      @Override
+      public String toString() {
+        return "basicAuthAuthenticationManager";
+      }
+
+    };
   }
 
   @Bean
@@ -87,11 +93,7 @@ public class App {
             .authenticated())
         .addFilterAt(bearerAuthFilter, SecurityWebFiltersOrder.AUTHENTICATION);
 
-
-
     return http.build();
   }
-
-  
 
 }

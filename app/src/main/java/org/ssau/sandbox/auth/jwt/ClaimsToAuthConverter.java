@@ -32,6 +32,7 @@ import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.lang.Collections;
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 /**
@@ -40,11 +41,13 @@ import reactor.core.publisher.Mono;
  * The signed JWT has already been verified.
  *
  */
+@Slf4j
 @Component
 public class ClaimsToAuthConverter implements Function<Claims, Mono<Authentication>> {
 
   @Override
   public Mono<Authentication> apply(Claims claims) {
+    log.info("Токен вытащен: ");
     String username = claims.getSubject();
 
     String[] roles = claims.get("roles", String.class)
@@ -54,6 +57,7 @@ public class ClaimsToAuthConverter implements Function<Claims, Mono<Authenticati
         .map(String::strip)
         .map(SimpleGrantedAuthority::new)
         .toList();
+    log.info("Токен вытащен: {}", username);
 
     return Mono.just(new UsernamePasswordAuthenticationToken(username, null, grantedAuthorities));
   }

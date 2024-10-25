@@ -35,14 +35,16 @@ public class BasicAuthenticationSuccessHandler
    */
   @Override
   public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange, Authentication authentication) {
-
-    log.info("Пользователь успешно аутентифицирован: {}", authentication);
-
     ServerWebExchange exchange = webFilterExchange.getExchange();
+
+    log.info("Пользователь {} успешно аутентифицирован через HttpBasic", authentication.getName());
     // TODO refactor this nasty implementation
-    exchange.getResponse()
-        .getHeaders()
-        .add(HttpHeaders.AUTHORIZATION, getHttpAuthHeaderValue(authentication));
+
+    if (exchange.getResponse().getHeaders().get(HttpHeaders.AUTHORIZATION) == null)
+      exchange.getResponse()
+          .getHeaders()
+          .add(HttpHeaders.AUTHORIZATION, getHttpAuthHeaderValue(authentication));
+
     return webFilterExchange.getChain().filter(exchange);
   }
 

@@ -5,9 +5,12 @@ import org.springframework.security.web.server.authentication.AuthenticationWebF
 import org.springframework.stereotype.Component;
 import org.ssau.sandbox.auth.basic.BasicAuthenticationSuccessHandler;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * BasicAuthenticationFilter
  */
+@Slf4j
 @Component
 public class BasicAuthenticationFilter extends AuthenticationWebFilter {
 
@@ -17,6 +20,7 @@ public class BasicAuthenticationFilter extends AuthenticationWebFilter {
 
     super(authManager);
     this.setAuthenticationSuccessHandler(handler);
+    // this.setRequiresAuthenticationMatcher(ServerWebExchangeMatchers.pathMatchers("/login"));
   }
 
 }

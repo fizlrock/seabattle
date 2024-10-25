@@ -9,6 +9,7 @@ import org.ssau.sandbox.auth.jwt.TokenClaimsExtractor;
 import org.ssau.sandbox.auth.jwt.ClaimsToAuthConverter;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 import java.util.function.Function;
@@ -19,6 +20,7 @@ import java.util.function.Predicate;
  * returns an Authentication object if the JWT token is valid.
  * Validity means is well formed and signature is correct
  */
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class ServerHttpBearerAuthenticationConverter implements Function<ServerWebExchange, Mono<Authentication>> {
@@ -40,12 +42,13 @@ public class ServerHttpBearerAuthenticationConverter implements Function<ServerW
    */
   @Override
   public Mono<Authentication> apply(ServerWebExchange serverWebExchange) {
+    log.info("Попытка вытащить токен, serverex: {}", serverWebExchange);
+
     return Mono.justOrEmpty(serverWebExchange)
         .flatMap(AuthorizationHeaderPayload::extract)
         .filter(matchBearerLength)
         .flatMap(isolateBearerValue)
         .flatMap(claimsExtractor)
-        .flatMap(claimsToAuth)
-        .log();
+        .flatMap(claimsToAuth);
   }
 }

@@ -10,7 +10,9 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 /**
@@ -22,6 +24,7 @@ import reactor.core.publisher.Mono;
  * и возвращет Claims
  */
 @Component
+@Slf4j
 @RequiredArgsConstructor
 public class TokenClaimsExtractor implements Function<String, Mono<Claims>> {
 
@@ -29,17 +32,18 @@ public class TokenClaimsExtractor implements Function<String, Mono<Claims>> {
 
   private JwtParser parser;
 
+  private Predicate<Claims> notExpired = claims -> claims.getExpiration().after(new Date());
+
+  @PostConstruct
   void init() {
-    // TODO может в отдельный компонент вынести?
     parser = Jwts.parser()
         .verifyWith(secrets.getKey())
         .build();
   }
 
-  private Predicate<Claims> notExpired = claims -> claims.getExpiration().before(new Date());
-
   @Override
   public Mono<Claims> apply(String token) {
+    log.info("Декодим токен");
     return Mono.just(token)
         .map(parser::parseSignedClaims)
         .map(Jws::getPayload)
