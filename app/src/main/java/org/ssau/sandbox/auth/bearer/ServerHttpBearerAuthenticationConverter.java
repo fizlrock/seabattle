@@ -2,6 +2,7 @@
 package org.ssau.sandbox.auth.bearer;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.web.server.authentication.ServerAuthenticationConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import org.ssau.sandbox.auth.jwt.AuthorizationHeaderPayload;
@@ -23,7 +24,7 @@ import java.util.function.Predicate;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class ServerHttpBearerAuthenticationConverter implements Function<ServerWebExchange, Mono<Authentication>> {
+public class ServerHttpBearerAuthenticationConverter implements ServerAuthenticationConverter {
 
   private static final String BEARER = "Bearer ";
   private static final Predicate<String> matchBearerLength = authValue -> authValue.length() > BEARER.length();
@@ -41,8 +42,7 @@ public class ServerHttpBearerAuthenticationConverter implements Function<ServerW
    * @return
    */
   @Override
-  public Mono<Authentication> apply(ServerWebExchange serverWebExchange) {
-    log.info("Попытка вытащить токен, serverex: {}", serverWebExchange);
+  public Mono<Authentication> convert(ServerWebExchange serverWebExchange) {
 
     return Mono.justOrEmpty(serverWebExchange)
         .flatMap(AuthorizationHeaderPayload::extract)

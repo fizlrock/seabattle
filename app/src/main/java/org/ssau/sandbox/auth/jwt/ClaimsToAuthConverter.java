@@ -47,7 +47,6 @@ public class ClaimsToAuthConverter implements Function<Claims, Mono<Authenticati
 
   @Override
   public Mono<Authentication> apply(Claims claims) {
-    log.info("Токен вытащен: ");
     String username = claims.getSubject();
 
     String[] roles = claims.get("roles", String.class)
@@ -57,7 +56,6 @@ public class ClaimsToAuthConverter implements Function<Claims, Mono<Authenticati
         .map(String::strip)
         .map(SimpleGrantedAuthority::new)
         .toList();
-    log.info("Токен вытащен: {}", username);
 
     return Mono.just(new UsernamePasswordAuthenticationToken(username, null, grantedAuthorities));
   }

@@ -5,8 +5,10 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import org.springframework.stereotype.Component;
+import org.ssau.sandbox.auth.exception.TokenExpiredException;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
@@ -43,12 +45,11 @@ public class TokenClaimsExtractor implements Function<String, Mono<Claims>> {
 
   @Override
   public Mono<Claims> apply(String token) {
-    log.info("Декодим токен");
     return Mono.just(token)
         .map(parser::parseSignedClaims)
         .map(Jws::getPayload)
         .filter(notExpired)
-        .log();
+        .switchIfEmpty(Mono.error(new TokenExpiredException()));
   }
 
 }

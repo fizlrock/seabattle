@@ -10,8 +10,6 @@ import reactor.core.publisher.Mono;
 public class AuthorizationHeaderPayload {
 
     public static Mono<String> extract(ServerWebExchange serverWebExchange) {
-        log.info("Вытаскиваем токен");
-
         return Mono.justOrEmpty(serverWebExchange.getRequest()
                 .getHeaders()
                 .getFirst(HttpHeaders.AUTHORIZATION));

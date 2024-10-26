@@ -3,6 +3,8 @@ plugins {
     id 'org.springframework.boot'
     id 'io.spring.dependency-management'
     id 'com.github.mrsarm.jshell.plugin' version '1.2.1'
+    id 'org.liquibase.gradle'
+    id 'org.openapi.generator'
     
 }
 
@@ -31,6 +33,18 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'    
+    implementation 'org.postgresql:r2dbc-postgresql:1.0.7.RELEASE'
+
+    liquibaseRuntime 'org.liquibase:liquibase-core:4.29.0'
+    liquibaseRuntime 'info.picocli:picocli:4.6.1'
+    liquibaseRuntime 'org.postgresql:postgresql:42.7.4'
+   
+    implementation 'org.openapitools:jackson-databind-nullable:0.2.6'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.8.0'
+
     // implementation 'org.springframework.boot:spring-boot-starter-data-jpa'    
 }
 
@@ -49,6 +63,51 @@ tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+
+
+
+
+
+compileJava.dependsOn tasks.openApiGenerate
+
+openApiGenerate {
+	inputSpec="${projectDir}/src/main/resources/openapi.yaml"
+	generatorName='spring'
+	additionalProperties = [
+		"useSpringBoot3":"true",
+    "reactive":"true",
+    "interfaceOnly":"true",
+    "skipDefaultInterface":"true",
+    "useResponseEntity":"false"
+  ]
+
+}
+
+openApiValidate{
+	inputSpec="${projectDir}/src/main/resources/openapi.yaml"
+}
+
+
+sourceSets {
+    main {
+        java{
+            srcDirs 'build/generate-resources/main/src/main/java' 
+        }
+    }
+}
+
+liquibase {
+    // jvmArgs "-Duser.dir=$project.projectDir" 
+    activities {
+        main {
+          changelogFile './app/src/main/resources/db/changelog/db.changelog-master.yaml'
+    			url 'jdbc:postgresql://localhost:5432/seabattle'
+          username "admin"
+          password "gracesecret"
+        }
+    }
+}
+
 
 
 jar {
