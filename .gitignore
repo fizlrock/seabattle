@@ -5,3 +5,6 @@
 build
 **/bin/*
 *.class
+.project
+app/.classpath
+app/.settings

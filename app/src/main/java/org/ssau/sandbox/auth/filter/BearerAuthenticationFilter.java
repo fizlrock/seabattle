@@ -9,7 +9,6 @@ import org.ssau.sandbox.auth.bearer.ServerHttpBearerAuthenticationConverter;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
-
 @Component
 @Slf4j
 public class BearerAuthenticationFilter extends AuthenticationWebFilter {
@@ -20,7 +19,7 @@ public class BearerAuthenticationFilter extends AuthenticationWebFilter {
       ServerHttpBearerAuthenticationConverter converter) {
     super(authenticationManager);
     this.setServerAuthenticationConverter(converter);
-    this.setRequiresAuthenticationMatcher(ServerWebExchangeMatchers.pathMatchers("/api/**"));
+    this.setRequiresAuthenticationMatcher(ServerWebExchangeMatchers.pathMatchers("/user/**"));
   }
 
 }

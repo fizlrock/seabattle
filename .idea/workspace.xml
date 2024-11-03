@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="21a4571d-2a74-4978-a293-1083f9ddf2a2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" afterPath="$PROJECT_DIR$/.project" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/app/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.project" beforeDir="false" afterPath="$PROJECT_DIR$/app/.project" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" afterPath="$PROJECT_DIR$/app/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/api/LoginAndRegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/api/LoginAndRegistrationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/auth/bearer/ServerHttpBearerAuthenticationConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/auth/bearer/ServerHttpBearerAuthenticationConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/auth/filter/BearerAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/auth/filter/BearerAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/configuration/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/configuration/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/repository/AppUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/repository/AppUserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/resources/logback.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/testFile.log" beforeDir="false" afterPath="$PROJECT_DIR$/app/testFile.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/libs.versions.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-commons/3.3.3/6a53f9799f4d0e0aea955b2d6bf073c9c65e7b52/spring-data-commons-3.3.3-sources.jar!/org/springframework/data/repository/reactive/ReactiveCrudRepository.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2nynnED46unmsNWBWAMEAHAgRho" />
+  <component name="ProjectViewState">
+    <option name="flattenModules" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="21a4571d-2a74-4978-a293-1083f9ddf2a2" name="Changes" comment="" />
+      <created>1729954348580</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1729954348580</updated>
+    </task>
+    <servers />
+  </component>
+</project>

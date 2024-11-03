@@ -1,8 +1,7 @@
 package org.ssau.sandbox.auth.basic;
 
-import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.token.TokenService;
 import org.springframework.security.web.server.WebFilterExchange;
 import org.springframework.security.web.server.authentication.ServerAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -35,22 +34,29 @@ public class BasicAuthenticationSuccessHandler
    */
   @Override
   public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange, Authentication authentication) {
+
+
     ServerWebExchange exchange = webFilterExchange.getExchange();
 
     log.info("Пользователь {} успешно аутентифицирован через HttpBasic", authentication.getName());
-    // TODO refactor this nasty implementation
 
-    if (exchange.getResponse().getHeaders().get(HttpHeaders.AUTHORIZATION) == null)
-      exchange.getResponse()
-          .getHeaders()
-          .add(HttpHeaders.AUTHORIZATION, getHttpAuthHeaderValue(authentication));
+    ResponseCookie cookie = ResponseCookie.from("Bearer", tokenFromAuthentication(authentication))
+        .path(null) // Доступна для всех путей
+        .httpOnly(false) // Доступ только для HTTP (недоступна из JavaScript) // TODO
+        .secure(false) // Передается только через HTTPS // TODO
+        .sameSite("None") // Защита от CSRF (можно также использовать "Lax" или "None") // TODO
+        .maxAge(360000) // Время жизни в секундах (например, 1 час)
+        .build();
+    webFilterExchange.getChain().filter(exchange);
+    exchange.getResponse().addCookie(cookie);
 
-    return webFilterExchange.getChain().filter(exchange);
+    log.info("Добавлена кука с JWT токеном");
+    return Mono.empty();
   }
 
-  private String getHttpAuthHeaderValue(Authentication authentication) {
-    return String.join(" ", "Bearer", tokenFromAuthentication(authentication));
-  }
+  // private String getHttpAuthHeaderValue(Authentication authentication) {
+  //   return String.join(" ", "Bearer", tokenFromAuthentication(authentication));
+  // }
 
   private String tokenFromAuthentication(Authentication authentication) {
     return tokenService.generateToken(

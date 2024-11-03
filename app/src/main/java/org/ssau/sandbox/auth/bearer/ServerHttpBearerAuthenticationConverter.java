@@ -43,6 +43,7 @@ public class ServerHttpBearerAuthenticationConverter implements ServerAuthentica
    */
   @Override
   public Mono<Authentication> convert(ServerWebExchange serverWebExchange) {
+    log.info("Попытка аутентифицироваться через token");
 
     return Mono.justOrEmpty(serverWebExchange)
         .flatMap(AuthorizationHeaderPayload::extract)
