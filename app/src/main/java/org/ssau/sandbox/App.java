@@ -19,12 +19,39 @@
  */
 package org.ssau.sandbox;
 
+import java.util.Map.Entry;
+import java.util.StringJoiner;
+import java.util.stream.Collectors;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.security.web.server.SecurityWebFilterChain;
 
-@SpringBootApplication
+import lombok.extern.slf4j.Slf4j;
+
+@SpringBootApplication(exclude = { OAuth2ClientAutoConfiguration.class, SecurityAutoConfiguration.class,
+    ReactiveSecurityAutoConfiguration.class })
+@Slf4j
 public class App {
   public static void main(String[] args) {
-    SpringApplication.run(App.class, args);
+    var context = SpringApplication.run(App.class, args);
+
+    findAndPrintBeans(context, SecurityWebFilterChain.class);
+  }
+
+  static <T> void findAndPrintBeans(ConfigurableApplicationContext context, Class<T> clazz) {
+
+    var beans = context.getBeansOfType(clazz);
+
+	   var report = beans.entrySet().stream()
+        .map(Entry::getValue)
+        .map(Object::toString)
+        .collect(Collectors.joining("\n"));
+    log.info("Bean type {} report: \n{}", clazz, report);
+
   }
 }

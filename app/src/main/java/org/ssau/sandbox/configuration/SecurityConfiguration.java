@@ -1,34 +1,30 @@
 package org.ssau.sandbox.configuration;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-
-import java.util.List;
-
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.UserDetailsRepositoryReactiveAuthenticationManager;
-import org.springframework.security.config.Customizer;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
-import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.context.NoOpServerSecurityContextRepository;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.reactive.CorsConfigurationSource;
-import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+import org.springframework.security.web.server.util.matcher.PathPatternParserServerWebExchangeMatcher;
+import org.ssau.sandbox.auth.BasicHttpReactiveAuthenticationMananger;
+import org.ssau.sandbox.auth.basic.BasicAuthenticationSuccessHandler;
 import org.ssau.sandbox.auth.filter.BasicAuthenticationFilter;
-import org.ssau.sandbox.auth.filter.BearerAuthenticationFilter;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * SecurityConfiguration
  */
 @Configuration
 @EnableWebFluxSecurity
+@Slf4j
 public class SecurityConfiguration {
 
   @Bean
@@ -37,90 +33,48 @@ public class SecurityConfiguration {
   }
 
   @Bean
-  public MapReactiveUserDetailsService userDetailsRepository() {
-    UserDetails user = User
-        .withDefaultPasswordEncoder()
-        .username("user")
-        .password("user")
-        .roles("USER", "ADMIN")
-        .build();
+  @Order(Ordered.LOWEST_PRECEDENCE)
+  SecurityWebFilterChain getHttpBearerSecurity(
+      ServerHttpSecurity http) {
+    http
+        .csrf(csrf -> csrf.disable())
+        .cors(cors -> cors.disable())
+        .httpBasic(basic -> basic.disable())
+        .formLogin(form -> form.disable())
+        .logout(logout -> logout.disable())
+        .securityContextRepository(NoOpServerSecurityContextRepository.getInstance()) // Отключение сессий
 
-    return new MapReactiveUserDetailsService(user);
+        .authorizeExchange(e -> e.pathMatchers(HttpMethod.POST, "/user").permitAll())
+
+        .authorizeExchange(e -> e.anyExchange().authenticated());
+
+    return http.build();
   }
 
   @Bean
-  public UserDetailsRepositoryReactiveAuthenticationManager basicAuthManager(
-      MapReactiveUserDetailsService userDetailsService) {
-    return new UserDetailsRepositoryReactiveAuthenticationManager(userDetailsService) {
-      @Override
-      public String toString() {
-        return "basicAuthAuthenticationManager";
-      }
-
-    };
-  }
-
-  // @Bean
-  // public SecurityWebFilterChain springSecurityFilterChain(
-  // ServerHttpSecurity http,
-  // BasicAuthenticationFilter basicAuthFilter,
-  // BearerAuthenticationFilter bearerAuthFilter) {
-
-  // http
-  // .authorizeExchange(e -> e
-  // .pathMatchers("/token", "/")
-  // .authenticated())
-  // .addFilterAt(basicAuthFilter, SecurityWebFiltersOrder.HTTP_BASIC)
-  // .authorizeExchange(e -> e
-  // .pathMatchers("/api/**")
-  // .authenticated())
-  // .addFilterAt(bearerAuthFilter, SecurityWebFiltersOrder.AUTHENTICATION)
-  // .csrf().disable();
-
-  // return http.build();
-  @Bean
-  public CorsConfigurationSource corsConfigurationSource() {
-    CorsConfiguration corsConfig = new CorsConfiguration();
-    corsConfig.setAllowedOrigins(List.of("*")); // Allow from any origin
-    corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH")); // Allowed HTTP methods
-    corsConfig.setAllowedHeaders(List.of("*")); // Allowed headers
-    // corsConfig.setAllowCredentials(true); // Allow cookies
-    // corsConfig.setMaxAge(3600L); // Set max age in seconds
-
-    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    source.registerCorsConfiguration("/**", corsConfig); // Apply to all paths
-
-    return source;
-  } // }
-
-  @Bean
-  public SecurityWebFilterChain springSecurityFilterChain(
+  @Order(Ordered.HIGHEST_PRECEDENCE)
+  SecurityWebFilterChain getHttpAuthSecurity(
       ServerHttpSecurity http,
-      BasicAuthenticationFilter basicAuthFilter,
-      BearerAuthenticationFilter bearerAuthFilter,
-      CorsConfigurationSource corsConfig) {
-    return http
-        // .authorizeExchange(e -> e.anyExchange().permitAll())
-        .securityContextRepository(NoOpServerSecurityContextRepository.getInstance())
-        .csrf().disable()
+      BasicHttpReactiveAuthenticationMananger authManager,
+      BasicAuthenticationSuccessHandler handler) {
 
-        .cors(c -> c.configurationSource(corsConfig))
+    var basic_auth_filter = new BasicAuthenticationFilter(authManager, handler);
 
+    var matcher = new PathPatternParserServerWebExchangeMatcher("/token", HttpMethod.GET);
+
+    http
+        .securityMatcher(matcher)
+        .csrf(csrf -> csrf.disable())
+        .cors(cors -> cors.disable())
+        .httpBasic(basic -> basic.disable())
+        .formLogin(form -> form.disable())
+        .logout(logout -> logout.disable())
+        .securityContextRepository(NoOpServerSecurityContextRepository.getInstance()) // Отключение сессий
         .authorizeExchange(e -> e
-            .pathMatchers("/token", "/")
-            .authenticated())
+            .anyExchange().permitAll())
+        .addFilterAt(basic_auth_filter, SecurityWebFiltersOrder.AUTHENTICATION);
 
-        .authorizeExchange(e -> e
-            .pathMatchers(HttpMethod.POST, "/user")
-            .permitAll())
-
-        .addFilterAt(basicAuthFilter, SecurityWebFiltersOrder.HTTP_BASIC)
-        .authorizeExchange(e -> e
-            .pathMatchers("/user/**")
-            .authenticated())
-        .addFilterAt(bearerAuthFilter, SecurityWebFiltersOrder.AUTHENTICATION)
-        .build();
-
+    return http.build();
   }
 
 }

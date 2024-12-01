@@ -7,8 +7,8 @@ import org.openapitools.model.RegistrationRequestBody;
 import org.openapitools.model.UserProfileDto;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.ssau.sandbox.domain.AppUser;
-import org.ssau.sandbox.domain.AppUser.UserRole;
+import org.ssau.sandbox.domain.user.AppUser;
+import org.ssau.sandbox.domain.user.AppUser.UserRole;
 import org.ssau.sandbox.repository.AppUserRepository;
 
 import jakarta.annotation.PostConstruct;
@@ -25,6 +25,15 @@ public class UserService {
   private final AppUserRepository userRepository;
 
   private Function<RegistrationRequestBody, AppUser> basicUserFactory;
+
+  @PostConstruct
+  void init() {
+    basicUserFactory = (RegistrationRequestBody r) -> AppUser.builder()
+        .username(r.getLogin())
+        .passwordHash(passEncoder.encode(r.getPassword()))
+        .role(UserRole.Player)
+        .build();
+  }
 
   private Function<AppUser, UserProfileDto> dtoFactory = user -> {
     var dto = new UserProfileDto();
@@ -45,15 +54,6 @@ public class UserService {
         .flatMap(userRepository::findByUsername)
         .map(dtoFactory);
 
-  }
-
-  @PostConstruct
-  void init() {
-    basicUserFactory = (RegistrationRequestBody r) -> AppUser.builder()
-        .username(r.getLogin())
-        .passwordHash(passEncoder.encode(r.getPassword()))
-        .role(UserRole.Player)
-        .build();
   }
 
 }

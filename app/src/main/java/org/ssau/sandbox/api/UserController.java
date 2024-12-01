@@ -25,6 +25,7 @@ public class UserController implements UserApi {
   @Override
   public Mono<UserProfileDto> getUserProfile(
       ServerWebExchange exchange) {
+
     return exchange.getPrincipal()
         .cast(UsernamePasswordAuthenticationToken.class)
         .map(UsernamePasswordAuthenticationToken::getPrincipal)
@@ -47,5 +48,6 @@ public class UserController implements UserApi {
       ServerWebExchange exchange) {
     throw new UnsupportedOperationException("Unimplemented method 'setAvatar'");
   }
+
 
 }

@@ -45,6 +45,7 @@ public class TokenClaimsExtractor implements Function<String, Mono<Claims>> {
 
   @Override
   public Mono<Claims> apply(String token) {
+    log.info("Попытка распарсить токен: {}", token);
     return Mono.just(token)
         .map(parser::parseSignedClaims)
         .map(Jws::getPayload)

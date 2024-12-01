@@ -35,27 +35,28 @@ public class BasicAuthenticationSuccessHandler
   @Override
   public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange, Authentication authentication) {
 
-
     ServerWebExchange exchange = webFilterExchange.getExchange();
 
-    log.info("Пользователь {} успешно аутентифицирован через HttpBasic", authentication.getName());
 
+    log.info("Пользователь {} успешно аутентифицирован через HttpBasic. id: {}", authentication.getName(), webFilterExchange.hashCode());
     ResponseCookie cookie = ResponseCookie.from("Bearer", tokenFromAuthentication(authentication))
         .path(null) // Доступна для всех путей
         .httpOnly(false) // Доступ только для HTTP (недоступна из JavaScript) // TODO
         .secure(false) // Передается только через HTTPS // TODO
-        .sameSite("None") // Защита от CSRF (можно также использовать "Lax" или "None") // TODO
+        // .sameSite("None") // Защита от CSRF (можно также использовать "Lax" или
+        // "None") // TODO
         .maxAge(360000) // Время жизни в секундах (например, 1 час)
         .build();
     webFilterExchange.getChain().filter(exchange);
     exchange.getResponse().addCookie(cookie);
 
     log.info("Добавлена кука с JWT токеном");
-    return Mono.empty();
+
+    return webFilterExchange.getChain().filter(exchange);
   }
 
   // private String getHttpAuthHeaderValue(Authentication authentication) {
-  //   return String.join(" ", "Bearer", tokenFromAuthentication(authentication));
+  // return String.join(" ", "Bearer", tokenFromAuthentication(authentication));
   // }
 
   private String tokenFromAuthentication(Authentication authentication) {

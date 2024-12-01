@@ -26,11 +26,6 @@ import java.util.function.Predicate;
 @RequiredArgsConstructor
 public class ServerHttpBearerAuthenticationConverter implements ServerAuthenticationConverter {
 
-  private static final String BEARER = "Bearer ";
-  private static final Predicate<String> matchBearerLength = authValue -> authValue.length() > BEARER.length();
-  private static final Function<String, Mono<String>> isolateBearerValue = authValue -> Mono
-      .justOrEmpty(authValue.substring(BEARER.length()));
-
   private final TokenClaimsExtractor claimsExtractor;
   private final ClaimsToAuthConverter claimsToAuth;
 
@@ -44,12 +39,11 @@ public class ServerHttpBearerAuthenticationConverter implements ServerAuthentica
   @Override
   public Mono<Authentication> convert(ServerWebExchange serverWebExchange) {
     log.info("Попытка аутентифицироваться через token");
-
-    return Mono.justOrEmpty(serverWebExchange)
-        .flatMap(AuthorizationHeaderPayload::extract)
-        .filter(matchBearerLength)
-        .flatMap(isolateBearerValue)
-        .flatMap(claimsExtractor)
-        .flatMap(claimsToAuth);
+    return Mono.empty();
+    // return Mono.just(serverWebExchange)
+    // .flatMap(AuthorizationHeaderPayload::extract)
+    // .switchIfEmpty(Mono.empty())
+    // .flatMap(claimsExtractor)
+    // .flatMap(claimsToAuth);
   }
 }

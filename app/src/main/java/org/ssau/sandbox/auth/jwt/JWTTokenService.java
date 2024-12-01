@@ -18,15 +18,7 @@ public class JWTTokenService {
 
   private final JWTSecrets secrets;
 
-  /**
-   * Create and sign a JWT object using information from the current
-   * authenticated principal
-   *
-   * @param subject     Name of current principal
-   * @param credentials Credentials of current principal
-   * @param authorities A collection of granted authorities for this principal
-   * @return String representing a valid token
-   */
+  
   public String generateToken(String subject,
       Collection<? extends GrantedAuthority> authorities) {
 

@@ -1,4 +1,4 @@
-package org.ssau.sandbox.domain;
+package org.ssau.sandbox.domain.user;
 
 import lombok.Data;
 

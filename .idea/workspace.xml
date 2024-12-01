@@ -4,20 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21a4571d-2a74-4978-a293-1083f9ddf2a2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" afterPath="$PROJECT_DIR$/.project" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/app/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/.project" beforeDir="false" afterPath="$PROJECT_DIR$/app/.project" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" afterPath="$PROJECT_DIR$/app/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
+    <list default="true" id="9846c5dc-a499-4497-9af5-2ff79a7e7d50" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/code.app.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/api/LoginAndRegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/api/LoginAndRegistrationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/api/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/api/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/auth/basic/BasicAuthenticationSuccessHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/auth/basic/BasicAuthenticationSuccessHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/auth/bearer/ServerHttpBearerAuthenticationConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/auth/bearer/ServerHttpBearerAuthenticationConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/auth/filter/BasicAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/auth/filter/BasicAuthenticationFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/auth/filter/BearerAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/auth/filter/BearerAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/auth/jwt/AuthorizationHeaderPayload.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/auth/jwt/AuthorizationHeaderPayload.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/auth/jwt/JWTTokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/auth/jwt/JWTTokenService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/auth/jwt/TokenClaimsExtractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/auth/jwt/TokenClaimsExtractor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/configuration/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/configuration/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/domain/AppUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/domain/Avatar.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/repository/AppUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/repository/AppUserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/ssau/sandbox/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/resources/logback.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/testFile.log" beforeDir="false" afterPath="$PROJECT_DIR$/app/testFile.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/libs.versions.toml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
@@ -36,35 +49,67 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-commons/3.3.3/6a53f9799f4d0e0aea955b2d6bf073c9c65e7b52/spring-data-commons-3.3.3-sources.jar!/org/springframework/data/repository/reactive/ReactiveCrudRepository.java" root0="SKIP_INSPECTION" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 1
-}</component>
-  <component name="ProjectId" id="2nynnED46unmsNWBWAMEAHAgRho" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2pd2qsX1jdNakMs8qgRZk04Mzqq" />
   <component name="ProjectViewState">
     <option name="flattenModules" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.seabattle_v2 [bootrun].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/fizlrock/code2/university/TP/code/seabattle_v2"
   }
-}</component>
+}]]></component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="gradle bootrun" />
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="seabattle_v2 [bootrun]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="bootrun" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.seabattle_v2 [bootrun]" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="21a4571d-2a74-4978-a293-1083f9ddf2a2" name="Changes" comment="" />
-      <created>1729954348580</created>
+      <changelist id="9846c5dc-a499-4497-9af5-2ff79a7e7d50" name="Changes" comment="" />
+      <created>1733081825137</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1729954348580</updated>
+      <updated>1733081825137</updated>
     </task>
     <servers />
   </component>
