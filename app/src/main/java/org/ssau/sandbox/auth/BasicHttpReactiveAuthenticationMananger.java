@@ -6,7 +6,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.ssau.sandbox.repository.AppUserRepository;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;

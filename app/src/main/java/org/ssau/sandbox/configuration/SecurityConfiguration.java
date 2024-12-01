@@ -15,7 +15,9 @@ import org.springframework.security.web.server.context.NoOpServerSecurityContext
 import org.springframework.security.web.server.util.matcher.PathPatternParserServerWebExchangeMatcher;
 import org.ssau.sandbox.auth.BasicHttpReactiveAuthenticationMananger;
 import org.ssau.sandbox.auth.basic.BasicAuthenticationSuccessHandler;
+import org.ssau.sandbox.auth.bearer.ServerHttpBearerAuthenticationConverter;
 import org.ssau.sandbox.auth.filter.BasicAuthenticationFilter;
+import org.ssau.sandbox.auth.filter.BearerAuthenticationFilter;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,7 +37,11 @@ public class SecurityConfiguration {
   @Bean
   @Order(Ordered.LOWEST_PRECEDENCE)
   SecurityWebFilterChain getHttpBearerSecurity(
-      ServerHttpSecurity http) {
+      ServerHttpSecurity http,
+      ServerHttpBearerAuthenticationConverter converter) {
+
+    var jwt_filter = new BearerAuthenticationFilter(converter);
+
     http
         .csrf(csrf -> csrf.disable())
         .cors(cors -> cors.disable())
@@ -46,7 +52,8 @@ public class SecurityConfiguration {
 
         .authorizeExchange(e -> e.pathMatchers(HttpMethod.POST, "/user").permitAll())
 
-        .authorizeExchange(e -> e.anyExchange().authenticated());
+        .authorizeExchange(e -> e.pathMatchers(HttpMethod.GET, "/user/profile").authenticated())
+        .addFilterAt(jwt_filter, SecurityWebFiltersOrder.AUTHENTICATION);
 
     return http.build();
   }

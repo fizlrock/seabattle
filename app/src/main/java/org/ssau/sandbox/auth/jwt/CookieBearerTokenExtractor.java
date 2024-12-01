@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 @Slf4j
-public class AuthorizationHeaderPayload {
+public class CookieBearerTokenExtractor {
 
   public static Mono<String> extract(ServerWebExchange exchange) {
     log.info("Содержимое кук: {}", exchange.getRequest().getCookies().getFirst("Bearer"));
