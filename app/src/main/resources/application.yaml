@@ -1,9 +1,9 @@
 
 spring:
   r2dbc:
-    url: r2dbc:postgresql://localhost:5432/seabattle
-    username: admin
-    password: gracesecret
+    url: r2dbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USER} 
+    password: ${DB_PASSWORD} 
 
 jpa:
   hibernate:

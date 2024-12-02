@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://json.schemastore.org/liquibase-3.2.json
+
+databaseChangeLog:
+  - changeSet:
+      id: '1'
+      author: 'fizlrock'
+      comment: Create table for users
+      changes:
+        - createTable:
+            tableName: app_user
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  startWith: 1
+                  constraints:
+                    primaryKey: true
+              - column:
+                  remarks: Имя пользователя. Длина от 4 до 8 символов
+                  name: username
+                  type: varchar(8)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password_hash
+                  type: varchar(255)
+              - column:
+                  name: role
+                  type: varchar(20)

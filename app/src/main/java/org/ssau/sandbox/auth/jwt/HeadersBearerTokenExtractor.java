@@ -32,7 +32,7 @@ public class HeadersBearerTokenExtractor {
         .map(ServerWebExchange::getRequest)
         .map(ServerHttpRequest::getHeaders)
         .map(h -> h.get(HttpHeaders.AUTHORIZATION))
-        .map(l -> l.getFirst()) // TODO тут должна быть обработка ошибок в случае если запрос не содержал
+        .map(l -> l.get(0)) // TODO тут должна быть обработка ошибок в случае если запрос не содержал
         .onErrorResume(e -> {
           return Mono.empty();
         })

@@ -1,61 +1,13 @@
-476  [background-preinit] INFO  o.h.validator.internal.util.Version -- HV000001: Hibernate Validator 8.0.1.Final
-504  [restartedMain] INFO  org.ssau.sandbox.App -- Starting App using Java 21.0.5 with PID 176384 (/home/fizlrock/code2/university/TP/code/seabattle_v2/app/build/classes/java/main started by fizlrock in /home/fizlrock/code2/university/TP/code/seabattle_v2/app)
-505  [restartedMain] INFO  org.ssau.sandbox.App -- No active profile set, falling back to 1 default profile: "default"
-538  [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -- Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-538  [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -- For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-971  [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -- Bootstrapping Spring Data R2DBC repositories in DEFAULT mode.
-1060 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -- Finished Spring Data repository scanning in 86 ms. Found 1 R2DBC repository interface.
-1568 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -- LiveReload server is running on port 35729
-2112 [restartedMain] INFO  o.s.b.w.e.netty.NettyWebServer -- Netty started on port 8080 (http)
-2117 [restartedMain] INFO  org.ssau.sandbox.App -- Started App in 1.852 seconds (process running for 2.194)
-2120 [restartedMain] INFO  org.ssau.sandbox.App -- Bean type interface org.springframework.security.web.server.SecurityWebFilterChain report: 
-org.springframework.security.web.server.MatcherSecurityWebFilterChain@39c8cdd6
-org.springframework.security.web.server.MatcherSecurityWebFilterChain@5f6657ba
-7257 [reactor-http-epoll-2] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'GET /user/profile' doesn't match 'GET /token'
-7262 [reactor-http-epoll-2] WARN  o.s.s.a.j.HeadersBearerTokenExtractor -- FUUUUCCK Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWFiYXR0bGVfc2VydmljZSIsInN1YiI6InRlc3QiLCJyb2xlcyI6IlJPTEVfUGxheWVyIiwiaWF0IjoxNzMzMTAxOTIwLCJleHAiOjE3MzMxMzc5MjB9.aLlLvWq4AQlzGuG-359CT89jCKsadW0296NwV-7WmYg 
-7262 [reactor-http-epoll-2] INFO  o.s.s.auth.jwt.TokenClaimsExtractor -- Попытка распарсить токен: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWFiYXR0bGVfc2VydmljZSIsInN1YiI6InRlc3QiLCJyb2xlcyI6IlJPTEVfUGxheWVyIiwiaWF0IjoxNzMzMTAxOTIwLCJleHAiOjE3MzMxMzc5MjB9.aLlLvWq4AQlzGuG-359CT89jCKsadW0296NwV-7WmYg
-7303 [reactor-http-epoll-2] INFO  o.s.s.a.f.BearerAuthenticationFilter -- Пользователь был успешно аутентифицирован через Bearer: UsernamePasswordAuthenticationToken [Principal=test, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_Player]]
-7315 [parallel-2] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/user', method=POST}
-7316 [parallel-2] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'GET /user/profile' doesn't match 'POST /user'
-7317 [parallel-2] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- No matches found
-7318 [parallel-2] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/user/profile', method=GET}
-7318 [parallel-2] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Checking match of request : '/user/profile'; against '/user/profile'
-7318 [parallel-2] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- matched
-7318 [parallel-2] DEBUG o.s.s.w.s.a.DelegatingReactiveAuthorizationManager -- Checking authorization on '/user/profile' using org.springframework.security.authorization.AuthenticatedReactiveAuthorizationManager@5d517d61
-7319 [parallel-2] DEBUG o.s.s.w.s.a.AuthorizationWebFilter -- Authorization successful
-11250 [reactor-http-epoll-2] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'GET /user/profile' doesn't match 'GET /token'
-11250 [reactor-http-epoll-2] WARN  o.s.s.a.j.HeadersBearerTokenExtractor -- FUUUUCCK Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWFiYXR0bGVfc2VydmljZSIsInN1YiI6InRlc3QiLCJyb2xlcyI6IlJPTEVfUGxheWVyIiwiaWF0IjoxNzMzMTAxOTIwLCJleHAiOjE3MzMxMzc5MjB9.aLlLvWq4AQlzGuG-359CT89jCKsadW0296NwV-7WmYg 
-11250 [reactor-http-epoll-2] INFO  o.s.s.auth.jwt.TokenClaimsExtractor -- Попытка распарсить токен: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWFiYXR0bGVfc2VydmljZSIsInN1YiI6InRlc3QiLCJyb2xlcyI6IlJPTEVfUGxheWVyIiwiaWF0IjoxNzMzMTAxOTIwLCJleHAiOjE3MzMxMzc5MjB9.aLlLvWq4AQlzGuG-359CT89jCKsadW0296NwV-7WmYg
-11251 [reactor-http-epoll-2] INFO  o.s.s.a.f.BearerAuthenticationFilter -- Пользователь был успешно аутентифицирован через Bearer: UsernamePasswordAuthenticationToken [Principal=test, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_Player]]
-11252 [parallel-3] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/user', method=POST}
-11252 [parallel-3] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'GET /user/profile' doesn't match 'POST /user'
-11253 [parallel-3] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- No matches found
-11253 [parallel-3] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/user/profile', method=GET}
-11253 [parallel-3] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Checking match of request : '/user/profile'; against '/user/profile'
-11253 [parallel-3] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- matched
-11253 [parallel-3] DEBUG o.s.s.w.s.a.DelegatingReactiveAuthorizationManager -- Checking authorization on '/user/profile' using org.springframework.security.authorization.AuthenticatedReactiveAuthorizationManager@5d517d61
-11253 [parallel-3] DEBUG o.s.s.w.s.a.AuthorizationWebFilter -- Authorization successful
-12156 [reactor-http-epoll-2] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'GET /user/profile' doesn't match 'GET /token'
-12157 [reactor-http-epoll-2] WARN  o.s.s.a.j.HeadersBearerTokenExtractor -- FUUUUCCK Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWFiYXR0bGVfc2VydmljZSIsInN1YiI6InRlc3QiLCJyb2xlcyI6IlJPTEVfUGxheWVyIiwiaWF0IjoxNzMzMTAxOTIwLCJleHAiOjE3MzMxMzc5MjB9.aLlLvWq4AQlzGuG-359CT89jCKsadW0296NwV-7WmYg 
-12157 [reactor-http-epoll-2] INFO  o.s.s.auth.jwt.TokenClaimsExtractor -- Попытка распарсить токен: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWFiYXR0bGVfc2VydmljZSIsInN1YiI6InRlc3QiLCJyb2xlcyI6IlJPTEVfUGxheWVyIiwiaWF0IjoxNzMzMTAxOTIwLCJleHAiOjE3MzMxMzc5MjB9.aLlLvWq4AQlzGuG-359CT89jCKsadW0296NwV-7WmYg
-12158 [reactor-http-epoll-2] INFO  o.s.s.a.f.BearerAuthenticationFilter -- Пользователь был успешно аутентифицирован через Bearer: UsernamePasswordAuthenticationToken [Principal=test, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_Player]]
-12159 [parallel-4] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/user', method=POST}
-12159 [parallel-4] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'GET /user/profile' doesn't match 'POST /user'
-12159 [parallel-4] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- No matches found
-12160 [parallel-4] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/user/profile', method=GET}
-12160 [parallel-4] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Checking match of request : '/user/profile'; against '/user/profile'
-12160 [parallel-4] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- matched
-12160 [parallel-4] DEBUG o.s.s.w.s.a.DelegatingReactiveAuthorizationManager -- Checking authorization on '/user/profile' using org.springframework.security.authorization.AuthenticatedReactiveAuthorizationManager@5d517d61
-12160 [parallel-4] DEBUG o.s.s.w.s.a.AuthorizationWebFilter -- Authorization successful
-71952 [reactor-http-epoll-2] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'GET /user/profile' doesn't match 'GET /token'
-71952 [reactor-http-epoll-2] WARN  o.s.s.a.j.HeadersBearerTokenExtractor -- FUUUUCCK Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWFiYXR0bGVfc2VydmljZSIsInN1YiI6InRlc3QiLCJyb2xlcyI6IlJPTEVfUGxheWVyIiwiaWF0IjoxNzMzMTAxOTIwLCJleHAiOjE3MzMxMzc5MjB9.aLlLvWq4AQlzGuG-359CT89jCKsadW0296NwV-7WmYg 
-71952 [reactor-http-epoll-2] INFO  o.s.s.auth.jwt.TokenClaimsExtractor -- Попытка распарсить токен: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWFiYXR0bGVfc2VydmljZSIsInN1YiI6InRlc3QiLCJyb2xlcyI6IlJPTEVfUGxheWVyIiwiaWF0IjoxNzMzMTAxOTIwLCJleHAiOjE3MzMxMzc5MjB9.aLlLvWq4AQlzGuG-359CT89jCKsadW0296NwV-7WmYg
-71953 [reactor-http-epoll-2] INFO  o.s.s.a.f.BearerAuthenticationFilter -- Пользователь был успешно аутентифицирован через Bearer: UsernamePasswordAuthenticationToken [Principal=test, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_Player]]
-71954 [parallel-5] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/user', method=POST}
-71954 [parallel-5] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'GET /user/profile' doesn't match 'POST /user'
-71954 [parallel-5] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- No matches found
-71954 [parallel-5] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/user/profile', method=GET}
-71955 [parallel-5] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Checking match of request : '/user/profile'; against '/user/profile'
-71955 [parallel-5] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- matched
-71955 [parallel-5] DEBUG o.s.s.w.s.a.DelegatingReactiveAuthorizationManager -- Checking authorization on '/user/profile' using org.springframework.security.authorization.AuthenticatedReactiveAuthorizationManager@5d517d61
-71955 [parallel-5] DEBUG o.s.s.w.s.a.AuthorizationWebFilter -- Authorization successful
+590  [background-preinit] INFO  o.h.validator.internal.util.Version -- HV000001: Hibernate Validator 8.0.1.Final
+625  [restartedMain] INFO  org.ssau.sandbox.App -- Starting App using Java 17.0.12 with PID 186977 (/home/fizlrock/code2/university/TP/code/seabattle_v2/app/build/classes/java/main started by fizlrock in /home/fizlrock/code2/university/TP/code/seabattle_v2/app)
+625  [restartedMain] INFO  org.ssau.sandbox.App -- No active profile set, falling back to 1 default profile: "default"
+658  [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -- Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+658  [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -- For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+1029 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -- Bootstrapping Spring Data R2DBC repositories in DEFAULT mode.
+1113 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -- Finished Spring Data repository scanning in 81 ms. Found 1 R2DBC repository interface.
+1579 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -- LiveReload server is running on port 35729
+2092 [restartedMain] INFO  o.s.b.w.e.netty.NettyWebServer -- Netty started on port 8080 (http)
+2099 [restartedMain] INFO  org.ssau.sandbox.App -- Started App in 1.721 seconds (process running for 2.245)
+2102 [restartedMain] INFO  org.ssau.sandbox.App -- Bean type interface org.springframework.security.web.server.SecurityWebFilterChain report: 
+org.springframework.security.web.server.MatcherSecurityWebFilterChain@3caffa74
+org.springframework.security.web.server.MatcherSecurityWebFilterChain@7be7dd9b

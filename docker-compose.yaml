@@ -1,0 +1,37 @@
+
+version: '3.8'
+
+services:
+
+  postgres:
+    image: postgres:latest
+    container_name: seabattle_database
+    environment:
+      POSTGRES_DB: seabattle_db # Название базы данных
+      POSTGRES_USER: service         # Пользователь БД
+      DB_PORT: 532                    # Порт БД TODO
+      POSTGRES_PASSWORD: password # Пароль для БД
+    ports:
+      - "532:532"                    # Проброс порта для внешнего доступа к БД
+    networks:
+      - app_network                    # Добавляем контейнер в пользовательскую сеть
+
+  app:
+    image: fizlrock/seabattle-api:latest       # Образ вашего сервиса
+    container_name: seabattle_api
+    environment:
+      DB_HOST: postgres # Имя сервиса базы данных из docker-compose
+      DB_PORT: 5432                    # Порт БД
+      DB_NAME: seabattle_db
+      DB_USER: service
+      DB_PASSWORD: password
+    ports:
+      - "8080:8080"                    # Проброс порта для внешнего доступа к сервису
+    depends_on:
+      - postgres                       # Указывает, что сервис зависит от запуска БД
+    networks:
+      - app_network                    # Добавляем контейнер в ту же сеть
+
+networks:
+  app_network:                         # Определение пользовательской сети
+    driver: bridge
