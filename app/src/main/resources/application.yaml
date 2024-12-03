@@ -1,13 +1,17 @@
 
 server:
   port: 8081
+
 spring:
   r2dbc:
-    url: r2dbc:postgresql://localhost:532/seabattle_db
-    username: password
-    password: service
-  liquebase:
-    change-log: ./app/src/main/resources/db/changelog.yaml
+    url: r2dbc:postgresql://localhost:5432/seabattle
+    username: admin
+    password: gracesecret
+
+liquibase:
+  url: jdbc:postgresql://localhost:5432/seabattle
+  enable: true
+  change-log: db/changelog.yaml
 
 jpa:
   hibernate:

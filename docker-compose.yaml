@@ -1,18 +1,45 @@
 
-version: '3.8'
-
 services:
 
   app:
-    image: fizlrock/seabattle-api:latest       # Образ вашего сервиса
+    image: fizlrock/seabattle-api:latest       
     container_name: seabattle_api
     environment:
-      DB_HOST: localhost # Имя сервиса базы данных из docker-compose
-      DB_PORT: 5432                    # Порт БД
+      DB_HOST: database
+      DB_PORT: 5432                    
       DB_NAME: seabattle_db
       DB_USER: service
       DB_PASSWORD: password
+
+    command:
+     - "--spring.profiles.active=production"        
     ports:
-      - "1234:8080"                    
+      - "1234:80"                    
     depends_on:
-      - postgres                       
+      - database                      
+    networks:
+      - app_network
+
+      
+  database:
+    image: postgres:latest
+    container_name: seabattle_database
+    restart: always
+    environment:
+      POSTGRES_USER: service
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: seabattle_db
+    ports:
+      - "532:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+volumes:
+  postgres_data:
+
+
+networks:
+  app_network:
+    driver: bridge
