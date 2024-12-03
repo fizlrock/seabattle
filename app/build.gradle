@@ -103,7 +103,7 @@ liquibase {
     activities {
         main {
           changelogFile './app/src/main/resources/db/changelog.yaml'
-    			url 'jdbc:postgresql://localhost:5432/seabattle_db'
+    			url 'jdbc:postgresql://localhost:532/seabattle_db'
           username "service"
           password "password"
         }
