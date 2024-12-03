@@ -1,0 +1,17 @@
+
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  liquebase:
+    change-log: ./app/src/main/resources/db/changelog.yaml
+
+jpa:
+  hibernate:
+    ddl-auto: validate
+
+jwt:
+  secret: B9+AWyF3OPMqs1PD6FSwj1LArLI63a3CehziWrOgYGk=
+  experation: 36000
+  issuer: seabattle_service
