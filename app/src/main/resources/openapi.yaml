@@ -14,7 +14,7 @@ info:
 
 
 servers:
-  - url: https://localhost:8080/api
+  - url: https://107.172.142.23:1234
 
 
 tags:

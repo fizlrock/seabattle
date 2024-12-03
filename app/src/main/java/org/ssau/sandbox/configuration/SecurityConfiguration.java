@@ -1,9 +1,14 @@
 package org.ssau.sandbox.configuration;
 
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
@@ -13,6 +18,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.context.NoOpServerSecurityContextRepository;
 import org.springframework.security.web.server.util.matcher.PathPatternParserServerWebExchangeMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import static org.springframework.web.cors.CorsConfiguration.ALL;
+import org.springframework.web.cors.reactive.CorsConfigurationSource;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+import org.springframework.web.server.ServerWebExchange;
 import org.ssau.sandbox.auth.BasicHttpReactiveAuthenticationMananger;
 import org.ssau.sandbox.auth.basic.BasicAuthenticationSuccessHandler;
 import org.ssau.sandbox.auth.bearer.ServerHttpBearerAuthenticationConverter;
@@ -35,16 +45,45 @@ public class SecurityConfiguration {
   }
 
   @Bean
+  CorsConfigurationSource getCors() {
+
+    var corsConfigurationSource = new UrlBasedCorsConfigurationSource();
+    // Конфигурация CORS
+    var globalCorsConfiguration = new CorsConfiguration();
+
+    // Разрешаются CORS-запросы:
+    // - с сайта http://localhost:8080
+
+    globalCorsConfiguration.addAllowedOrigin(ALL);
+    globalCorsConfiguration.addAllowedHeader(ALL);
+    // globalCorsConfiguration.addAllowedMethod(ALL);
+
+    globalCorsConfiguration.setAllowedMethods(List.of(
+        HttpMethod.GET.name(),
+        HttpMethod.POST.name(),
+        HttpMethod.PUT.name(),
+        HttpMethod.PATCH.name(),
+        HttpMethod.DELETE.name()));
+
+    // Использование конфигурации CORS для всех запросов
+    corsConfigurationSource.registerCorsConfiguration("/**", globalCorsConfiguration);
+
+    return corsConfigurationSource;
+  }
+
+  @Bean
   @Order(Ordered.LOWEST_PRECEDENCE)
   SecurityWebFilterChain getHttpBearerSecurity(
       ServerHttpSecurity http,
-      ServerHttpBearerAuthenticationConverter converter) {
+      ServerHttpBearerAuthenticationConverter converter,
+
+      CorsConfigurationSource corsConfig) {
 
     var jwt_filter = new BearerAuthenticationFilter(converter);
 
     http
         .csrf(csrf -> csrf.disable())
-        .cors(cors -> cors.disable())
+        .cors(cors -> cors.configurationSource(corsConfig)) // TODO
         .httpBasic(basic -> basic.disable())
         .formLogin(form -> form.disable())
         .logout(logout -> logout.disable())
