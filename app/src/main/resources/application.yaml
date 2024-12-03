@@ -1,4 +1,6 @@
 
+server:
+  port: 8081
 spring:
   r2dbc:
     url: r2dbc:postgresql://localhost:5432/seabattle
