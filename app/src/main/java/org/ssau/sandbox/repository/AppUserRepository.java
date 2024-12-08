@@ -8,6 +8,7 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface AppUserRepository extends ReactiveCrudRepository<AppUser, Long> {
+
   public Mono<AppUser> findByUsername(String username);
 
 }

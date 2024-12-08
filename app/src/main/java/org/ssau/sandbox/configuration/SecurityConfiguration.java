@@ -1,15 +1,17 @@
 package org.ssau.sandbox.configuration;
 
-import java.time.Duration;
-import java.util.Arrays;
+import static org.springframework.web.cors.CorsConfiguration.ALL;
+
 import java.util.List;
 
+import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.event.EventListener;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -19,11 +21,10 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.context.NoOpServerSecurityContextRepository;
 import org.springframework.security.web.server.util.matcher.PathPatternParserServerWebExchangeMatcher;
 import org.springframework.web.cors.CorsConfiguration;
-import static org.springframework.web.cors.CorsConfiguration.ALL;
 import org.springframework.web.cors.reactive.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
-import org.springframework.web.server.ServerWebExchange;
-import org.ssau.sandbox.auth.BasicHttpReactiveAuthenticationMananger;
+import org.ssau.sandbox.auth.UsernamePasswordAuthenticationManager;
+import org.ssau.sandbox.auth.basic.BasicAuthenticationConverter;
 import org.ssau.sandbox.auth.basic.BasicAuthenticationSuccessHandler;
 import org.ssau.sandbox.auth.bearer.ServerHttpBearerAuthenticationConverter;
 import org.ssau.sandbox.auth.filter.BasicAuthenticationFilter;
@@ -91,7 +92,8 @@ public class SecurityConfiguration {
 
         .authorizeExchange(e -> e.pathMatchers(HttpMethod.POST, "/user").permitAll())
 
-        .authorizeExchange(e -> e.pathMatchers(HttpMethod.GET, "/user/profile").authenticated())
+        // .authorizeExchange(e -> e.pathMatchers(HttpMethod.GET,
+        // "/user/profile").authenticated())
         .addFilterAt(jwt_filter, SecurityWebFiltersOrder.AUTHENTICATION);
 
     return http.build();
@@ -101,10 +103,11 @@ public class SecurityConfiguration {
   @Order(Ordered.HIGHEST_PRECEDENCE)
   SecurityWebFilterChain getHttpAuthSecurity(
       ServerHttpSecurity http,
-      BasicHttpReactiveAuthenticationMananger authManager,
+      UsernamePasswordAuthenticationManager authManager,
       BasicAuthenticationSuccessHandler handler) {
 
-    var basic_auth_filter = new BasicAuthenticationFilter(authManager, handler);
+      // TODO
+    var basic_auth_filter = new BasicAuthenticationFilter(authManager, handler, new BasicAuthenticationConverter());
 
     var matcher = new PathPatternParserServerWebExchangeMatcher("/token", HttpMethod.GET);
 
@@ -117,10 +120,25 @@ public class SecurityConfiguration {
         .logout(logout -> logout.disable())
         .securityContextRepository(NoOpServerSecurityContextRepository.getInstance()) // Отключение сессий
         .authorizeExchange(e -> e
-            .anyExchange().permitAll())
+            .anyExchange().authenticated())
         .addFilterAt(basic_auth_filter, SecurityWebFiltersOrder.AUTHENTICATION);
 
     return http.build();
+  }
+
+  @EventListener
+  public void printFilterChain(ApplicationReadyEvent event) {
+    List<SecurityWebFilterChain> chains = event.getApplicationContext()
+        .getBeanProvider(SecurityWebFilterChain.class)
+        .stream()
+        .toList();
+
+    chains.forEach(chain -> {
+      System.out.println("Security Web Filter Chain:");
+      chain.getWebFilters().toStream().forEach(filter -> {
+        System.out.println("Filter: " + filter.getClass().getName());
+      });
+    });
   }
 
 }
