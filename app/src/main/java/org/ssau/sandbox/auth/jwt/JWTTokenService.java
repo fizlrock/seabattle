@@ -18,8 +18,7 @@ public class JWTTokenService {
 
   private final JWTSecrets secrets;
 
-  
-  public String generateToken(String subject,
+  public String generateToken(String username, Long userId,
       Collection<? extends GrantedAuthority> authorities) {
 
     LocalDateTime issuedAt = LocalDateTime.now();
@@ -27,7 +26,8 @@ public class JWTTokenService {
 
     return Jwts.builder()
         .issuer(secrets.getIssuer())
-        .subject(subject)
+        .subject(username)
+        .claim("user_id", userId)
         .claim("roles",
             authorities.stream()
                 .map(GrantedAuthority.class::cast)
@@ -35,7 +35,7 @@ public class JWTTokenService {
                 .collect(Collectors.joining(",")))
         .issuedAt(Date.from(issuedAt.toInstant(ZoneOffset.UTC)))
         .expiration(Date.from(expAt.toInstant(ZoneOffset.UTC)))
-        .subject(subject)
+        .subject(username)
         .signWith(secrets.getKey())
         .compact();
   }

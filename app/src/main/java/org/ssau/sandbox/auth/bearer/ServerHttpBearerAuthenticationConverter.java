@@ -24,6 +24,7 @@ public class ServerHttpBearerAuthenticationConverter implements ServerAuthentica
 
   @Override
   public Mono<Authentication> convert(ServerWebExchange serverWebExchange) {
+    // TODO это нужно переписывать
     return Mono.just(serverWebExchange)
         .flatMap(HeadersBearerTokenExtractor::extract)
         .switchIfEmpty(Mono.empty())
