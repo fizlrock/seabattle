@@ -331,10 +331,9 @@ components:
         oponent_name:
           type: string
           examples : ['njenkins']
-        who_shoting:
-          description: Активный игрок
-          type: string
-          examples: ['fizlrock']
+        you_shoting:
+          description: Ваша ли очередь делать выстрел
+          type: boolean
         your_field:
           $ref: '#/components/schemas/field_state_dto'
         oponent_field:

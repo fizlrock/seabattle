@@ -15,19 +15,14 @@ public class HeadersBearerTokenExtractor {
 
   private static String validateAndExtract(String header) {
     header = header.strip();
-
-    log.warn("FUUUUCCK {} ", header);
-
     if (!header.startsWith("Bearer "))
       throw new BadCredentialsException("Токен необходимо передавать в формате Bearer <сам токен>");
-
     return header.substring(token_start_index);
   }
 
   public static Mono<String> extract(ServerWebExchange exchange) {
 
     // TODO эта реализция ужасна
-
     return Mono.justOrEmpty(exchange)
         .map(ServerWebExchange::getRequest)
         .map(ServerHttpRequest::getHeaders)
@@ -36,7 +31,6 @@ public class HeadersBearerTokenExtractor {
         .onErrorResume(e -> {
           return Mono.empty();
         })
-        // заголовка Authorization
         .map(HeadersBearerTokenExtractor::validateAndExtract);
 
   }

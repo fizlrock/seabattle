@@ -1,11 +1,12 @@
 package org.ssau.sandbox.domain.game;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 import org.ssau.sandbox.domain.game.field.GameField;
-import org.ssau.sandbox.domain.user.AppUser;
 
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -14,12 +15,12 @@ import lombok.extern.slf4j.Slf4j;
  * SeabattleGame
  */
 @Slf4j
+@ToString
 public class GameSession {
 
   public static enum GameState {
-    WaitingSecondPlayer, Ended, Failed, Started
+    Created, WaitingSecondPlayer, Ended, Failed, Started
   }
-
 
   private final UUID sessionId;
 
@@ -29,34 +30,50 @@ public class GameSession {
 
   private final GameField secondPlayerField;
 
-  private String firstPlayer;
+  private Long firstPlayerId;
+  private Long secondPlayerId;
+  private Long activePlayerId;
 
-  private String secondPlayer;
-  private String activePlayer;
+  public Long getFirstPlayerId() {
+    return firstPlayerId;
+  }
+
+  public Long getSecondPlayerId() {
+    return secondPlayerId;
+  }
+
+  public Long getActivePlayerId() {
+    return activePlayerId;
+  }
 
   private GameSettings settings;
 
   private GameState state;
 
-  public GameSession(String user, Collection<BoatCord> cords) {
+  public GameSession() {
+    sessionId = UUID.randomUUID();
+    log.debug("Создание новой игровой сессии.ID: {}", sessionId);
 
-    if (user == null)
-      throw new IllegalArgumentException("User can't be null");
+    var settings = new GameSettings(new GameMapSettings(10, 10), List.of(new BoatType(3, 4)));
+
+    firstPlayerField = new GameField(settings);
+    secondPlayerField = new GameField(settings);
+    state = GameState.Created;
+  }
+
+  public GameSession(long playerId, Collection<BoatCord> cords) {
+    this();
+    log.debug("GameSession: {}. Первый игрок: {}", sessionId, playerId);
+
     // TODO а может ли пользователь участвовать в нескольких играх?
     // Думаю это стоить проверять в сервисе
-
-    sessionId = UUID.randomUUID();
-    log.debug("Создание новой игровой сессии.ID: {} Инициатор: {}", sessionId, user);
-
-    firstPlayerField = new GameField(null);
-    secondPlayerField = new GameField(null);
 
     // TODO стоит расставлять корабли более эффективно
     for (var boat : cords)
       firstPlayerField.placeBoat(boat);
 
-    firstPlayer = user;
-    activePlayer = user;
+    firstPlayerId = playerId;
+    activePlayerId = playerId;
 
     state = GameState.WaitingSecondPlayer;
 
@@ -78,18 +95,6 @@ public class GameSession {
     return secondPlayerField;
   }
 
-  public String getFirstPlayer() {
-    return firstPlayer;
-  }
-
-  public String getSecondPlayer() {
-    return secondPlayer;
-  }
-
-  public String getActivePlayer() {
-    return activePlayer;
-  }
-
   public GameSettings getSettings() {
     return settings;
   }
@@ -98,36 +103,43 @@ public class GameSession {
     return state;
   }
 
-  public void setOpponent(String user, Collection<BoatCord> cords) {
-    if (user == null)
-      throw new IllegalArgumentException("User can't be null");
-    // TODO а может ли пользователь участвовать в нескольких играх?
-    // Думаю это стоить проверять в сервисе
-    secondPlayer = user;
-    for (var boat : cords)
-      secondPlayerField.placeBoat(boat);
+  public void addPlayer(long playerId, Collection<BoatCord> cords) {
 
-    version++;
-
-    state = GameState.Started;
+    switch (state) {
+      case Started, Created -> {
+        firstPlayerId = playerId;
+        for (var boat : cords)
+          firstPlayerField.placeBoat(boat);
+        state = GameState.WaitingSecondPlayer;
+        version++;
+      }
+      case WaitingSecondPlayer -> {
+        secondPlayerId = playerId;
+        for (var boat : cords)
+          secondPlayerField.placeBoat(boat);
+        state = GameState.Started;
+        version++;
+      }
+      default -> throw new IllegalArgumentException("В это состоянии игры невозможно добавлять игроков");
+    }
   }
 
-  public int makeShot(AppUser user, int x, int y) {
+  public int makeShot(long playerId, int x, int y) {
 
     if (state != GameState.Started)
       throw new IllegalStateException("Нельзя делать выстрелы в этом состояние");
 
-    if (!(user.equals(firstPlayer) || user.equals(secondPlayer)))
+    if (playerId != firstPlayerId || playerId != secondPlayerId)
       throw new IllegalArgumentException("Игрок не состоит в этой игре");
 
-    if (!user.equals(activePlayer))
+    if (playerId != activePlayerId)
       throw new IllegalStateException("Сейчас очередь опонента");
 
-    log.trace("Игрок {} делает выстрел по координатам {}:{}", user.getUsername(), x, y);
+    log.trace("Игрок {} делает выстрел по координатам {}:{}", playerId, x, y);
 
     version++;
 
-    if (user.equals(firstPlayer))
+    if (playerId == firstPlayerId)
       return secondPlayerField.makeShot(x, y);
     else
       return firstPlayerField.makeShot(x, y);

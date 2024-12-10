@@ -11,7 +11,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -76,11 +75,9 @@ public class SecurityConfiguration {
   @Order(Ordered.LOWEST_PRECEDENCE)
   SecurityWebFilterChain getHttpBearerSecurity(
       ServerHttpSecurity http,
-      ServerHttpBearerAuthenticationConverter converter,
-
       CorsConfigurationSource corsConfig) {
 
-    var jwt_filter = new BearerAuthenticationFilter(converter);
+    var jwt_filter = new BearerAuthenticationFilter();
 
     http
         .csrf(csrf -> csrf.disable())
@@ -90,7 +87,9 @@ public class SecurityConfiguration {
         .logout(logout -> logout.disable())
         .securityContextRepository(NoOpServerSecurityContextRepository.getInstance()) // Отключение сессий
 
-        .authorizeExchange(e -> e.pathMatchers(HttpMethod.POST, "/user").permitAll())
+        .authorizeExchange(e -> e
+            .pathMatchers(HttpMethod.POST, "/user").permitAll()
+            .anyExchange().authenticated())
 
         // .authorizeExchange(e -> e.pathMatchers(HttpMethod.GET,
         // "/user/profile").authenticated())
@@ -106,7 +105,7 @@ public class SecurityConfiguration {
       UsernamePasswordAuthenticationManager authManager,
       BasicAuthenticationSuccessHandler handler) {
 
-      // TODO
+    // TODO
     var basic_auth_filter = new BasicAuthenticationFilter(authManager, handler, new BasicAuthenticationConverter());
 
     var matcher = new PathPatternParserServerWebExchangeMatcher("/token", HttpMethod.GET);

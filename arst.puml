@@ -1,0 +1,123 @@
+@startuml
+
+!theme sketchy-outline
+
+class org.ssau.sandbox.domain.game.BoatPlacement {
+}
+enum org.ssau.sandbox.domain.game.field.OwnerCageState {
++  Void
++  Ship
++  ShotIntoVoid
++  ShotIntoShip
+}
+
+class org.ssau.sandbox.domain.game.GameSettings {
++ List<BoatType> boatTypes()
++ GameMapSettings mapSettings()
+}
+
+interface org.ssau.sandbox.domain.game.GameMapSerializer {
++ String serializeOpponentMap(GameField)
++ String serializeOwnerMap(GameField)
+}
+
+class org.ssau.sandbox.domain.game.GameSession {
++ Long getFirstPlayerId()
++ Long getSecondPlayerId()
++ Long getActivePlayerId()
++ UUID getSessionId()
++ long getVersion()
++ GameField getFirstPlayerField()
++ GameField getSecondPlayerField()
++ GameSettings getSettings()
++ GameState getState()
++ void addPlayer(long,Collection<BoatCord>)
++ int makeShot(long,int,int)
+}
+
+enum org.ssau.sandbox.domain.game.GameState {
++  Created
++  WaitingSecondPlayer
++  Ended
++  Failed
++  Started
+}
+
+class org.ssau.sandbox.domain.user.UserEntity {
+}
+class org.ssau.sandbox.domain.game.GameMapSettings {
++ int width()
++ int height()
+}
+
+enum org.ssau.sandbox.domain.user.UserRole {
++  Player
++  Admin
+}
+
+enum org.ssau.sandbox.domain.game.field.OpponentCageState {
++  Unchecked
++  CheckedEmpty
++  UncheckedEmpty
++  BlowedShip
+}
+
+class org.ssau.sandbox.domain.game.BoatCord {
++ int ye()
++ int xe()
++ int ys()
++ int xs()
+}
+
+class org.ssau.sandbox.domain.game.GameSessionPool {
++ Set<GameSession> sessions
++ GameSession findSession()
+}
+
+
+class org.ssau.sandbox.domain.game.BoatType {
++ int count()
++ int size()
+}
+
+class org.ssau.sandbox.domain.game.AsciiGameMapSerializer {
++ String serializeOpponentMap(GameField)
++ String serializeOwnerMap(GameField)
+}
+
+class org.ssau.sandbox.domain.game.field.GameField {
+~ Map<Integer,Integer> stilBoats
++ int makeShot(int,int)
++ void placeBoat(BoatCord)
++ List<Point> getPoints(BoatCord)
++ int getHeight()
++ int getWidth()
++ int[][] getOwnerMap()
++ int[][] getOpponentMap()
+~ void swap(Supplier<T>,Consumer<T>,Supplier<T>,Consumer<T>)
+}
+
+
+class org.ssau.sandbox.domain.game.field.GameField$Point {
++ int y()
++ int x()
+}
+
+class org.ssau.sandbox.domain.user.Avatar {
+}
+class org.ssau.sandbox.domain.user.AppUser {
++ Collection<? extends GrantedAuthority> getAuthorities()
++ String getPassword()
+}
+
+enum org.ssau.sandbox.domain.user.UserRole {
++  Player
++  Manager
++  Banned
+}
+
+
+
+org.ssau.sandbox.domain.game.GameMapSerializer <|.. org.ssau.sandbox.domain.game.AsciiGameMapSerializer
+org.ssau.sandbox.domain.game.field.GameField *- org.ssau.sandbox.domain.game.field.GameField$Point
+@enduml

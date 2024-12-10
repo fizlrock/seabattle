@@ -1,10 +1,12 @@
 package org.ssau.sandbox.domain.game;
 
+import org.springframework.stereotype.Component;
 import org.ssau.sandbox.domain.game.field.GameField;
 
 /**
  * AsciiGameMapSerializer
  */
+@Component
 public class AsciiGameMapSerializer implements GameMapSerializer {
 
   private static final char[] ownerMatrix = new char[] { '.', 'S', 'x', 'X' };
