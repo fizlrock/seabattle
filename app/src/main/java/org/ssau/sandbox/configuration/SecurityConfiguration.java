@@ -29,10 +29,7 @@ import org.ssau.sandbox.auth.bearer.BearerTokenAuthenticationManager;
 import org.ssau.sandbox.auth.filter.BasicAuthenticationFilter;
 import org.ssau.sandbox.auth.filter.BearerAuthenticationFilter;
 import org.ssau.sandbox.auth.jwt.JWTSecrets;
-import org.ssau.sandbox.auth.jwt.TokenParser;
-
 import lombok.extern.slf4j.Slf4j;
-import reactor.core.publisher.Mono;
 
 /**
  * SecurityConfiguration
