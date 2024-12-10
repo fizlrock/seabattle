@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import org.ssau.sandbox.auth.jwt.ClaimsToAuthConverter;
 import org.ssau.sandbox.auth.jwt.HeadersBearerTokenExtractor;
-import org.ssau.sandbox.auth.jwt.TokenClaimsExtractor;
+import org.ssau.sandbox.auth.jwt.TokenParser;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class ServerHttpBearerAuthenticationConverter implements ServerAuthenticationConverter {
 
-  private final TokenClaimsExtractor claimsExtractor;
+  private final TokenParser claimsExtractor;
   private final ClaimsToAuthConverter claimsToAuth;
 
   @Override

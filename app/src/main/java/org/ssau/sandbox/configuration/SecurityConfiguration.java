@@ -25,11 +25,14 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import org.ssau.sandbox.auth.UsernamePasswordAuthenticationManager;
 import org.ssau.sandbox.auth.basic.BasicAuthenticationConverter;
 import org.ssau.sandbox.auth.basic.BasicAuthenticationSuccessHandler;
-import org.ssau.sandbox.auth.bearer.ServerHttpBearerAuthenticationConverter;
+import org.ssau.sandbox.auth.bearer.BearerTokenAuthenticationManager;
 import org.ssau.sandbox.auth.filter.BasicAuthenticationFilter;
 import org.ssau.sandbox.auth.filter.BearerAuthenticationFilter;
+import org.ssau.sandbox.auth.jwt.JWTSecrets;
+import org.ssau.sandbox.auth.jwt.TokenParser;
 
 import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Mono;
 
 /**
  * SecurityConfiguration
@@ -75,9 +78,12 @@ public class SecurityConfiguration {
   @Order(Ordered.LOWEST_PRECEDENCE)
   SecurityWebFilterChain getHttpBearerSecurity(
       ServerHttpSecurity http,
-      CorsConfigurationSource corsConfig) {
+      CorsConfigurationSource corsConfig,
+      JWTSecrets secrets) {
 
-    var jwt_filter = new BearerAuthenticationFilter();
+    var authManager = new BearerTokenAuthenticationManager(secrets);
+    authManager.init();
+    var jwt_filter = new BearerAuthenticationFilter(authManager);
 
     http
         .csrf(csrf -> csrf.disable())
@@ -86,13 +92,9 @@ public class SecurityConfiguration {
         .formLogin(form -> form.disable())
         .logout(logout -> logout.disable())
         .securityContextRepository(NoOpServerSecurityContextRepository.getInstance()) // Отключение сессий
-
         .authorizeExchange(e -> e
             .pathMatchers(HttpMethod.POST, "/user").permitAll()
             .anyExchange().authenticated())
-
-        // .authorizeExchange(e -> e.pathMatchers(HttpMethod.GET,
-        // "/user/profile").authenticated())
         .addFilterAt(jwt_filter, SecurityWebFiltersOrder.AUTHENTICATION);
 
     return http.build();

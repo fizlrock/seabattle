@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import org.ssau.sandbox.auth.exception.TokenExpiredException;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
@@ -28,12 +27,13 @@ import reactor.core.publisher.Mono;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class TokenClaimsExtractor implements Function<String, Mono<Claims>> {
+public class TokenParser implements Function<String, Claims> {
 
   private final JWTSecrets secrets;
 
   private JwtParser parser;
 
+  // TODO
   private Predicate<Claims> notExpired = claims -> claims.getExpiration().after(new Date());
 
   @PostConstruct
@@ -44,13 +44,13 @@ public class TokenClaimsExtractor implements Function<String, Mono<Claims>> {
   }
 
   @Override
-  public Mono<Claims> apply(String token) {
+  public Claims apply(String token) {
     log.info("Попытка распарсить токен: {}", token);
     return Mono.just(token)
         .map(parser::parseSignedClaims)
         .map(Jws::getPayload)
         .filter(notExpired)
-        .switchIfEmpty(Mono.error(new TokenExpiredException()));
+        .switchIfEmpty(Mono.error(new TokenExpiredException())).block();
   }
 
 }
