@@ -19,12 +19,9 @@ public class BearerAuthenticationFilter extends AuthenticationWebFilter {
    * Если токена нет - вернуть Mono.empty()
    */
   private ServerAuthenticationConverter converter = (ServerWebExchange exch) -> {
-    log.info("Попытка вытащить токен из запроса");
-
     return Mono.just(exch)
         .flatMap(HeadersBearerTokenExtractor::extract)
         .map(BearerTokenAuthenticationToken::new)
-        .log()
         .cast(Authentication.class);
   };
 

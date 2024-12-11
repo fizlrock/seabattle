@@ -1,16 +1,23 @@
 package org.ssau.sandbox.api;
 
-import java.util.List;
+import java.util.function.Function;
 
 import org.openapitools.api.GameApi;
 import org.openapitools.model.BoatCordDto;
+import org.openapitools.model.BoatTypeDto;
+import org.openapitools.model.GameMapSettingsDto;
 import org.openapitools.model.GameSettingsDto;
 import org.openapitools.model.GameStateDto;
 import org.openapitools.model.ShotDto;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
 import org.ssau.sandbox.domain.game.BoatCord;
-import org.ssau.sandbox.domain.game.BoatPlacement;
+import org.ssau.sandbox.domain.game.BoatType;
+import org.ssau.sandbox.domain.game.GameMapSettings;
+import org.ssau.sandbox.domain.game.GameSettings;
 import org.ssau.sandbox.service.GameService;
 
 import jakarta.validation.Valid;
@@ -26,10 +33,26 @@ public class GameController implements GameApi {
 
   private final GameService service;
 
+  private static Function<BoatType, BoatTypeDto> boatTypeToDto = boat -> (new BoatTypeDto())
+      .count(boat.count())
+      .size(boat.size());
+
+  private static Function<GameMapSettings, GameMapSettingsDto> mapSettingsToDto = mapSettings -> new GameMapSettingsDto(
+      mapSettings.width(), mapSettings.height());
+
+  private static Function<GameSettings, GameSettingsDto> gameSettingsToDto = settings -> {
+    var boatTypes = settings.boatTypes().stream()
+        .map(boatTypeToDto)
+        .toList();
+
+    var mapSettingsDto = mapSettingsToDto.apply(settings.mapSettings());
+    return new GameSettingsDto(boatTypes, mapSettingsDto);// TODO
+  };
+
   @Override
   public Mono<GameSettingsDto> getGameSettings(ServerWebExchange exchange) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getGameSettings'");
+    return Mono.just(service.gameSettings)
+        .map(x -> gameSettingsToDto.apply(x));
   }
 
   @Override

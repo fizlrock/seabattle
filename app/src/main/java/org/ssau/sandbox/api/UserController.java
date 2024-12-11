@@ -24,24 +24,19 @@ public class UserController implements UserApi {
 
   private final UserService userService;
 
+  private Mono<DefaultOAuth2AuthenticatedPrincipal> getPrincipal(ServerWebExchange exchange) {
+
+    return exchange.getPrincipal()
+        .cast(BearerTokenAuthentication.class)
+        .map(BearerTokenAuthentication::getPrincipal)
+        .cast(DefaultOAuth2AuthenticatedPrincipal.class);
+  }
+
   @Override
   public Mono<UserProfileDto> getUserProfile(
       ServerWebExchange exchange) {
 
-    // return exchange.getPrincipal()
-    // .cast(BearerTokenAuthentication.class)
-    // .map(t -> t.getName())
-    // .cast(String.class)
-    // .map(Mono::just)
-    // .flatMap(userService::getUserProfileByUsername)
-    // .switchIfEmpty(Mono.error(new UsernameNotFoundException("Пользователь не
-    // найден")));
-
-    return exchange.getPrincipal()
-        .log("FUUUCK")
-        .cast(BearerTokenAuthentication.class)
-        .map(BearerTokenAuthentication::getPrincipal)
-        .cast(DefaultOAuth2AuthenticatedPrincipal.class)
+    return getPrincipal(exchange)
         .map(DefaultOAuth2AuthenticatedPrincipal::getName)
         .flatMap(x -> userService.getUserProfileByUsername(Mono.just(x)))
         .switchIfEmpty(Mono.error(new UsernameNotFoundException("Пользователь не  найден")));

@@ -56,13 +56,6 @@ public class BearerTokenAuthenticationManager implements
     var claims = parser.parseSignedClaims(token)
         .getPayload();
 
-    // {iss=seabattle_service, sub=test22, user_id=1, roles=Player, iat=1733872306,
-    // exp=1733908306}
-
-    // new OAuth2AccessToken(TokenType.BEARER, "", , )
-    // parser.apply(token_auth.getToken()).subscribe(c -> log.info("parsed claims
-    // {}", c));
-
     var role = new SimpleGrantedAuthority(claims.get("roles", String.class));
 
     var principal = new DefaultOAuth2AuthenticatedPrincipal(claims.getSubject(), claims, List.of(role));

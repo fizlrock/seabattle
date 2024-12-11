@@ -2,15 +2,19 @@ package org.ssau.sandbox.service;
 
 import java.lang.invoke.SwitchPoint;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.openapitools.model.GameStateDto;
 import org.openapitools.model.GameStateDto.StatusEnum;
 import org.springframework.stereotype.Service;
 import org.ssau.sandbox.domain.game.BoatCord;
+import org.ssau.sandbox.domain.game.BoatType;
 import org.ssau.sandbox.domain.game.GameMapSerializer;
+import org.ssau.sandbox.domain.game.GameMapSettings;
 import org.ssau.sandbox.domain.game.GameSession;
 import org.ssau.sandbox.domain.game.GameSessionPool;
+import org.ssau.sandbox.domain.game.GameSettings;
 import org.ssau.sandbox.domain.game.GameSession.GameState;
 import org.ssau.sandbox.domain.game.field.GameField;
 import org.ssau.sandbox.domain.user.AppUser;
@@ -30,6 +34,14 @@ public class GameService {
 
   private final GameSessionPool sessionPool;
   private final GameMapSerializer mapSerializer;
+
+  public final GameSettings gameSettings = new GameSettings(
+      new GameMapSettings(10, 10),
+      List.of(
+          new BoatType(1, 4),
+          new BoatType(2, 3),
+          new BoatType(3, 2),
+          new BoatType(4, 1)));
 
   /**
    * Начать новую игру.
