@@ -39,6 +39,8 @@ public class UserService {
     var dto = new UserProfileDto();
     dto.setLogin(user.getUsername());
     dto.setUserId(user.getId());
+    dto.setAvatarId(-1l);
+    dto.setPictureUrl("https://i.pinimg.com/736x/e9/77/ad/e977ad69d2c07efd37b044b85e29aff7.jpg");
     return dto;
   };
 

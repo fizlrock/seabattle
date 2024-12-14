@@ -3,6 +3,8 @@ package org.ssau.sandbox.configuration;
 import static org.springframework.web.cors.CorsConfiguration.ALL;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Bean;
@@ -82,6 +84,7 @@ public class SecurityConfiguration {
     authManager.init();
     var jwt_filter = new BearerAuthenticationFilter(authManager);
 
+
     http
         .csrf(csrf -> csrf.disable())
         .cors(cors -> cors.configurationSource(corsConfig)) // TODO
@@ -132,10 +135,11 @@ public class SecurityConfiguration {
         .toList();
 
     chains.forEach(chain -> {
-      System.out.println("Security Web Filter Chain:");
-      chain.getWebFilters().toStream().forEach(filter -> {
-        System.out.println("Filter: " + filter.getClass().getName());
-      });
+      var chain_report = chain.getWebFilters().toStream()
+          .map(Object::getClass)
+          .map(Class::getSimpleName)
+          .collect(Collectors.joining(" - "));
+      log.info("Filter chain: {}", chain_report);
     });
   }
 

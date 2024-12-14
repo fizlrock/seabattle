@@ -9,9 +9,8 @@ import org.openapitools.model.GameMapSettingsDto;
 import org.openapitools.model.GameSettingsDto;
 import org.openapitools.model.GameStateDto;
 import org.openapitools.model.ShotDto;
-import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.security.oauth2.core.DefaultOAuth2AuthenticatedPrincipal;
+import org.springframework.security.oauth2.server.resource.authentication.BearerTokenAuthentication;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
 import org.ssau.sandbox.domain.game.BoatCord;
@@ -24,12 +23,23 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class GameController implements GameApi {
+
+  // TODO от этого нужно избавится
+  private Mono<DefaultOAuth2AuthenticatedPrincipal> getPrincipal(ServerWebExchange exchange) {
+
+    return exchange.getPrincipal()
+        .cast(BearerTokenAuthentication.class)
+        .map(BearerTokenAuthentication::getPrincipal)
+        .cast(DefaultOAuth2AuthenticatedPrincipal.class);
+  }
 
   private final GameService service;
 
@@ -71,12 +81,20 @@ public class GameController implements GameApi {
   @Override
   public Mono<GameStateDto> startNewGame(@Valid Flux<BoatCordDto> boatCordDto, ServerWebExchange exchange) {
 
-    // TODO take user id
 
-    return boatCordDto
+    var principal = getPrincipal(exchange);
+
+    var user_id = principal.map(
+        x -> x.getAttribute("user_id"))
+        .cast(Integer.class)
+        .map(x -> x.longValue());
+
+    var boats = boatCordDto
         .map(GameController::fromDto)
-        .collectList()
-        .flatMap(boats -> service.startGame(0l, boats));
+        .collectList();
+
+    return Mono.zip(user_id, boats)
+        .flatMap(x -> service.startGame(x.getT1(), x.getT2()));
 
   }
 

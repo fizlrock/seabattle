@@ -1,0 +1,104 @@
+728  [background-preinit] INFO  o.h.validator.internal.util.Version -- HV000001: Hibernate Validator 8.0.1.Final
+778  [restartedMain] INFO  org.ssau.sandbox.App -- Starting App using Java 17.0.12 with PID 22158 (/home/fizlrock/code2/university/TP/code/seabattle_v2/app/build/classes/java/main started by fizlrock in /home/fizlrock/code2/university/TP/code/seabattle_v2/app)
+779  [restartedMain] INFO  org.ssau.sandbox.App -- No active profile set, falling back to 1 default profile: "default"
+822  [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -- Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+823  [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor -- For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+1424 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -- Bootstrapping Spring Data R2DBC repositories in DEFAULT mode.
+1551 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate -- Finished Spring Data repository scanning in 122 ms. Found 1 R2DBC repository interface.
+2249 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer -- LiveReload server is running on port 35729
+2543 [restartedMain] INFO  o.s.s.a.f.BasicAuthenticationFilter -- Инициализация BasicAuth Filter. Обработчик успешной авторизации: org.ssau.sandbox.auth.basic.BasicAuthenticationSuccessHandler@a5a601a, Auth manager: org.ssau.sandbox.auth.UsernamePasswordAuthenticationManager@11ac17a1
+2990 [restartedMain] INFO  o.s.b.w.e.netty.NettyWebServer -- Netty started on port 8081 (http)
+2998 [restartedMain] INFO  org.ssau.sandbox.App -- Started App in 2.555 seconds (process running for 3.188)
+3002 [restartedMain] INFO  o.s.s.c.DatabaseInitializer -- Выполнение миграций БД
+3002 [restartedMain] INFO  o.s.s.c.DatabaseInitializer -- Подключение к БД по адресу: jdbc:postgresql://localhost:5432/seabattle
+3327 [restartedMain] INFO  liquibase.database -- Set default schema name to public
+3568 [restartedMain] INFO  liquibase.changelog -- Reading from public.databasechangelog
+3604 [restartedMain] INFO  liquibase.changelog -- Reading from public.databasechangelog
+3611 [restartedMain] INFO  liquibase.util -- UPDATE SUMMARY
+3611 [restartedMain] INFO  liquibase.util -- Run:                          0
+3611 [restartedMain] INFO  liquibase.util -- Previously run:               1
+3611 [restartedMain] INFO  liquibase.util -- Filtered out:                 0
+3611 [restartedMain] INFO  liquibase.util -- -------------------------------
+3611 [restartedMain] INFO  liquibase.util -- Total change sets:            1
+3612 [restartedMain] INFO  liquibase.util -- Update summary generated
+3641 [restartedMain] INFO  liquibase.lockservice -- Successfully released change log lock
+3642 [restartedMain] INFO  liquibase.command -- Command execution complete
+3643 [restartedMain] INFO  o.s.s.c.DatabaseInitializer -- Миграция успешно выполнена
+3650 [restartedMain] INFO  o.s.s.c.SecurityConfiguration -- Filter chain: ServerWebExchangeReactorContextWebFilter - HttpHeaderWriterWebFilter - CorsWebFilter - ReactorContextWebFilter - BearerAuthenticationFilter - SecurityContextServerWebExchangeWebFilter - ServerRequestCacheWebFilter - ExceptionTranslationWebFilter - AuthorizationWebFilter
+3650 [restartedMain] INFO  o.s.s.c.SecurityConfiguration -- Filter chain: ServerWebExchangeReactorContextWebFilter - HttpHeaderWriterWebFilter - ReactorContextWebFilter - BasicAuthenticationFilter - SecurityContextServerWebExchangeWebFilter - ServerRequestCacheWebFilter - ExceptionTranslationWebFilter - AuthorizationWebFilter
+6608 [reactor-http-epoll-2] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'POST /game' doesn't match 'GET /token'
+6614 [reactor-http-epoll-2] INFO  o.s.s.a.j.HeadersBearerTokenExtractor -- Попытка вытащить токен из запроса: /game
+6677 [parallel-2] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/user', method=POST}
+6678 [parallel-2] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'POST /game' doesn't match 'POST /user'
+6678 [parallel-2] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- No matches found
+6679 [parallel-2] DEBUG o.s.s.w.s.a.DelegatingReactiveAuthorizationManager -- Checking authorization on '/game' using org.springframework.security.authorization.AuthenticatedReactiveAuthorizationManager@2ecd299e
+6680 [parallel-2] DEBUG o.s.s.w.s.a.AuthorizationWebFilter -- Authorization successful
+6918 [reactor-http-epoll-2] INFO  o.ssau.sandbox.service.GameService -- Пользователь с id 52 хочет вступить в поединок
+6926 [reactor-http-epoll-2] ERROR o.s.s.api.GlobalExceptionHandler -- ОшибОчка: {}
+java.lang.IllegalArgumentException: В клетке с координатами 0:0 уже стоит корабль
+	at org.ssau.sandbox.domain.game.field.GameField.formatExcepiton(GameField.java:247)
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ Handler org.ssau.sandbox.api.GameController#startNewGame(Flux, ServerWebExchange) [DispatcherHandler]
+Original Stack Trace:
+		at org.ssau.sandbox.domain.game.field.GameField.formatExcepiton(GameField.java:247)
+		at org.ssau.sandbox.domain.game.field.GameField.checkPoint(GameField.java:227)
+		at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+		at java.base/java.util.ArrayList$ArrayListSpliterator.tryAdvance(ArrayList.java:1602)
+		at java.base/java.util.stream.ReferencePipeline.forEachWithCancel(ReferencePipeline.java:129)
+		at java.base/java.util.stream.AbstractPipeline.copyIntoWithCancel(AbstractPipeline.java:527)
+		at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:513)
+		at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+		at java.base/java.util.stream.FindOps$FindOp.evaluateSequential(FindOps.java:150)
+		at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+		at java.base/java.util.stream.ReferencePipeline.findAny(ReferencePipeline.java:652)
+		at org.ssau.sandbox.domain.game.field.GameField.placeBoat(GameField.java:98)
+		at org.ssau.sandbox.domain.game.GameSession.addPlayer(GameSession.java:115)
+		at org.ssau.sandbox.service.GameService.startGame(GameService.java:57)
+		at org.ssau.sandbox.api.GameController.lambda$startNewGame$6(GameController.java:97)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:132)
+		at reactor.core.publisher.MonoZip$ZipCoordinator.signal(MonoZip.java:297)
+		at reactor.core.publisher.MonoZip$ZipInner.onNext(MonoZip.java:478)
+		at reactor.core.publisher.Operators$BaseFluxToMonoOperator.completePossiblyEmpty(Operators.java:2097)
+		at reactor.core.publisher.MonoCollectList$MonoCollectListSubscriber.onComplete(MonoCollectList.java:118)
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144)
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:260)
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:260)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.onComplete(Operators.java:2231)
+		at reactor.core.publisher.FluxHandle$HandleSubscriber.onComplete(FluxHandle.java:223)
+		at reactor.core.publisher.FluxConcatArray$ConcatArraySubscriber.onComplete(FluxConcatArray.java:209)
+		at reactor.core.publisher.FluxFlattenIterable$FlattenIterableSubscriber.drainAsync(FluxFlattenIterable.java:371)
+		at reactor.core.publisher.FluxFlattenIterable$FlattenIterableSubscriber.drain(FluxFlattenIterable.java:724)
+		at reactor.core.publisher.FluxFlattenIterable$FlattenIterableSubscriber.onComplete(FluxFlattenIterable.java:273)
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144)
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:260)
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144)
+		at reactor.netty.channel.FluxReceive.terminateReceiver(FluxReceive.java:483)
+		at reactor.netty.channel.FluxReceive.drainReceiver(FluxReceive.java:275)
+		at reactor.netty.channel.FluxReceive.request(FluxReceive.java:133)
+		at reactor.core.publisher.FluxMap$MapSubscriber.request(FluxMap.java:164)
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.request(FluxPeek.java:138)
+		at reactor.core.publisher.FluxMap$MapSubscriber.request(FluxMap.java:164)
+		at reactor.core.publisher.FluxFlattenIterable$FlattenIterableSubscriber.onSubscribe(FluxFlattenIterable.java:241)
+		at reactor.core.publisher.FluxMap$MapSubscriber.onSubscribe(FluxMap.java:92)
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onSubscribe(FluxPeek.java:171)
+		at reactor.core.publisher.FluxMap$MapSubscriber.onSubscribe(FluxMap.java:92)
+		at reactor.netty.channel.FluxReceive.startReceiver(FluxReceive.java:172)
+		at reactor.netty.channel.FluxReceive.lambda$subscribe$2(FluxReceive.java:150)
+		at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:173)
+		at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:166)
+		at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:469)
+		at io.netty.channel.epoll.EpollEventLoop.run(EpollEventLoop.java:405)
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:994)
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+		at java.base/java.lang.Thread.run(Thread.java:840)
+23239 [reactor-http-epoll-3] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'POST /game' doesn't match 'GET /token'
+23239 [reactor-http-epoll-3] INFO  o.s.s.a.j.HeadersBearerTokenExtractor -- Попытка вытащить токен из запроса: /game
+23242 [parallel-3] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/user', method=POST}
+23242 [parallel-3] DEBUG o.s.s.w.s.u.m.PathPatternParserServerWebExchangeMatcher -- Request 'POST /game' doesn't match 'POST /user'
+23242 [parallel-3] DEBUG o.s.s.w.s.u.m.OrServerWebExchangeMatcher -- No matches found
+23242 [parallel-3] DEBUG o.s.s.w.s.a.DelegatingReactiveAuthorizationManager -- Checking authorization on '/game' using org.springframework.security.authorization.AuthenticatedReactiveAuthorizationManager@2ecd299e
+23243 [parallel-3] DEBUG o.s.s.w.s.a.AuthorizationWebFilter -- Authorization successful
+23247 [reactor-http-epoll-3] INFO  o.ssau.sandbox.service.GameService -- Пользователь с id 52 хочет вступить в поединок
+23248 [reactor-http-epoll-3] INFO  o.ssau.sandbox.service.GameService -- Start game with session: GameSession(sessionId=2d9ac229-0bbb-47e9-af53-7e74d0e6541e, version=1, firstPlayerField=org.ssau.sandbox.domain.game.field.GameField@5000e9d, secondPlayerField=org.ssau.sandbox.domain.game.field.GameField@3010879, firstPlayerId=52, secondPlayerId=null, activePlayerId=null, createdAt=2024-12-14T14:43:14.795727393, startedAt=null, endedAt=null, settings=GameSettings[mapSettings=GameMapSettings[width=10, height=10], boatTypes=[BoatType[size=1, count=4], BoatType[size=2, count=3], BoatType[size=3, count=2], BoatType[size=4, count=1]]], state=WaitingSecondPlayer)

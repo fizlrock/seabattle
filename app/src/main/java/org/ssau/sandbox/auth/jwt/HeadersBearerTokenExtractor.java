@@ -21,17 +21,19 @@ public class HeadersBearerTokenExtractor {
   }
 
   public static Mono<String> extract(ServerWebExchange exchange) {
+    log.info("Попытка вытащить токен из запроса: {}", exchange.getRequest().getPath());
 
     // TODO эта реализция ужасна
     return Mono.justOrEmpty(exchange)
         .map(ServerWebExchange::getRequest)
         .map(ServerHttpRequest::getHeaders)
         .map(h -> h.get(HttpHeaders.AUTHORIZATION))
-        .map(l -> l.get(0)) // TODO тут должна быть обработка ошибок в случае если запрос не содержал
+        .map(l -> l.get(0)) // TODO
+        .map(HeadersBearerTokenExtractor::validateAndExtract)
         .onErrorResume(e -> {
+          log.warn("Ошибка парсинга токена: {}", e.toString());
           return Mono.empty();
-        })
-        .map(HeadersBearerTokenExtractor::validateAndExtract);
+        });
 
   }
 }

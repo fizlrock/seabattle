@@ -1,23 +1,21 @@
 package org.ssau.sandbox.service;
 
-import java.lang.invoke.SwitchPoint;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import org.openapitools.model.GameStateDto;
 import org.openapitools.model.GameStateDto.StatusEnum;
+import org.openapitools.model.ShotDto;
 import org.springframework.stereotype.Service;
 import org.ssau.sandbox.domain.game.BoatCord;
 import org.ssau.sandbox.domain.game.BoatType;
 import org.ssau.sandbox.domain.game.GameMapSerializer;
 import org.ssau.sandbox.domain.game.GameMapSettings;
 import org.ssau.sandbox.domain.game.GameSession;
+import org.ssau.sandbox.domain.game.GameSession.GameState;
 import org.ssau.sandbox.domain.game.GameSessionPool;
 import org.ssau.sandbox.domain.game.GameSettings;
-import org.ssau.sandbox.domain.game.GameSession.GameState;
 import org.ssau.sandbox.domain.game.field.GameField;
-import org.ssau.sandbox.domain.user.AppUser;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +39,9 @@ public class GameService {
           new BoatType(1, 4),
           new BoatType(2, 3),
           new BoatType(3, 2),
-          new BoatType(4, 1)));
+          new BoatType(4, 1))
+
+  );
 
   /**
    * Начать новую игру.
@@ -52,6 +52,8 @@ public class GameService {
    */
   public Mono<GameStateDto> startGame(Long userId, Collection<BoatCord> cords) {
 
+    log.info("Пользователь с id {} хочет вступить в поединок", userId);
+
     var session = sessionPool.findSession();
     session.addPlayer(userId, cords);
 
@@ -59,6 +61,11 @@ public class GameService {
 
     return Mono.just(session).map(s -> toDto(s, userId));
 
+  }
+
+  public Mono<GameStateDto> getUpdatedGameState(Long userId, Long currentStateNumber) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getUpdatedGameState'");
   }
 
   public GameStateDto toDto(GameSession session, Long playerId) {

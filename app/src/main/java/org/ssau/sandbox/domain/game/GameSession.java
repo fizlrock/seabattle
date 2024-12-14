@@ -1,5 +1,6 @@
 package org.ssau.sandbox.domain.game;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -27,12 +28,15 @@ public class GameSession {
   private long version = 0;
 
   private final GameField firstPlayerField;
-
   private final GameField secondPlayerField;
 
   private Long firstPlayerId;
   private Long secondPlayerId;
   private Long activePlayerId;
+
+  private final LocalDateTime createdAt = LocalDateTime.now();
+  private LocalDateTime startedAt;
+  private LocalDateTime endedAt;
 
   public Long getFirstPlayerId() {
     return firstPlayerId;
@@ -46,23 +50,22 @@ public class GameSession {
     return activePlayerId;
   }
 
-  private GameSettings settings;
+  private final GameSettings settings;
 
   private GameState state;
 
-  public GameSession() {
+  public GameSession(GameSettings settings) {
     sessionId = UUID.randomUUID();
     log.debug("Создание новой игровой сессии.ID: {}", sessionId);
-
-    var settings = new GameSettings(new GameMapSettings(10, 10), List.of(new BoatType(3, 4)));
+    this.settings = settings;
 
     firstPlayerField = new GameField(settings);
     secondPlayerField = new GameField(settings);
     state = GameState.Created;
   }
 
-  public GameSession(long playerId, Collection<BoatCord> cords) {
-    this();
+  public GameSession(GameSettings settings, long playerId, Collection<BoatCord> cords) {
+    this(settings);
     log.debug("GameSession: {}. Первый игрок: {}", sessionId, playerId);
 
     // TODO а может ли пользователь участвовать в нескольких играх?
@@ -103,7 +106,7 @@ public class GameSession {
     return state;
   }
 
-  public void addPlayer(long playerId, Collection<BoatCord> cords) {
+  public void addPlayer(Long playerId, Collection<BoatCord> cords) {
 
     switch (state) {
       case Started, Created -> {
@@ -114,10 +117,15 @@ public class GameSession {
         version++;
       }
       case WaitingSecondPlayer -> {
+
+        if (playerId.equals(firstPlayerId)) {
+          throw new IllegalArgumentException("Игрок не может вступить в бой сам с собой");
+        }
         secondPlayerId = playerId;
         for (var boat : cords)
           secondPlayerField.placeBoat(boat);
         state = GameState.Started;
+        startedAt = LocalDateTime.now();
         version++;
       }
       default -> throw new IllegalArgumentException("В это состоянии игры невозможно добавлять игроков");
@@ -144,6 +152,11 @@ public class GameSession {
     else
       return firstPlayerField.makeShot(x, y);
 
+  }
+
+  @Override
+  public int hashCode() {
+    return sessionId.hashCode();
   }
 
 }
