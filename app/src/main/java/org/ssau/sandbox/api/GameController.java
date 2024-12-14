@@ -68,8 +68,15 @@ public class GameController implements GameApi {
   @Override
   public Mono<GameStateDto> getUpdatedGameState(@NotNull @Min(0) @Valid Long currentStateNumber,
       ServerWebExchange exchange) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getUpdatedGameState'");
+
+    var principal = getPrincipal(exchange);
+    var user_id = principal.map(
+        x -> x.getAttribute("user_id"))
+        .cast(Integer.class)
+        .map(x -> x.longValue());
+
+    return user_id.flatMap(id -> service.getUpdatedGameState(id,
+        currentStateNumber));
   }
 
   @Override
@@ -80,7 +87,6 @@ public class GameController implements GameApi {
 
   @Override
   public Mono<GameStateDto> startNewGame(@Valid Flux<BoatCordDto> boatCordDto, ServerWebExchange exchange) {
-
 
     var principal = getPrincipal(exchange);
 

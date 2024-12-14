@@ -1,11 +1,12 @@
 package org.ssau.sandbox.service;
 
+import java.time.Duration;
 import java.util.Collection;
 import java.util.List;
 
 import org.openapitools.model.GameStateDto;
 import org.openapitools.model.GameStateDto.StatusEnum;
-import org.openapitools.model.ShotDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.ssau.sandbox.domain.game.BoatCord;
 import org.ssau.sandbox.domain.game.BoatType;
@@ -63,9 +64,25 @@ public class GameService {
 
   }
 
+  @Autowired
+  WaitService waitService;
+
   public Mono<GameStateDto> getUpdatedGameState(Long userId, Long currentStateNumber) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getUpdatedGameState'");
+
+    log.info("Запрос обновленного состояния игры. userId: {} state: {}", userId, currentStateNumber);
+    var session = sessionPool.findUserSession(userId)
+        .orElseThrow(() -> new IllegalStateException("Игрок не состоит в игре"));
+
+    if (session.getVersion() < currentStateNumber)
+      return Mono.just(session).map(s -> toDto(s, userId));
+    else {
+      return waitService.waitForSignal(session.getSessionId().toString())
+          .cast(GameSession.class)
+          .timeout(Duration.ofSeconds(10), Mono.just(session))
+          .map(s -> toDto(s, userId));
+
+    }
+
   }
 
   public GameStateDto toDto(GameSession session, Long playerId) {

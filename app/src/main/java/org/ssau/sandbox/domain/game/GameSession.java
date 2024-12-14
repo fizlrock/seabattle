@@ -2,10 +2,13 @@ package org.ssau.sandbox.domain.game;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.ssau.sandbox.domain.game.field.GameField;
+import org.ssau.sandbox.service.WaitService;
 
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +20,8 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @ToString
+@Component
+@Scope("prototype")
 public class GameSession {
 
   public static enum GameState {
@@ -51,6 +56,14 @@ public class GameSession {
   }
 
   private final GameSettings settings;
+
+  @Autowired
+  private WaitService waitService;
+
+  private void stateUpdated() {
+    version++;
+    waitService.signal(sessionId.toString(), this);
+  }
 
   private GameState state;
 
@@ -114,7 +127,7 @@ public class GameSession {
         for (var boat : cords)
           firstPlayerField.placeBoat(boat);
         state = GameState.WaitingSecondPlayer;
-        version++;
+        stateUpdated();
       }
       case WaitingSecondPlayer -> {
 
@@ -126,7 +139,7 @@ public class GameSession {
           secondPlayerField.placeBoat(boat);
         state = GameState.Started;
         startedAt = LocalDateTime.now();
-        version++;
+        stateUpdated();
       }
       default -> throw new IllegalArgumentException("В это состоянии игры невозможно добавлять игроков");
     }
@@ -145,13 +158,14 @@ public class GameSession {
 
     log.trace("Игрок {} делает выстрел по координатам {}:{}", playerId, x, y);
 
-    version++;
-
+    int score;
     if (playerId == firstPlayerId)
-      return secondPlayerField.makeShot(x, y);
+      score = secondPlayerField.makeShot(x, y);
     else
-      return firstPlayerField.makeShot(x, y);
+      score = firstPlayerField.makeShot(x, y);
+    stateUpdated();
 
+    return score;
   }
 
   @Override
