@@ -21,6 +21,7 @@ public class BearerAuthenticationFilter extends AuthenticationWebFilter {
   private ServerAuthenticationConverter converter = (ServerWebExchange exch) -> {
     return Mono.just(exch)
         .flatMap(HeadersBearerTokenExtractor::extract)
+        .switchIfEmpty(Mono.empty())
         .map(BearerTokenAuthenticationToken::new)
         .cast(Authentication.class);
   };

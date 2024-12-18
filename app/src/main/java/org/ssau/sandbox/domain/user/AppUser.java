@@ -25,6 +25,8 @@ public class AppUser implements UserDetails {
     Player, Manager, Banned
   }
 
+
+
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return List.of(new SimpleGrantedAuthority(role.toString()));

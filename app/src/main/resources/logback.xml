@@ -7,7 +7,7 @@
   <import class="ch.qos.logback.core.ConsoleAppender"/>
 
 
-  <logger name="org.springframework.security" level="TRACE" />  
+  <logger name="org.springframework.security" level="INFO" />  
 
 
   <appender name="STDOUT" class="ConsoleAppender">

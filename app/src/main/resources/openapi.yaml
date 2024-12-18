@@ -505,6 +505,7 @@ components:
           type: string
           minLength: 4
           maxLength: 8
+          pattern: ^[^\s]*$
           examples: ['fizlrock', 'njenkins']
         password:
           type: string

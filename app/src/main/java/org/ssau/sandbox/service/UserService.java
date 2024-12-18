@@ -3,6 +3,8 @@ package org.ssau.sandbox.service;
 import java.util.function.Function;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import org.openapitools.model.RegistrationRequestBody;
 import org.openapitools.model.UserProfileDto;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +20,8 @@ import reactor.core.publisher.Mono;
  * UserService
  */
 @Service
+
+@Slf4j
 @RequiredArgsConstructor
 public class UserService {
 
@@ -47,8 +51,17 @@ public class UserService {
   public Mono<UserProfileDto> registerUser(Mono<RegistrationRequestBody> request) {
     return request
         .map(basicUserFactory)
-        .flatMap(userRepository::save)
-        .map(dtoFactory);
+        .flatMap(user -> userRepository.existsByUsername(user.getUsername())
+            .flatMap(exists -> {
+              if (exists) {
+                return Mono.error(new IllegalArgumentException("Пользователь с таким именем уже существует"));
+              } else {
+                return userRepository.save(user);
+              }
+            }))
+        .map(dtoFactory)
+        .doOnError(th->log.debug("Ошибка регистрации пользователя: {}", th))
+        .doOnNext(x -> log.info("Регистрация игрока с именем: {}", x.getLogin()));
   }
 
   public Mono<UserProfileDto> getUserProfileByUsername(Mono<String> username) {

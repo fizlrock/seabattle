@@ -10,9 +10,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.context.ApplicationContext;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.ssau.sandbox.domain.game.GameSession.GameState;
 
@@ -83,8 +81,9 @@ public class GameSessionPool {
         .collect(Collectors.groupingBy(GameSession::getState, Collectors.counting()));
   }
 
-  private Disposable f = Flux.interval(Duration.ofSeconds(10))
-      .subscribe(x -> logPoolState());
+  // Логирование раз в 10 секунд
+  // private Disposable f = Flux.interval(Duration.ofSeconds(10))
+  // .subscribe(x -> logPoolState());
 
   private void logPoolState() {
     log.info("Размер пула игр: {}", sessions.size());
@@ -98,6 +97,7 @@ public class GameSessionPool {
     logPoolState();
     return session;
   }
+
 
   @Autowired
   private ApplicationContext applicationContext;

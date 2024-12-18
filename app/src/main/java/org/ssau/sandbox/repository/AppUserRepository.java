@@ -11,4 +11,5 @@ public interface AppUserRepository extends ReactiveCrudRepository<AppUser, Long>
 
   public Mono<AppUser> findByUsername(String username);
 
+  public Mono<Boolean> existsByUsername(String username);
 }
