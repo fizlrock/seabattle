@@ -13,6 +13,7 @@
   <appender name="STDOUT" class="ConsoleAppender">
     <encoder>
       <pattern>%highlight([%level]) - %msg%n</pattern>
+      <charset>UTF-8</charset>
     </encoder>
   </appender>
 

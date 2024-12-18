@@ -114,10 +114,18 @@ sourceSets {
 //     }
 // }
 
+bootRun {
+    jvmArgs = ['-Dfile.encoding=UTF-8']
+}
+
 
 bootBuildImage {
     imageName = 'fizlrock/seabattle-api:latest'
+    builder = 'paketobuildpacks/builder:base'   
     environment = [
         'BP_JVM_VERSION': '17',
+        'LANG': 'ru_RU.UTF-8',
+        'LC_ALL': 'ru_RU.UTF-8'
+        
     ]
 }
