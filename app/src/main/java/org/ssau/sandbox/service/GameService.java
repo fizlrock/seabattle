@@ -8,6 +8,8 @@ import org.openapitools.model.GameStateDto;
 import org.openapitools.model.GameStateDto.StatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.ssau.sandbox.domain.exception.NoSessionException;
+import org.ssau.sandbox.domain.exception.UserAlreadyInSessionException;
 import org.ssau.sandbox.domain.game.BoatCord;
 import org.ssau.sandbox.domain.game.BoatType;
 import org.ssau.sandbox.domain.game.GameMapSerializer;
@@ -55,10 +57,12 @@ public class GameService {
 
     log.info("Пользователь с id {} хочет вступить в поединок", userId);
 
+    sessionPool.findUserSession(userId).ifPresent(x -> {
+      throw new UserAlreadyInSessionException();
+    });
+
     var session = sessionPool.findSession();
     session.addPlayer(userId, cords);
-
-    log.info("Start game with session: {}", session);
 
     return Mono.just(session).map(s -> toDto(s, userId));
 
@@ -71,18 +75,29 @@ public class GameService {
 
     log.info("Запрос обновленного состояния игры. userId: {} state: {}", userId, currentStateNumber);
     var session = sessionPool.findUserSession(userId)
-        .orElseThrow(() -> new IllegalStateException("Игрок не состоит в игре"));
+        .orElseThrow(() -> new NoSessionException());
 
     if (session.getVersion() < currentStateNumber)
-      return Mono.just(session).map(s -> toDto(s, userId));
-    else {
+      return Mono.just(session).map(s -> toDto(s, userId))
+          .doOnNext(x -> log.debug("Отправка обновленного состояния пользователю с id : {}", userId));
+    else
       return waitService.waitForSignal(session.getSessionId().toString())
           .cast(GameSession.class)
           .timeout(Duration.ofSeconds(10), Mono.just(session))
-          .map(s -> toDto(s, userId));
+          .map(s -> toDto(s, userId))
+          .doOnNext(x -> log.debug("Отправка обновленного состояния пользователю с id : {}", userId));
 
-    }
+  }
 
+  public GameStateDto makeShot(Long playerId, int x, int y) {
+    log.debug("Игрок с id: {} хочет сделать выстрел по координатам {x}:{y}", playerId, x, y);
+
+    var session = sessionPool.findUserSession(playerId)
+        .orElseThrow(() -> new NoSessionException());
+
+    session.makeShot(playerId, x, y);
+
+    return toDto(session, playerId);
   }
 
   public GameStateDto toDto(GameSession session, Long playerId) {

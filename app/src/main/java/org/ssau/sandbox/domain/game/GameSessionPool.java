@@ -1,6 +1,5 @@
 package org.ssau.sandbox.domain.game;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -15,8 +14,6 @@ import org.springframework.stereotype.Component;
 import org.ssau.sandbox.domain.game.GameSession.GameState;
 
 import lombok.extern.slf4j.Slf4j;
-import reactor.core.Disposable;
-import reactor.core.publisher.Flux;
 
 /**
  * Структура хранит активные игры
@@ -88,7 +85,6 @@ public class GameSessionPool {
   private void logPoolState() {
     log.info("Размер пула игр: {}", sessions.size());
     log.info("Статистика состояний: {}", getPoolStateStat());
-    log.info("Статистика состояний: {}", sessions);
   }
 
   private GameSession createNewSession() {

@@ -81,8 +81,15 @@ public class GameController implements GameApi {
 
   @Override
   public Mono<GameStateDto> makeShot(@Valid Mono<ShotDto> shotDto, ServerWebExchange exchange) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'makeShot'");
+    var principal = getPrincipal(exchange);
+
+    var user_id = principal.map(
+        x -> x.getAttribute("user_id"))
+        .cast(Integer.class)
+        .map(x -> x.longValue());
+
+    return Mono.zip(user_id, shotDto)
+        .map(x -> service.makeShot(x.getT1(), x.getT2().getX(), x.getT2().getY()));
   }
 
   @Override

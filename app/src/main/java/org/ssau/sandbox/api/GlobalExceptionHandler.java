@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.support.WebExchangeBindException;
+import org.ssau.sandbox.domain.exception.SeabattleException;
 
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
@@ -38,10 +39,18 @@ public class GlobalExceptionHandler {
 
   @ExceptionHandler(IllegalArgumentException.class)
   public Mono<ResponseEntity<String>> handle(IllegalArgumentException ex) {
-
     // log.debug("Ошибка: {}", ex);
     return Mono.just(ResponseEntity
         .status(HttpStatus.BAD_REQUEST)
         .body(ex.getMessage()));
   }
+
+  @ExceptionHandler(SeabattleException.class)
+  @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+  public String handle(SeabattleException ex) {
+    return ex.getMessage();
+  }
+
+
+  
 }

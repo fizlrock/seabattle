@@ -9,8 +9,11 @@ import org.ssau.sandbox.domain.game.field.GameField;
 @Component
 public class AsciiGameMapSerializer implements GameMapSerializer {
 
-  private static final char[] ownerMatrix = new char[] { '.', 'S', 'x', 'X' };
-  private static final char[] opponentMatrix = new char[] { '.', 'O', 'O', 'X' };
+  private static final char[] ownerMatrix = new char[] {
+     '_', 'O', '.', 'x'
+      };
+  private static final char[] opponentMatrix = new char[] { 
+    '_', '.', '_', 'x' };
 
   @Override
   public String serializeOpponentMap(GameField field) {

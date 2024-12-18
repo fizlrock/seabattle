@@ -122,7 +122,7 @@ public class GameSession {
   public void addPlayer(Long playerId, Collection<BoatCord> cords) {
 
     switch (state) {
-      case Started, Created -> {
+      case Created -> {
         firstPlayerId = playerId;
         for (var boat : cords)
           firstPlayerField.placeBoat(boat);
@@ -139,6 +139,7 @@ public class GameSession {
           secondPlayerField.placeBoat(boat);
         state = GameState.Started;
         startedAt = LocalDateTime.now();
+        log.info("Начат бой между игроками с id {} и {}", firstPlayerId, secondPlayerId);
         stateUpdated();
       }
       default -> throw new IllegalArgumentException("В это состоянии игры невозможно добавлять игроков");
@@ -171,6 +172,19 @@ public class GameSession {
   @Override
   public int hashCode() {
     return sessionId.hashCode();
+  }
+
+  public GameField getField(long playerId) {
+    if (state != GameState.Started)
+      throw new IllegalStateException("Нельзя получить поле до начала игры");
+
+    if (playerId == firstPlayerId)
+      return firstPlayerField;
+    else if (playerId == secondPlayerId)
+      return secondPlayerField;
+    else
+      throw new IllegalArgumentException("Игрок не состоит в этой игре");
+
   }
 
 }

@@ -60,7 +60,7 @@ public class UserService {
               }
             }))
         .map(dtoFactory)
-        .doOnError(th->log.debug("Ошибка регистрации пользователя: {}", th))
+        .doOnError(th -> log.debug("Ошибка регистрации пользователя: {}", th))
         .doOnNext(x -> log.info("Регистрация игрока с именем: {}", x.getLogin()));
   }
 
