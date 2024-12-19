@@ -57,8 +57,10 @@ public class GameService {
 
     log.info("Пользователь с id {} хочет вступить в поединок", userId);
 
-    sessionPool.findUserSession(userId).ifPresent(x -> {
-      throw new UserAlreadyInSessionException();
+    sessionPool.findUserSession(userId).ifPresent(s -> {
+      log.info("Завершение игровой сессии: {}", s.getSessionId());
+      s.fail("Игрок %s покинул сессию".formatted(userId));
+      // throw new UserAlreadyInSessionException();
     });
 
     var session = sessionPool.findSession();

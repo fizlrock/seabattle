@@ -187,6 +187,14 @@ public class GameSession {
     return score;
   }
 
+  /**
+   * Завершить игровую сессию с ошибкой
+   */
+  public void fail(String reason) {
+    state = GameState.Failed;
+    stateUpdated();
+  }
+
   @Override
   public int hashCode() {
     return sessionId.hashCode();

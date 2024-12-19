@@ -64,6 +64,7 @@ public class GameSessionPool {
 
     return sessions.entrySet().stream()
         .map(Entry::getKey)
+        .filter(s -> (s.getState() != GameState.Ended) & (s.getState() != GameState.Failed))
         .filter(userInSession)
         .findAny();
   }
@@ -93,7 +94,6 @@ public class GameSessionPool {
     logPoolState();
     return session;
   }
-
 
   @Autowired
   private ApplicationContext applicationContext;
