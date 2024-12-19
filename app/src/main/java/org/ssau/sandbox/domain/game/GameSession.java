@@ -133,6 +133,7 @@ public class GameSession {
     switch (state) {
       case Created -> {
         firstPlayerId = playerId;
+        activePlayerId = firstPlayerId;
         field = firstPlayerField;
         state = GameState.WaitingSecondPlayer;
       }
@@ -175,8 +176,10 @@ public class GameSession {
     int score;
     if (playerId == firstPlayerId) {
       score = secondPlayerField.makeShot(x, y);
+      activePlayerId = secondPlayerId;
     } else {
       score = firstPlayerField.makeShot(x, y);
+      activePlayerId = firstPlayerId;
     }
 
     if (score == 0)
