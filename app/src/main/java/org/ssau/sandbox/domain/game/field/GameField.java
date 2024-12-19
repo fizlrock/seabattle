@@ -14,8 +14,6 @@ import java.util.stream.Stream;
 import org.ssau.sandbox.domain.game.BoatCord;
 import org.ssau.sandbox.domain.game.GameSettings;
 
-
-
 /**
  * <p>
  * Игровое поле
@@ -34,9 +32,6 @@ import org.ssau.sandbox.domain.game.GameSettings;
 @Slf4j
 public class GameField {
 
-
-  
-
   private static record Point(int x, int y) {
   }
 
@@ -47,7 +42,15 @@ public class GameField {
   private final int width, height;
   private int aliveShips = 0;
 
-  Map<Integer, Integer> stilBoats = new HashMap<>();
+  /**
+   * Словарь:
+   * Длина корабля - Сколько ещё таких кораблей можно поставить
+   */
+  private Map<Integer, Integer> stilBoats = new HashMap<>();
+
+  public Map<Integer, Integer> getStilBoats() {
+    return stilBoats;
+  }
 
   public GameField(GameSettings gameSettings) {
     this.width = gameSettings.mapSettings().width();
@@ -67,7 +70,7 @@ public class GameField {
    * 
    * @param x
    * @param y
-   * @return
+   * @return число живых кораблей на карте
    */
   public int makeShot(int x, int y) {
     OwnerCageState prevState = getOwnerState(x, y);
@@ -143,7 +146,7 @@ public class GameField {
       length = cords.xe() - cords.xs() + 1;
     else if (!horizontal && vertical)
       // Вертикальный корабль
-      length = cords.ys() - cords.ye() + 1;
+      length = cords.ye() - cords.ys() + 1;
     else if (horizontal && vertical)
       // Корабль в одну клеточку
       length = 1;

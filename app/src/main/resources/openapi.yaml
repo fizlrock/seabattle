@@ -67,6 +67,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/user_profile_dto'
+
+
+
   /user/profile:
     get:
       tags: ['profile']

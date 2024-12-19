@@ -1,6 +1,8 @@
 package org.ssau.sandbox.api;
 
+import org.openapitools.api.AvatarApi;
 import org.openapitools.api.UserApi;
+import org.openapitools.model.AvatarDto;
 import org.openapitools.model.RegistrationRequestBody;
 import org.openapitools.model.UserProfileDto;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,6 +15,7 @@ import org.ssau.sandbox.service.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -20,7 +23,7 @@ import reactor.core.publisher.Mono;
  */
 @RestController
 @RequiredArgsConstructor
-public class UserController implements UserApi {
+public class UserController implements UserApi, AvatarApi {
 
   private final UserService userService;
 
@@ -56,6 +59,12 @@ public class UserController implements UserApi {
       @Min(0) Long avatarId,
       ServerWebExchange exchange) {
     throw new UnsupportedOperationException("Unimplemented method 'setAvatar'");
+  }
+
+  @Override
+  public Flux<AvatarDto> getAvatars(ServerWebExchange exchange) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getAvatars'");
   }
 
 }

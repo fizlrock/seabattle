@@ -37,10 +37,25 @@ public class GameSession {
 
   private Long firstPlayerId;
   private Long secondPlayerId;
+
+  /**
+   * Идентификатор активного игрока.
+   * <p>
+   * В случае когда {@link GameState} == Ended.
+   * Так же является идентификатором победителя
+   */
   private Long activePlayerId;
 
+  /**
+   * Дата создания игровой сессии
+   */
   private final LocalDateTime createdAt = LocalDateTime.now();
+
+  /**
+   * Дата начала игры. (Присоединения двух игроков)
+   */
   private LocalDateTime startedAt;
+
   private LocalDateTime endedAt;
 
   public Long getFirstPlayerId() {
@@ -55,6 +70,9 @@ public class GameSession {
     return activePlayerId;
   }
 
+  /**
+   * Настройки игрового поля
+   */
   private final GameSettings settings;
 
   @Autowired
@@ -67,6 +85,11 @@ public class GameSession {
 
   private GameState state;
 
+  /**
+   * Максимальный счет в игре. Иными словами, число палуб в начале.
+   */
+  private final long max_score;
+
   public GameSession(GameSettings settings) {
     sessionId = UUID.randomUUID();
     log.debug("Создание новой игровой сессии.ID: {}", sessionId);
@@ -74,25 +97,10 @@ public class GameSession {
 
     firstPlayerField = new GameField(settings);
     secondPlayerField = new GameField(settings);
+
+    max_score = settings.boatTypes().stream().mapToInt(t -> t.size() * t.count()).sum();
+
     state = GameState.Created;
-  }
-
-  public GameSession(GameSettings settings, long playerId, Collection<BoatCord> cords) {
-    this(settings);
-    log.debug("GameSession: {}. Первый игрок: {}", sessionId, playerId);
-
-    // TODO а может ли пользователь участвовать в нескольких играх?
-    // Думаю это стоить проверять в сервисе
-
-    // TODO стоит расставлять корабли более эффективно
-    for (var boat : cords)
-      firstPlayerField.placeBoat(boat);
-
-    firstPlayerId = playerId;
-    activePlayerId = playerId;
-
-    state = GameState.WaitingSecondPlayer;
-
   }
 
   public UUID getSessionId() {
@@ -120,30 +128,35 @@ public class GameSession {
   }
 
   public void addPlayer(Long playerId, Collection<BoatCord> cords) {
+    GameField field = null;
 
     switch (state) {
       case Created -> {
         firstPlayerId = playerId;
-        for (var boat : cords)
-          firstPlayerField.placeBoat(boat);
+        field = firstPlayerField;
         state = GameState.WaitingSecondPlayer;
-        stateUpdated();
       }
       case WaitingSecondPlayer -> {
-
-        if (playerId.equals(firstPlayerId)) {
+        if (playerId.equals(firstPlayerId))
           throw new IllegalArgumentException("Игрок не может вступить в бой сам с собой");
-        }
+
+        field = secondPlayerField;
         secondPlayerId = playerId;
-        for (var boat : cords)
-          secondPlayerField.placeBoat(boat);
         state = GameState.Started;
         startedAt = LocalDateTime.now();
         log.info("Начат бой между игроками с id {} и {}", firstPlayerId, secondPlayerId);
-        stateUpdated();
       }
       default -> throw new IllegalArgumentException("В это состоянии игры невозможно добавлять игроков");
     }
+
+    for (var boat : cords)
+      field.placeBoat(boat);
+
+    if (field.getAliveShips() != max_score)
+      throw new IllegalStateException("Недопустимая расстановка кораблей. Должно быть %d палуб. А на деле: %d"
+          .formatted(max_score, field.getAliveShips()));
+
+    stateUpdated();
   }
 
   public int makeShot(long playerId, int x, int y) {
@@ -160,10 +173,15 @@ public class GameSession {
     log.trace("Игрок {} делает выстрел по координатам {}:{}", playerId, x, y);
 
     int score;
-    if (playerId == firstPlayerId)
+    if (playerId == firstPlayerId) {
       score = secondPlayerField.makeShot(x, y);
-    else
+    } else {
       score = firstPlayerField.makeShot(x, y);
+    }
+
+    if (score == 0)
+      state = GameState.Ended;
+
     stateUpdated();
 
     return score;
