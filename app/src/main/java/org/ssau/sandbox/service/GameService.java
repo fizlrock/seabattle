@@ -115,7 +115,8 @@ public class GameService {
 
     dto.setChangeCount(session.getVersion());
     dto.setStatus(dto_status);
-    dto.youShoting(false);
+
+    dto.youShoting(session.getActivePlayerId().equals(playerId));
 
     if (session.getState() == GameState.Started) {
       dto.youShoting(session.getActivePlayerId() == playerId);
