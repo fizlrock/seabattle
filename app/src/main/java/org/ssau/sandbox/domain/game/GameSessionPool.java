@@ -15,6 +15,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.ssau.sandbox.domain.game.GameSession.GameState;
 
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 
@@ -31,7 +32,8 @@ public class GameSessionPool {
   @Value("${seabattle.pool_check_period}")
   Long poolCheckPeriod;
 
-  {
+  @PostConstruct
+  void init() {
     // Запуск Flux для проверки пула
     Flux.interval(Duration.ZERO, Duration.ofSeconds(poolCheckPeriod))
         .subscribe(tick -> this.checkPool());
