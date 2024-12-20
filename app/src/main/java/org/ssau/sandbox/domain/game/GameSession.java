@@ -103,7 +103,7 @@ public class GameSession {
 
   private void planMatchmakingTimeoutTask() {
 
-    if (!failTask.isDisposed())
+    if (failTask != null && !failTask.isDisposed())
       failTask.dispose();
 
     failTask = Mono.delay(Duration.ofSeconds(matchmakingTimeout))
@@ -112,7 +112,7 @@ public class GameSession {
   }
 
   private void planFireTimeoutTask() {
-    if (!failTask.isDisposed())
+    if (failTask != null && !failTask.isDisposed())
       failTask.dispose();
 
     failTask = Mono.delay(Duration.ofSeconds(fireTimeout))
