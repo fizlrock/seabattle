@@ -165,7 +165,7 @@ public class GameSession {
     if (state != GameState.Started)
       throw new IllegalStateException("Нельзя делать выстрелы в этом состояние");
 
-    if (playerId != firstPlayerId || playerId != secondPlayerId)
+    if (!(playerId == firstPlayerId || playerId == secondPlayerId))
       throw new IllegalArgumentException("Игрок не состоит в этой игре");
 
     if (playerId != activePlayerId)
@@ -173,21 +173,27 @@ public class GameSession {
 
     log.trace("Игрок {} делает выстрел по координатам {}:{}", playerId, x, y);
 
-    int score;
+    log.info("FPF: {}, SPF: {}", firstPlayerField, secondPlayerField);
+
+    int aliveShips;
     if (playerId == firstPlayerId) {
-      score = secondPlayerField.makeShot(x, y);
-      activePlayerId = secondPlayerId;
+      if (!secondPlayerField.makeShot(x, y))
+        activePlayerId = secondPlayerId;
+      aliveShips = secondPlayerField.getAliveShips();
     } else {
-      score = firstPlayerField.makeShot(x, y);
-      activePlayerId = firstPlayerId;
+      if (!firstPlayerField.makeShot(x, y))
+        activePlayerId = firstPlayerId;
+      aliveShips = firstPlayerField.getAliveShips();
     }
 
-    if (score == 0)
+    log.info("Осталось {} живых палуб", aliveShips);
+
+    if (aliveShips == 0)
       state = GameState.Ended;
 
     stateUpdated();
 
-    return score;
+    return aliveShips;
   }
 
   /**

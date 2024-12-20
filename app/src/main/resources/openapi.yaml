@@ -87,7 +87,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/user_profile_dto'
  
-  /user/{userId}/avatar/{avatarId}:
+  /user/profile/avatar/{avatarId}:
     post:
       tags: ['profile']
       operationId: setAvatar
@@ -95,13 +95,6 @@ paths:
       security:
         - bearerAuth: []
       parameters:
-      - name: userId
-        in : path
-        required: true
-        schema:
-          type: integer
-          format: int64
-          minimum: 0
       - name: avatarId
         in : path
         required: true
@@ -112,6 +105,49 @@ paths:
       responses:
         200:
           description: Аватар успешно установлен
+
+  /user/stats:
+    post:
+      tags: ['profile']
+      operationId: getStats
+      summary: Получить статистику об играх пользователя
+      security:
+        - bearerAuth: []
+      parameters:
+      - name: count
+        in : query
+        required: false
+        schema:
+          type: integer
+          format: int64
+
+          minimum: 0
+      responses:
+        200:
+          description: Список игр в формате JSON.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    game_number:
+                      type: integer
+                      description: Номер игры в списке статистики.
+                    opponent_name:
+                      type: string
+                      description: Имя противника.
+                    shots_fired:
+                      type: integer
+                      description: Общее количество выстрелов.
+                    hit_percentage:
+                      type: string
+                      description: Процент попаданий, в формате строки с символом '%'.
+                    match_duration:
+                      type: integer
+                      description: Длительность поединка в миллисекундах.
+        
  
  
  

@@ -59,7 +59,6 @@ public class GameField {
     gameSettings.boatTypes().stream()
         .forEach(x -> stilBoats.put(x.size(), x.count()));
 
-    System.out.println(stilBoats);
 
     ownerMap = new int[width][height];
     opponentMap = new int[width][height];
@@ -72,25 +71,27 @@ public class GameField {
    * @param y
    * @return число живых кораблей на карте
    */
-  public int makeShot(int x, int y) {
+  public boolean makeShot(int x, int y) {
     OwnerCageState prevState = getOwnerState(x, y);
 
     switch (prevState) {
       case Void -> {
         setOwnerState(x, y, OwnerCageState.ShotIntoVoid);
         setOpponentState(x, y, OpponentCageState.CheckedEmpty);
+        return false;
       }
       case Ship -> {
         setOwnerState(x, y, OwnerCageState.ShotIntoShip);
         setOpponentState(x, y, OpponentCageState.BlowedShip);
         aliveShips--;
         markEmptyCages(x, y);
+        return true;
       }
-      case ShotIntoShip, ShotIntoVoid -> {
+      default -> {
+        return false;
       }
     }
 
-    return aliveShips;
   }
 
   public synchronized void placeBoat(BoatCord cords) {
@@ -153,7 +154,6 @@ public class GameField {
     else
       // Недопустимые корды
       throw new IllegalArgumentException("Нельзя ставить корабли по диагонали");
-    System.out.println(length);
 
     int stil = stilBoats.getOrDefault(length, -1);
     switch (stil) {

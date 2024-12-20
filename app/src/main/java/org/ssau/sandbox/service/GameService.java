@@ -79,7 +79,7 @@ public class GameService {
     var session = sessionPool.findUserSession(userId)
         .orElseThrow(() -> new NoSessionException());
 
-    if (session.getVersion() < currentStateNumber)
+    if (session.getVersion() != currentStateNumber)
       return Mono.just(session).map(s -> toDto(s, userId))
           .doOnNext(x -> log.debug("Отправка обновленного состояния пользователю с id : {}", userId));
     else
@@ -92,7 +92,7 @@ public class GameService {
   }
 
   public GameStateDto makeShot(Long playerId, int x, int y) {
-    log.debug("Игрок с id: {} хочет сделать выстрел по координатам {x}:{y}", playerId, x, y);
+    log.debug("Игрок с id: {} хочет сделать выстрел по координатам {}:{}", playerId, x, y);
 
     var session = sessionPool.findUserSession(playerId)
         .orElseThrow(() -> new NoSessionException());
@@ -118,15 +118,15 @@ public class GameService {
 
     dto.youShoting(session.getActivePlayerId().equals(playerId));
 
-    if (session.getState() == GameState.Started) {
+    if (session.getState() == GameState.Started || session.getState() == GameState.Ended) {
       dto.youShoting(session.getActivePlayerId() == playerId);
-
       GameField yourField, oppoField;
 
       if (session.getFirstPlayerId() == playerId) {
         yourField = session.getFirstPlayerField();
         oppoField = session.getSecondPlayerField();
         dto.setOponentName(session.getSecondPlayerId().toString());
+
       } else if (session.getSecondPlayerId() == playerId) {
         yourField = session.getSecondPlayerField();
         oppoField = session.getFirstPlayerField();
