@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import liquibase.Liquibase;
@@ -21,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Component
+@Order(0)
 public class DatabaseInitializer implements ApplicationRunner {
 
   @Value("${liquibase.url}")

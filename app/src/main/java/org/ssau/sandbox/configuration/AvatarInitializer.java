@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.ssau.sandbox.domain.user.Avatar;
 import org.ssau.sandbox.repository.AvatarRepository;
@@ -17,6 +18,7 @@ import reactor.core.publisher.Flux;
  */
 @Slf4j
 @Component
+@Order(2)
 public class AvatarInitializer implements ApplicationRunner {
 
   @Autowired
