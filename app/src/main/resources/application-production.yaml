@@ -2,6 +2,21 @@
 server:
   port: 80
 
+seabattle:
+  # Таймаут вебхука. Через сколько завершается подключение
+  webhook_timeout: 10
+
+  # Таймаут матчмейкинга
+  matchmaking_timeout: 120
+
+  # Таймаут на ход игрока
+  fire_timeout: 120
+
+
+  # Период проверки пула игр. На завершенные для сохранения, на failed для удаления
+  pool_check_period: 20
+
+  
 spring:
   web:
     charset: UTF-8
