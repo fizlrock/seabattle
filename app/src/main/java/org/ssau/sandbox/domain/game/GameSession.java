@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.ssau.sandbox.domain.game.field.GameField;
 import org.ssau.sandbox.service.WaitService;
 
+import jakarta.annotation.PostConstruct;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.Disposable;
@@ -45,10 +46,20 @@ public class GameSession {
 
   Disposable failTask;
 
-  @Value("${seabattle.matchmaking_timeout}")
-  Long matchmakingTimeout;
-  @Value("${seabattle.fire_timeout}")
-  Long fireTimeout;
+
+  @PostConstruct
+  void fuck(){
+    System.out.println("\nFUUUUUUUUUUCK YOOUT\n");
+  }
+
+  // @Value("${seabattle.matchmaking_timeout}")
+  long matchmakingTimeout = 120;
+
+  // @Value("${seabattle.fire_timeout}")
+  long fireTimeout = 60; // TODO @Value почему-то ломает инициализцию бина
+
+  @Autowired
+  private WaitService waitService;
 
   /**
    * Идентификатор активного игрока.
@@ -77,8 +88,6 @@ public class GameSession {
    */
   private final GameSettings settings;
 
-  @Autowired
-  private WaitService waitService;
 
   private GameState state;
 
