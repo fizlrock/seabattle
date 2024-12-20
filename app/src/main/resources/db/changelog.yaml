@@ -48,9 +48,37 @@ databaseChangeLog:
                     primaryKey: true
               - column:
                   name: picture_url
-                  type: bigint
-                  autoIncrement: true
-                  startWith: 1
+                  type: varchar
                   constraints:
-                    primaryKey: true
+                    unique: true
+                    nullable: false
+        - insert:
+            tableName: avatar
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 0
+              - column:
+                  name: picture_url
+                  value: 'https://avatars.mds.yandex.net/i?id=2ac3f96ac7e18a5fe173e9ce8b7e82b6_l-5222025-images-thumbs&n=13'
 
+  - changeSet:
+        id: '3'
+        author: fizlrock
+        comment: Добавление avatar_id в app_user и связь с avatar
+        changes:
+          - addColumn:
+              tableName: app_user
+              columns:
+                - column:
+                    name: avatar_id
+                    type: bigint
+                    defaultValueNumeric: 0
+                    constraints:
+                      nullable: false
+          - addForeignKeyConstraint:
+              baseTableName: app_user
+              baseColumnNames: avatar_id
+              constraintName: fk_app_user_avatar
+              referencedTableName: avatar
+              referencedColumnNames: id

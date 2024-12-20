@@ -11,6 +11,8 @@ import org.springframework.security.oauth2.core.DefaultOAuth2AuthenticatedPrinci
 import org.springframework.security.oauth2.server.resource.authentication.BearerTokenAuthentication;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
+import org.ssau.sandbox.repository.AppUserRepository;
+import org.ssau.sandbox.repository.AvatarRepository;
 import org.ssau.sandbox.service.UserService;
 
 import jakarta.validation.Valid;
@@ -27,6 +29,8 @@ import reactor.core.publisher.Mono;
 public class UserController implements UserApi, AvatarApi {
 
   private final UserService userService;
+  private final AvatarRepository avaRep;
+  private final AppUserRepository userRep;
 
   private Mono<DefaultOAuth2AuthenticatedPrincipal> getPrincipal(ServerWebExchange exchange) {
 
@@ -54,23 +58,38 @@ public class UserController implements UserApi, AvatarApi {
     return userService.registerUser(regRequest);
   }
 
-
   @Override
   public Flux<AvatarDto> getAvatars(ServerWebExchange exchange) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getAvatars'");
+
+    return avaRep.findAll()
+        .map(
+            x -> {
+              var dto = new AvatarDto();
+              dto.avatarId(x.getId());
+              dto.pictureUrl(x.getPicture_url());
+              return dto;
+            });
   }
 
-@Override
-public Flux<GameStatsDto> getStats(@Min(0) @Valid Long count, ServerWebExchange exchange) {
-	// TODO Auto-generated method stub
-	throw new UnsupportedOperationException("Unimplemented method 'getStats'");
-}
+  @Override
+  public Flux<GameStatsDto> getStats(@Min(0) @Valid Long count, ServerWebExchange exchange) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getStats'");
+  }
 
-@Override
-public Mono<Void> setAvatar(@Min(0) Long avatarId, ServerWebExchange exchange) {
-	// TODO Auto-generated method stub
-	throw new UnsupportedOperationException("Unimplemented method 'setAvatar'");
-}
+  @Override
+  public Mono<Void> setAvatar(@Min(0) Long avatarId, ServerWebExchange exchange) {
+
+    var principal = getPrincipal(exchange);
+    return principal.map(
+        x -> x.getAttribute("user_id"))
+        .cast(Integer.class)
+        .map(x -> x.longValue())
+        .flatMap(id -> userRep.findById(id))
+        .doOnNext(u -> u.setAvatarId(avatarId))
+        .flatMap(u -> userRep.save(u))
+        .then();
+
+  }
 
 }

@@ -20,6 +20,7 @@ public class AppUser implements UserDetails {
   private String username;
   private UserRole role;
   private String passwordHash;
+  private Long avatarId;
 
   public static enum UserRole {
     Player, Manager, Banned

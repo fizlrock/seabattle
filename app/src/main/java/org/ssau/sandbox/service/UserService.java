@@ -7,11 +7,13 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.openapitools.model.RegistrationRequestBody;
 import org.openapitools.model.UserProfileDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.ssau.sandbox.domain.user.AppUser;
 import org.ssau.sandbox.domain.user.AppUser.UserRole;
 import org.ssau.sandbox.repository.AppUserRepository;
+import org.ssau.sandbox.repository.AvatarRepository;
 
 import jakarta.annotation.PostConstruct;
 import reactor.core.publisher.Mono;
@@ -25,8 +27,12 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class UserService {
 
-  private final PasswordEncoder passEncoder;
-  private final AppUserRepository userRepository;
+  @Autowired
+  private PasswordEncoder passEncoder;
+  @Autowired
+  private AppUserRepository userRepository;
+  @Autowired
+  private AvatarRepository avatarRepository;
 
   private Function<RegistrationRequestBody, AppUser> basicUserFactory;
 
@@ -36,16 +42,21 @@ public class UserService {
         .username(r.getLogin())
         .passwordHash(passEncoder.encode(r.getPassword()))
         .role(UserRole.Player)
+        .avatarId(0l) // default avatar
         .build();
   }
 
-  private Function<AppUser, UserProfileDto> dtoFactory = user -> {
+  private Function<AppUser, Mono<UserProfileDto>> dtoFactory = user -> {
     var dto = new UserProfileDto();
     dto.setLogin(user.getUsername());
     dto.setUserId(user.getId());
-    dto.setAvatarId(-1l);
-    dto.setPictureUrl("https://i.pinimg.com/736x/e9/77/ad/e977ad69d2c07efd37b044b85e29aff7.jpg");
-    return dto;
+    dto.setAvatarId(user.getAvatarId());
+
+    return avatarRepository.findById(user.getAvatarId()).map(avatar -> {
+      dto.setPictureUrl(avatar.getPicture_url());
+      return dto;
+    });
+    // TODO
   };
 
   public Mono<UserProfileDto> registerUser(Mono<RegistrationRequestBody> request) {
@@ -53,13 +64,13 @@ public class UserService {
         .map(basicUserFactory)
         .flatMap(user -> userRepository.existsByUsername(user.getUsername())
             .flatMap(exists -> {
-              if (exists) {
+              if (exists)
                 return Mono.error(new IllegalArgumentException("Пользователь с таким именем уже существует"));
-              } else {
+              else
                 return userRepository.save(user);
-              }
+
             }))
-        .map(dtoFactory)
+        .flatMap(dtoFactory)
         .doOnError(th -> log.debug("Ошибка регистрации пользователя: {}", th))
         .doOnNext(x -> log.info("Регистрация игрока с именем: {}", x.getLogin()));
   }
@@ -67,7 +78,7 @@ public class UserService {
   public Mono<UserProfileDto> getUserProfileByUsername(Mono<String> username) {
     return username
         .flatMap(userRepository::findByUsername)
-        .map(dtoFactory);
+        .flatMap(dtoFactory);
 
   }
 

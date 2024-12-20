@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +14,6 @@ import liquibase.database.Database;
 import liquibase.database.DatabaseFactory;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.resource.ClassLoaderResourceAccessor;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -20,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Component
-public class DatabaseInitializer implements CommandLineRunner {
+public class DatabaseInitializer implements ApplicationRunner {
 
   @Value("${liquibase.url}")
   String url;
@@ -32,10 +33,10 @@ public class DatabaseInitializer implements CommandLineRunner {
   String changeLogFilePath;
 
   @Override
-  public void run(String... args) throws Exception {
+  public void run(ApplicationArguments args) throws Exception {
 
     log.info("Выполнение миграций БД");
-      log.info("Подключение к БД по адресу: {}", url);
+    log.info("Подключение к БД по адресу: {}", url);
 
     try (Connection connection = DriverManager.getConnection(url, username,
         password)) {
@@ -49,7 +50,7 @@ public class DatabaseInitializer implements CommandLineRunner {
       liquibase.update(""); // Пустая строка означает все контексты
       liquibase.close();
     } catch (Exception e) {
-      e.printStackTrace();
+      throw new RuntimeException(e);
     }
     log.info("Миграция успешно выполнена");
   }
