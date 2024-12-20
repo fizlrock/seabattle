@@ -3,6 +3,7 @@ package org.ssau.sandbox.api;
 import org.openapitools.api.AvatarApi;
 import org.openapitools.api.UserApi;
 import org.openapitools.model.AvatarDto;
+import org.openapitools.model.GameStatsDto;
 import org.openapitools.model.RegistrationRequestBody;
 import org.openapitools.model.UserProfileDto;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -53,18 +54,23 @@ public class UserController implements UserApi, AvatarApi {
     return userService.registerUser(regRequest);
   }
 
-  @Override
-  public Mono<Void> setAvatar(
-      @Min(0) Long userId,
-      @Min(0) Long avatarId,
-      ServerWebExchange exchange) {
-    throw new UnsupportedOperationException("Unimplemented method 'setAvatar'");
-  }
 
   @Override
   public Flux<AvatarDto> getAvatars(ServerWebExchange exchange) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'getAvatars'");
   }
+
+@Override
+public Flux<GameStatsDto> getStats(@Min(0) @Valid Long count, ServerWebExchange exchange) {
+	// TODO Auto-generated method stub
+	throw new UnsupportedOperationException("Unimplemented method 'getStats'");
+}
+
+@Override
+public Mono<Void> setAvatar(@Min(0) Long avatarId, ServerWebExchange exchange) {
+	// TODO Auto-generated method stub
+	throw new UnsupportedOperationException("Unimplemented method 'setAvatar'");
+}
 
 }

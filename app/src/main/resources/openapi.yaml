@@ -120,34 +120,18 @@ paths:
         schema:
           type: integer
           format: int64
-
+          default: 5
           minimum: 0
+
       responses:
         200:
-          description: Список игр в формате JSON.
+          description: Статистика игр последних count игр
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    game_number:
-                      type: integer
-                      description: Номер игры в списке статистики.
-                    opponent_name:
-                      type: string
-                      description: Имя противника.
-                    shots_fired:
-                      type: integer
-                      description: Общее количество выстрелов.
-                    hit_percentage:
-                      type: string
-                      description: Процент попаданий, в формате строки с символом '%'.
-                    match_duration:
-                      type: integer
-                      description: Длительность поединка в миллисекундах.
-        
+                  $ref: '#/components/schemas/game_stats_dto'        
  
  
  
@@ -396,9 +380,6 @@ components:
           $ref: '#/components/schemas/boat_types_settings_dto'
         game_map_settings_dto:
           $ref : '#/components/schemas/game_map_settings_dto'
-
-    
-
     
     placement_strategy_dto:
       description: >
@@ -426,6 +407,31 @@ components:
       description: Описание расположений кораблей на карте 
       items:
         $ref : '#/components/schemas/boat_cord_dto'
+
+
+    game_stats_dto:
+      type: object
+      properties:
+        game_number:
+          type: integer
+          description: Порядковый номер игры
+          minimum: 0
+        opponent_name:
+          type: string
+          description: Имя противника
+        shots_fired:
+          type: integer
+          description: Количество выстрелов
+          minimum: 0
+        hit_percentage:
+          type: integer
+          description: Процент попаданий
+          minimum: 0
+          maximum: 100
+        match_duration:
+          type: integer
+          description: Длительность поединка в миллисекундах
+          minimum: 0
 
     boat_cord_dto:
       type: object
@@ -551,3 +557,4 @@ components:
           minLength: 4
           maxLength: 12
           examples: ['mypass', '12345678']
+

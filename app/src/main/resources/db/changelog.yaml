@@ -29,3 +29,28 @@ databaseChangeLog:
               - column:
                   name: role
                   type: varchar(20)
+
+  - changeSet:
+      id: '2'
+      author: fizlrock
+      comment:  Создание таблицы для аватаров
+      changes:
+        - createTable:
+            tableName: avatar
+            remarks:  Таблица для аватаров
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  startWith: 1
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: picture_url
+                  type: bigint
+                  autoIncrement: true
+                  startWith: 1
+                  constraints:
+                    primaryKey: true
+
