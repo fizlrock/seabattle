@@ -1,6 +1,17 @@
 
 server:
   port: 8081
+
+
+seabattle:
+  # Таймаут вебхука. Через сколько завершается подключение
+  webhook_timeout: 10
+
+  # Таймаут матчмейкинга
+  matchmaking_timeout: 120
+
+  # Таймаут на ход игрока
+  fire_timeout: 120
  
 
 spring:

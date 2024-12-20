@@ -7,9 +7,9 @@ import java.util.List;
 import org.openapitools.model.GameStateDto;
 import org.openapitools.model.GameStateDto.StatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.ssau.sandbox.domain.exception.NoSessionException;
-import org.ssau.sandbox.domain.exception.UserAlreadyInSessionException;
 import org.ssau.sandbox.domain.game.BoatCord;
 import org.ssau.sandbox.domain.game.BoatType;
 import org.ssau.sandbox.domain.game.GameMapSerializer;
@@ -35,6 +35,9 @@ public class GameService {
 
   private final GameSessionPool sessionPool;
   private final GameMapSerializer mapSerializer;
+  private final WaitService waitService;
+  @Value("${seabattle.webhook_timeout}")
+  Long webhookTimeout;
 
   public final GameSettings gameSettings = new GameSettings(
       new GameMapSettings(10, 10),
@@ -45,6 +48,7 @@ public class GameService {
           new BoatType(4, 1))
 
   );
+
 
   /**
    * Начать новую игру.
@@ -70,9 +74,6 @@ public class GameService {
 
   }
 
-  @Autowired
-  WaitService waitService;
-
   public Mono<GameStateDto> getUpdatedGameState(Long userId, Long currentStateNumber) {
 
     log.info("Запрос обновленного состояния игры. userId: {} state: {}", userId, currentStateNumber);
@@ -85,7 +86,7 @@ public class GameService {
     else
       return waitService.waitForSignal(session.getSessionId().toString())
           .cast(GameSession.class)
-          .timeout(Duration.ofSeconds(10), Mono.just(session))
+          .timeout(Duration.ofSeconds(webhookTimeout), Mono.just(session))
           .map(s -> toDto(s, userId))
           .doOnNext(x -> log.debug("Отправка обновленного состояния пользователю с id : {}", userId));
 

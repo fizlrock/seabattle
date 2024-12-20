@@ -1,10 +1,12 @@
 package org.ssau.sandbox.domain.game;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.ssau.sandbox.domain.game.field.GameField;
@@ -12,6 +14,9 @@ import org.ssau.sandbox.service.WaitService;
 
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
+import reactor.core.Disposable;
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 /**
  * Содержит логику изменения состояния игры и проверку допустимости действий
@@ -38,6 +43,13 @@ public class GameSession {
   private Long firstPlayerId;
   private Long secondPlayerId;
 
+  Disposable failTask;
+
+  @Value("${seabattle.matchmaking_timeout}")
+  Long matchmakingTimeout;
+  @Value("${seabattle.fire_timeout}")
+  Long fireTimeout;
+
   /**
    * Идентификатор активного игрока.
    * <p>
@@ -58,17 +70,7 @@ public class GameSession {
 
   private LocalDateTime endedAt;
 
-  public Long getFirstPlayerId() {
-    return firstPlayerId;
-  }
-
-  public Long getSecondPlayerId() {
-    return secondPlayerId;
-  }
-
-  public Long getActivePlayerId() {
-    return activePlayerId;
-  }
+  private long lastShotMillis = 0;
 
   /**
    * Настройки игрового поля
@@ -77,11 +79,6 @@ public class GameSession {
 
   @Autowired
   private WaitService waitService;
-
-  private void stateUpdated() {
-    version++;
-    waitService.signal(sessionId.toString(), this);
-  }
 
   private GameState state;
 
@@ -101,6 +98,38 @@ public class GameSession {
     max_score = settings.boatTypes().stream().mapToInt(t -> t.size() * t.count()).sum();
 
     state = GameState.Created;
+    planMatchmakingTimeoutTask();
+  }
+
+  private void planMatchmakingTimeoutTask() {
+
+    if (!failTask.isDisposed())
+      failTask.dispose();
+
+    failTask = Mono.delay(Duration.ofSeconds(matchmakingTimeout))
+        .doOnNext(tick -> fail("Team building timeout"))
+        .subscribeOn(Schedulers.boundedElastic()).subscribe();
+  }
+
+  private void planFireTimeoutTask() {
+    if (!failTask.isDisposed())
+      failTask.dispose();
+
+    failTask = Mono.delay(Duration.ofSeconds(fireTimeout))
+        .doOnNext(tick -> fail("Fire timeout"))
+        .subscribeOn(Schedulers.boundedElastic()).subscribe();
+  }
+
+  public Long getFirstPlayerId() {
+    return firstPlayerId;
+  }
+
+  public Long getSecondPlayerId() {
+    return secondPlayerId;
+  }
+
+  public Long getActivePlayerId() {
+    return activePlayerId;
   }
 
   public UUID getSessionId() {
@@ -136,6 +165,7 @@ public class GameSession {
         activePlayerId = firstPlayerId;
         field = firstPlayerField;
         state = GameState.WaitingSecondPlayer;
+        planMatchmakingTimeoutTask();
       }
       case WaitingSecondPlayer -> {
         if (playerId.equals(firstPlayerId))
@@ -143,9 +173,15 @@ public class GameSession {
 
         field = secondPlayerField;
         secondPlayerId = playerId;
+
         state = GameState.Started;
+
         startedAt = LocalDateTime.now();
         log.info("Начат бой между игроками с id {} и {}", firstPlayerId, secondPlayerId);
+
+        planFireTimeoutTask();
+        // Планируем задачку завершения сессии по таймауту хода
+
       }
       default -> throw new IllegalArgumentException("В это состоянии игры невозможно добавлять игроков");
     }
@@ -171,6 +207,8 @@ public class GameSession {
     if (playerId != activePlayerId)
       throw new IllegalStateException("Сейчас очередь опонента");
 
+    planFireTimeoutTask();
+
     log.trace("Игрок {} делает выстрел по координатам {}:{}", playerId, x, y);
 
     log.info("FPF: {}, SPF: {}", firstPlayerField, secondPlayerField);
@@ -188,9 +226,10 @@ public class GameSession {
 
     log.info("Осталось {} живых палуб", aliveShips);
 
-    if (aliveShips == 0)
+    if (aliveShips == 0) {
       state = GameState.Ended;
-
+      failTask.dispose();
+    }
     stateUpdated();
 
     return aliveShips;
@@ -220,6 +259,11 @@ public class GameSession {
     else
       throw new IllegalArgumentException("Игрок не состоит в этой игре");
 
+  }
+
+  private void stateUpdated() {
+    version++;
+    waitService.signal(sessionId.toString(), this);
   }
 
 }
