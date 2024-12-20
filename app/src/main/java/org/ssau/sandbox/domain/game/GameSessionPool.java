@@ -1,19 +1,22 @@
 package org.ssau.sandbox.domain.game;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.ssau.sandbox.domain.game.GameSession.GameState;
 
 import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Flux;
 
 /**
  * Структура хранит активные игры
@@ -23,10 +26,31 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class GameSessionPool {
 
-  public final Map<GameSession, Object> sessions = new ConcurrentHashMap<>();
+  public final Set<GameSession> sessions = ConcurrentHashMap.newKeySet();
 
-  // TODO после завершения игры, нужно удалить объекты из sessions и
-  // userSessionDict
+  @Value("${seabattle.pool_check_period}")
+  Long poolCheckPeriod;
+
+  {
+    // Запуск Flux для проверки пула
+    Flux.interval(Duration.ZERO, Duration.ofSeconds(poolCheckPeriod))
+        .subscribe(tick -> this.checkPool());
+  }
+
+  private void checkPool() {
+    boolean deleted = sessions.removeIf(s -> s.getState() == GameState.Failed);
+    if (deleted)
+      log.info("Удалены игровые сессии завершенные ошибкой");
+
+    var ended_sessions = sessions.stream()
+        .filter(s -> s.getState() == GameState.Ended)
+        .toList();
+
+    sessions.removeAll(ended_sessions);
+    // TODO тут надо сессии сохранить
+
+  }
+
   public final Map<Long, GameSession> userSessionDict = new ConcurrentHashMap<>();
 
   public final GameSettings settings = new GameSettings(
@@ -45,7 +69,7 @@ public class GameSessionPool {
    */
   public GameSession findSession() {
     log.debug("Поиск игровой сессии");
-    var session = sessions.entrySet().stream().map(Entry::getKey)
+    var session = sessions.stream()
         .filter(s -> s.getState() == GameState.WaitingSecondPlayer)
         .findAny();
 
@@ -62,8 +86,7 @@ public class GameSessionPool {
         return (s.getFirstPlayerId() == user_id) || (s.getSecondPlayerId() == user_id);
     };
 
-    return sessions.entrySet().stream()
-        .map(Entry::getKey)
+    return sessions.stream()
         .filter(s -> (s.getState() != GameState.Ended) & (s.getState() != GameState.Failed))
         .filter(userInSession)
         .findAny();
@@ -75,7 +98,7 @@ public class GameSessionPool {
    * @return словарь состояние:кол-во
    */
   private Map<GameState, Long> getPoolStateStat() {
-    return sessions.entrySet().stream().map(Entry::getKey)
+    return sessions.stream()
         .collect(Collectors.groupingBy(GameSession::getState, Collectors.counting()));
   }
 
@@ -90,7 +113,7 @@ public class GameSessionPool {
 
   private GameSession createNewSession() {
     var session = newSession();
-    sessions.put(session, new Object());
+    sessions.add(session);
     logPoolState();
     return session;
   }

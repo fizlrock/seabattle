@@ -239,6 +239,7 @@ public class GameSession {
    * Завершить игровую сессию с ошибкой
    */
   public void fail(String reason) {
+    log.warn("Завершение игровой сессии {} по ошибке {}", sessionId, reason);
     state = GameState.Failed;
     stateUpdated();
   }
