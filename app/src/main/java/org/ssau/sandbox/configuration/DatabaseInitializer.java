@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Component
-@Order(0)
+@Order(1)
 public class DatabaseInitializer implements ApplicationRunner {
 
   @Value("${liquibase.url}")
