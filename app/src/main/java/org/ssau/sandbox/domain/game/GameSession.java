@@ -6,13 +6,11 @@ import java.util.Collection;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.ssau.sandbox.domain.game.field.GameField;
 import org.ssau.sandbox.service.WaitService;
 
-import jakarta.annotation.PostConstruct;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.Disposable;
@@ -46,12 +44,6 @@ public class GameSession {
 
   Disposable failTask;
 
-
-  @PostConstruct
-  void fuck(){
-    System.out.println("\nFUUUUUUUUUUCK YOOUT\n");
-  }
-
   // @Value("${seabattle.matchmaking_timeout}")
   long matchmakingTimeout = 120;
 
@@ -83,12 +75,28 @@ public class GameSession {
 
   private long lastShotMillis = 0;
 
+  private int firstPlayerShotsInTarget = 0;
+
+  public int getFirstPlayerShotsInTarget() {
+    return firstPlayerShotsInTarget;
+  }
+
+  private int secondPlayerShotsInTarget = 0;
+
+  public int getSecondPlayerShotsInTarget() {
+    return secondPlayerShotsInTarget;
+  }
+
+  private int totalShots = 0;
+
+  public int getTotalShots() {
+    return totalShots;
+  }
+
   /**
    * Настройки игрового поля
    */
   private final GameSettings settings;
-
-
   private GameState state;
 
   /**
@@ -110,23 +118,12 @@ public class GameSession {
     planMatchmakingTimeoutTask();
   }
 
-  private void planMatchmakingTimeoutTask() {
-
-    if (failTask != null && !failTask.isDisposed())
-      failTask.dispose();
-
-    failTask = Mono.delay(Duration.ofSeconds(matchmakingTimeout))
-        .doOnNext(tick -> fail("Team building timeout"))
-        .subscribeOn(Schedulers.boundedElastic()).subscribe();
+  public LocalDateTime getStartedAt() {
+    return startedAt;
   }
 
-  private void planFireTimeoutTask() {
-    if (failTask != null && !failTask.isDisposed())
-      failTask.dispose();
-
-    failTask = Mono.delay(Duration.ofSeconds(fireTimeout))
-        .doOnNext(tick -> fail("Fire timeout"))
-        .subscribeOn(Schedulers.boundedElastic()).subscribe();
+  public LocalDateTime getEndedAt() {
+    return endedAt;
   }
 
   public Long getFirstPlayerId() {
@@ -220,24 +217,29 @@ public class GameSession {
 
     log.trace("Игрок {} делает выстрел по координатам {}:{}", playerId, x, y);
 
-    log.info("FPF: {}, SPF: {}", firstPlayerField, secondPlayerField);
-
     int aliveShips;
     if (playerId == firstPlayerId) {
-      if (!secondPlayerField.makeShot(x, y))
+      if (!secondPlayerField.makeShot(x, y)) {
         activePlayerId = secondPlayerId;
+      } else
+        firstPlayerShotsInTarget++;
       aliveShips = secondPlayerField.getAliveShips();
     } else {
       if (!firstPlayerField.makeShot(x, y))
         activePlayerId = firstPlayerId;
+      else
+        secondPlayerShotsInTarget++;
+
       aliveShips = firstPlayerField.getAliveShips();
     }
+    totalShots++;
 
     log.info("Осталось {} живых палуб", aliveShips);
 
     if (aliveShips == 0) {
-      state = GameState.Ended;
       failTask.dispose();
+      state = GameState.Ended;
+      endedAt = LocalDateTime.now();
     }
     stateUpdated();
 
@@ -269,6 +271,25 @@ public class GameSession {
     else
       throw new IllegalArgumentException("Игрок не состоит в этой игре");
 
+  }
+
+  private void planMatchmakingTimeoutTask() {
+
+    if (failTask != null && !failTask.isDisposed())
+      failTask.dispose();
+
+    failTask = Mono.delay(Duration.ofSeconds(matchmakingTimeout))
+        .doOnNext(tick -> fail("Team building timeout"))
+        .subscribeOn(Schedulers.boundedElastic()).subscribe();
+  }
+
+  private void planFireTimeoutTask() {
+    if (failTask != null && !failTask.isDisposed())
+      failTask.dispose();
+
+    failTask = Mono.delay(Duration.ofSeconds(fireTimeout))
+        .doOnNext(tick -> fail("Fire timeout"))
+        .subscribeOn(Schedulers.boundedElastic()).subscribe();
   }
 
   private void stateUpdated() {

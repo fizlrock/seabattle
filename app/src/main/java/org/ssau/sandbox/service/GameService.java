@@ -126,12 +126,12 @@ public class GameService {
       if (session.getFirstPlayerId() == playerId) {
         yourField = session.getFirstPlayerField();
         oppoField = session.getSecondPlayerField();
-        dto.setOponentName(session.getSecondPlayerId().toString());
+        dto.setOponentId(session.getSecondPlayerId());
 
       } else if (session.getSecondPlayerId() == playerId) {
         yourField = session.getSecondPlayerField();
         oppoField = session.getFirstPlayerField();
-        dto.setOponentName(session.getFirstPlayerId().toString());
+        dto.setOponentId(session.getFirstPlayerId());
       } else
         throw new IllegalArgumentException("Пользователя не состоит в игре");
 

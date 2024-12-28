@@ -1,0 +1,265 @@
+@startuml
+class GlobalExceptionHandler {
++ Mono<ResponseEntity<String>> handleGeneralException(Exception)
++ String handleWebExchangeBindException(WebExchangeBindException)
++ Mono<ResponseEntity<String>> handle(IllegalArgumentException)
++ String handle(SeabattleException)
+}
+
+interface AppUserRepository {
++ Mono<AppUser> findByUsername(String)
++ Mono<Boolean> existsByUsername(String)
+}
+
+class GameSettings {
++ List<BoatType> boatTypes()
++ GameMapSettings mapSettings()
+}
+
+class App {
++ {static} void main(String[])
+}
+
+interface GameMapSerializer {
++ String serializeOpponentMap(GameField)
++ String serializeOwnerMap(GameField)
+}
+
+class GameSession {
++ Long getFirstPlayerId()
++ Long getSecondPlayerId()
++ Long getActivePlayerId()
++ UUID getSessionId()
++ long getVersion()
++ GameField getFirstPlayerField()
++ GameField getSecondPlayerField()
++ GameSettings getSettings()
++ GameState getState()
++ void addPlayer(Long,Collection<BoatCord>)
++ int makeShot(long,int,int)
++ void fail(String)
++ int hashCode()
++ GameField getField(long)
+}
+
+enum GameState {
++  Created
++  WaitingSecondPlayer
++  Ended
++  Failed
++  Started
+}
+
+class UserDetailsService {
++ Mono<UserDetails> findByUsername(String)
+}
+
+class CookieBearerTokenExtractor {
++ {static} Mono<String> extract(ServerWebExchange)
+}
+
+class GameService {
++ GameSettings gameSettings
++ Mono<GameStateDto> startGame(Long,Collection<BoatCord>)
++ Mono<GameStateDto> getUpdatedGameState(Long,Long)
++ GameStateDto makeShot(Long,int,int)
++ GameStateDto toDto(GameSession,Long)
+}
+
+
+class GameMapSettings {
++ int height()
++ int width()
+}
+
+class DatabaseInitializer {
++ void run(ApplicationArguments)
+}
+
+class TokenExpiredException {
+}
+enum UserRole {
++  Player
++  Admin
+}
+
+enum OpponentCageState {
++  Unchecked
++  CheckedEmpty
++  UncheckedEmpty
++  BlowedShip
+}
+
+class NoSessionException {
+}
+class JWTTokenService {
++ String generateToken(String,Long,Collection<? extends GrantedAuthority>)
+}
+
+class WaitService {
++ Mono<Object> waitForSignal(String)
++ Mono<Void> signal(String,Object)
+}
+
+class BoatType {
++ int count()
++ int size()
+}
+
+class GameController {
++ Mono<GameSettingsDto> getGameSettings(ServerWebExchange)
++ Mono<GameStateDto> getUpdatedGameState(Long,ServerWebExchange)
++ Mono<GameStateDto> makeShot(Mono<ShotDto>,ServerWebExchange)
++ Mono<GameStateDto> startNewGame(Flux<BoatCordDto>,ServerWebExchange)
+}
+
+class BearerTokenAuthenticationManager {
++ void init()
++ Mono<Authentication> authenticate(Authentication)
+}
+
+class BearerAuthenticationFilter {
+}
+class AsciiGameMapSerializer {
++ String serializeOpponentMap(GameField)
++ String serializeOwnerMap(GameField)
+}
+
+class Avatar {
+}
+class BoatPlacement {
+}
+class UserAlreadyInSessionException {
+}
+class UsernamePasswordAuthenticationManager {
++ Mono<Authentication> authenticate(Authentication)
+}
+
+enum OwnerCageState {
++  Void
++  Ship
++  ShotIntoVoid
++  ShotIntoShip
+}
+
+class JWTSecrets {
+}
+class GameSessionRecord {
+}
+class UserController {
++ Mono<UserProfileDto> getUserProfile(ServerWebExchange)
++ Mono<UserProfileDto> registerUser(Mono<RegistrationRequestBody>,ServerWebExchange)
++ Flux<AvatarDto> getAvatars(ServerWebExchange)
++ Flux<GameStatsDto> getStats(Long,ServerWebExchange)
++ Mono<Void> setAvatar(Long,ServerWebExchange)
+}
+
+class SecurityConfiguration {
++ PasswordEncoder passwordEncoder()
++ void printFilterChain(ApplicationReadyEvent)
+}
+
+class BasicAuthenticationConverter {
++ Mono<Authentication> convert(ServerWebExchange)
+}
+
+class ServerHttpBearerAuthenticationConverter {
++ Mono<Authentication> convert(ServerWebExchange)
+}
+
+class BoatCord {
++ int xe()
++ int ye()
++ int xs()
++ int ys()
+}
+
+class UserService {
++ Mono<UserProfileDto> registerUser(Mono<RegistrationRequestBody>)
++ Mono<UserProfileDto> getUserProfileByUsername(Mono<String>)
+}
+
+class BasicAuthenticationFilter {
+}
+class GameSessionPool {
++ Set<GameSession> sessions
++ Map<Long,GameSession> userSessionDict
++ GameSettings settings
++ GameSession findSession()
++ Optional<GameSession> findUserSession(long)
+}
+
+
+class BasicAuthenticationSuccessHandler {
++ Mono<Void> onAuthenticationSuccess(WebFilterExchange,Authentication)
+}
+
+class HeadersBearerTokenExtractor {
++ {static} Mono<String> extract(ServerWebExchange)
+}
+
+class AvatarInitializer {
++ void run(ApplicationArguments)
+}
+
+interface AvatarRepository {
+}
+class SeabattleException {
+}
+class TokenController {
++ Mono<Void> getToken(ServerWebExchange)
+}
+
+class GameField {
++ Map<Integer,Integer> getStilBoats()
++ boolean makeShot(int,int)
++ void placeBoat(BoatCord)
++ List<Point> getPoints(BoatCord)
++ int getHeight()
++ int getWidth()
++ int[][] getOwnerMap()
++ int[][] getOpponentMap()
+}
+
+class GameField$Point {
++ int x()
++ int y()
+}
+
+class AppUser {
++ Collection<? extends GrantedAuthority> getAuthorities()
++ String getPassword()
+}
+
+enum UserRole {
++  Player
++  Manager
++  Banned
+}
+
+
+
+ReactiveCrudRepository <|-- AppUserRepository
+ReactiveUserDetailsService <|.. UserDetailsService
+ApplicationRunner <|.. DatabaseInitializer
+RuntimeException <|-- TokenExpiredException
+SeabattleException <|-- NoSessionException
+GameApi <|.. GameController
+ReactiveAuthenticationManager <|.. BearerTokenAuthenticationManager
+AuthenticationWebFilter <|-- BearerAuthenticationFilter
+GameMapSerializer <|.. AsciiGameMapSerializer
+SeabattleException <|-- UserAlreadyInSessionException
+ReactiveAuthenticationManager <|.. UsernamePasswordAuthenticationManager
+UserApi <|.. UserController
+AvatarApi <|.. UserController
+ServerAuthenticationConverter <|.. BasicAuthenticationConverter
+ServerAuthenticationConverter <|.. ServerHttpBearerAuthenticationConverter
+AuthenticationWebFilter <|-- BasicAuthenticationFilter
+ServerAuthenticationSuccessHandler <|.. BasicAuthenticationSuccessHandler
+ApplicationRunner <|.. AvatarInitializer
+ReactiveCrudRepository <|-- AvatarRepository
+RuntimeException <|-- SeabattleException
+TokenApi <|.. TokenController
+GameField +.. GameField$Point
+UserDetails <|.. AppUser
+@enduml

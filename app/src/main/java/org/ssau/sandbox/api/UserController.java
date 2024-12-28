@@ -11,6 +11,7 @@ import org.springframework.security.oauth2.core.DefaultOAuth2AuthenticatedPrinci
 import org.springframework.security.oauth2.server.resource.authentication.BearerTokenAuthentication;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
+import org.ssau.sandbox.domain.game.DtoFactory;
 import org.ssau.sandbox.repository.AppUserRepository;
 import org.ssau.sandbox.repository.AvatarRepository;
 import org.ssau.sandbox.service.UserService;
@@ -31,6 +32,7 @@ public class UserController implements UserApi, AvatarApi {
   private final UserService userService;
   private final AvatarRepository avaRep;
   private final AppUserRepository userRep;
+  private final DtoFactory dtoFactory;
 
   private Mono<DefaultOAuth2AuthenticatedPrincipal> getPrincipal(ServerWebExchange exchange) {
 
@@ -90,6 +92,15 @@ public class UserController implements UserApi, AvatarApi {
         .flatMap(u -> userRep.save(u))
         .then();
 
+  }
+
+  @Override
+  public Mono<UserProfileDto> getUserProfileById(@Min(0) Long userId, ServerWebExchange exchange) {
+    return userRep
+        .findById(userId)
+        .flatMap(u -> dtoFactory.toDto(u))
+        .switchIfEmpty(Mono.error(new UsernameNotFoundException("Пользователь с указанным ID не найден")))
+        ;
   }
 
 }

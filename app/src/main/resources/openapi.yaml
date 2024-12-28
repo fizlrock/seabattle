@@ -87,6 +87,32 @@ paths:
               schema:
                 $ref: '#/components/schemas/user_profile_dto'
  
+  /user/profile/{userId}:
+    get:
+      tags: ['profile']
+      summary: >
+        Получить профиль пользователя
+      operationId: getUserProfileById
+      security:
+        - bearerAuth: []
+
+      parameters:
+      - name: userId
+        in : path
+        required: true
+        schema:
+          type: integer
+          format: int64
+          minimum: 0
+
+      responses:
+        200:
+          description: Профиль пользователя
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_profile_dto'
+ 
   /user/profile/avatar/{avatarId}:
     post:
       tags: ['profile']
@@ -351,9 +377,9 @@ components:
             - WaitingSecondPlayer
             - Ended
             - Failed
-        oponent_name:
-          type: string
-          examples : ['njenkins']
+        oponent_id:
+          type: integer
+          format: int64
         you_shoting:
           description: Ваша ли очередь делать выстрел
           type: boolean
@@ -412,23 +438,19 @@ components:
     game_stats_dto:
       type: object
       properties:
-        game_number:
+        number:
           type: integer
           description: Порядковый номер игры
           minimum: 0
         opponent_name:
           type: string
           description: Имя противника
-        shots_fired:
-          type: integer
-          description: Количество выстрелов
-          minimum: 0
         hit_percentage:
           type: integer
           description: Процент попаданий
           minimum: 0
           maximum: 100
-        match_duration:
+        duration:
           type: integer
           description: Длительность поединка в миллисекундах
           minimum: 0

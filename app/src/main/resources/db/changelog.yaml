@@ -82,3 +82,101 @@ databaseChangeLog:
               constraintName: fk_app_user_avatar
               referencedTableName: avatar
               referencedColumnNames: id
+
+  - changeSet:
+      id: create-game-session-record
+      author: fizlrock
+      changes:
+        - createTable:
+            tableName: game_session_record
+            columns:
+              - column:
+                  name: session_id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  remarks: "Уникальный идентификатор сессии, создаётся на клиенте"
+              - column:
+                  name: first_player_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                  remarks: "Идентификатор первого игрока, ссылается на app_user(id)"
+              - column:
+                  name: second_player_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                  remarks: "Идентификатор второго игрока, ссылается на app_user(id)"
+              - column:
+                  name: winner_player_id
+                  type: BIGINT
+                  remarks: "Идентификатор победителя, ссылается на app_user(id)"
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: started_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+                  remarks: "Время начала игры"
+              - column:
+                  name: ended_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+                  remarks: "Время окончания игры"
+
+              - column:
+                  name: total_shots
+                  type: INT
+                  defaultValueNumeric: 0
+                  remarks: "Общее количество выстрелов в игре"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: first_player_shots_in_target
+                  type: INT
+                  defaultValueNumeric: 0
+                  remarks: "Количество успешных попаданий первого игрока"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: second_player_shots_in_target
+                  type: INT
+                  defaultValueNumeric: 0
+                  remarks: "Количество успешных попаданий второго игрока"
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            constraintName: fk_game_session_first_player
+            baseTableName: game_session_record
+            baseColumnNames: first_player_id
+            referencedTableName: app_user
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            constraintName: fk_game_session_second_player
+            baseTableName: game_session_record
+            baseColumnNames: second_player_id
+            referencedTableName: app_user
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            constraintName: fk_game_session_winner_player
+            baseTableName: game_session_record
+            baseColumnNames: winner_player_id
+            referencedTableName: app_user
+            referencedColumnNames: id
+
+  - changeSet:
+      id: 'create-game-stats-procedure'
+      author: fizlrock
+      changes:
+        - createProcedure:
+            procedureName: getUserStat
+            path: user_stats_procedure.sql
+            comments: Процедура для получение статистики игр пользователя

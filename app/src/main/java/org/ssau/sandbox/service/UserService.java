@@ -10,6 +10,7 @@ import org.openapitools.model.UserProfileDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.ssau.sandbox.domain.game.DtoFactory;
 import org.ssau.sandbox.domain.user.AppUser;
 import org.ssau.sandbox.domain.user.AppUser.UserRole;
 import org.ssau.sandbox.repository.AppUserRepository;
@@ -31,10 +32,11 @@ public class UserService {
   private PasswordEncoder passEncoder;
   @Autowired
   private AppUserRepository userRepository;
-  @Autowired
-  private AvatarRepository avatarRepository;
 
   private Function<RegistrationRequestBody, AppUser> basicUserFactory;
+
+  @Autowired
+  private DtoFactory dtoFactory;
 
   @PostConstruct
   void init() {
@@ -45,19 +47,6 @@ public class UserService {
         .avatarId(0l) // default avatar
         .build();
   }
-
-  private Function<AppUser, Mono<UserProfileDto>> dtoFactory = user -> {
-    var dto = new UserProfileDto();
-    dto.setLogin(user.getUsername());
-    dto.setUserId(user.getId());
-    dto.setAvatarId(user.getAvatarId());
-
-    return avatarRepository.findById(user.getAvatarId()).map(avatar -> {
-      dto.setPictureUrl(avatar.getPicture_url());
-      return dto;
-    });
-    // TODO
-  };
 
   public Mono<UserProfileDto> registerUser(Mono<RegistrationRequestBody> request) {
     return request
@@ -70,7 +59,7 @@ public class UserService {
                 return userRepository.save(user);
 
             }))
-        .flatMap(dtoFactory)
+        .flatMap(x -> dtoFactory.toDto(x))
         .doOnError(th -> log.debug("Ошибка регистрации пользователя: {}", th))
         .doOnNext(x -> log.info("Регистрация игрока с именем: {}", x.getLogin()));
   }
@@ -78,7 +67,7 @@ public class UserService {
   public Mono<UserProfileDto> getUserProfileByUsername(Mono<String> username) {
     return username
         .flatMap(userRepository::findByUsername)
-        .flatMap(dtoFactory);
+        .flatMap(x -> dtoFactory.toDto(x));
 
   }
 
