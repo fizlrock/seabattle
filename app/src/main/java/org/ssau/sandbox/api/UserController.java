@@ -14,6 +14,7 @@ import org.springframework.web.server.ServerWebExchange;
 import org.ssau.sandbox.domain.game.DtoFactory;
 import org.ssau.sandbox.repository.AppUserRepository;
 import org.ssau.sandbox.repository.AvatarRepository;
+import org.ssau.sandbox.repository.GameStatsRepository;
 import org.ssau.sandbox.service.UserService;
 
 import jakarta.validation.Valid;
@@ -33,6 +34,8 @@ public class UserController implements UserApi, AvatarApi {
   private final AvatarRepository avaRep;
   private final AppUserRepository userRep;
   private final DtoFactory dtoFactory;
+
+  private final GameStatsRepository statsRepa;
 
   private Mono<DefaultOAuth2AuthenticatedPrincipal> getPrincipal(ServerWebExchange exchange) {
 
@@ -75,8 +78,13 @@ public class UserController implements UserApi, AvatarApi {
 
   @Override
   public Flux<GameStatsDto> getStats(@Min(0) @Valid Long count, ServerWebExchange exchange) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getStats'");
+    var principal = getPrincipal(exchange);
+    var id = principal.map(
+        x -> x.getAttribute("user_id"))
+        .cast(Integer.class)
+        .map(x -> x.longValue());
+
+    return id.flatMapMany(x -> statsRepa.getPersonalStat(x, count));
   }
 
   @Override
@@ -99,8 +107,7 @@ public class UserController implements UserApi, AvatarApi {
     return userRep
         .findById(userId)
         .flatMap(u -> dtoFactory.toDto(u))
-        .switchIfEmpty(Mono.error(new UsernameNotFoundException("Пользователь с указанным ID не найден")))
-        ;
+        .switchIfEmpty(Mono.error(new UsernameNotFoundException("Пользователь с указанным ID не найден")));
   }
 
 }

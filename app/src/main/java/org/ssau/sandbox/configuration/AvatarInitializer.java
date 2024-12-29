@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import org.openapitools.model.RegistrationRequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -16,9 +17,11 @@ import org.ssau.sandbox.domain.user.UserRole;
 import org.ssau.sandbox.repository.AppUserRepository;
 import org.ssau.sandbox.repository.AvatarRepository;
 import org.ssau.sandbox.repository.GameSessionRecordRepository;
+import org.ssau.sandbox.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 /**
  * DatabaseInitializer
@@ -31,17 +34,9 @@ public class AvatarInitializer implements ApplicationRunner {
   @Autowired
   AvatarRepository repository;
 
-  @Autowired
-  AppUserRepository userRep;
-  @Autowired
-  GameSessionRecordRepository sessionRep;
 
   @Override
   public void run(ApplicationArguments args) throws Exception {
-
-    var r = new GameSessionRecord(UUID.randomUUID(), 1l, 2l, 1l, LocalDateTime.now(), LocalDateTime.now(), 0, 0, 0);
-
-    sessionRep.save(r).subscribe();
 
     var count = repository.findAll().count().block();
     if (count > 1)

@@ -172,11 +172,3 @@ databaseChangeLog:
             referencedTableName: app_user
             referencedColumnNames: id
 
-  - changeSet:
-      id: 'create-game-stats-procedure'
-      author: fizlrock
-      changes:
-        - createProcedure:
-            procedureName: getUserStat
-            path: user_stats_procedure.sql
-            comments: Процедура для получение статистики игр пользователя

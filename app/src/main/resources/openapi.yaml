@@ -133,7 +133,7 @@ paths:
           description: Аватар успешно установлен
 
   /user/stats:
-    post:
+    get:
       tags: ['profile']
       operationId: getStats
       summary: Получить статистику об играх пользователя
@@ -442,6 +442,8 @@ components:
           type: integer
           description: Порядковый номер игры
           minimum: 0
+        you_win:
+          type: boolean
         opponent_name:
           type: string
           description: Имя противника
