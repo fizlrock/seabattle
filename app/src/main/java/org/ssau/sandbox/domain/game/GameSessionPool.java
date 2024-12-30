@@ -57,10 +57,10 @@ public class GameSessionPool {
         .toList();
     sessions.removeAll(ended_sessions);
 
-    Flux.fromIterable(ended_sessions)
-        .map(s -> entityFactory.toEntity(s))
-        .flatMap(s-> sessionRepository.save(s))
-        .subscribe();
+    // Flux.fromIterable(ended_sessions)
+    //     .map(s -> entityFactory.toEntity(s))
+    //     .flatMap(s-> sessionRepository.save(s))
+    //     .subscribe();
 
     // TODO тут надо сессии сохранить
 

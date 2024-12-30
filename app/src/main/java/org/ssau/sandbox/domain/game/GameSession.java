@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.ssau.sandbox.domain.game.field.GameField;
+import org.ssau.sandbox.repository.GameSessionRecordRepository;
 import org.ssau.sandbox.service.WaitService;
 
 import lombok.ToString;
@@ -52,6 +53,10 @@ public class GameSession {
 
   @Autowired
   private WaitService waitService;
+  @Autowired
+  private GameSessionRecordRepository sessionRepository;
+  @Autowired
+  private EntityFactory entityFactory;
 
   /**
    * Идентификатор активного игрока.
@@ -236,14 +241,22 @@ public class GameSession {
 
     log.info("Осталось {} живых палуб", aliveShips);
 
-    if (aliveShips == 0) {
-      failTask.dispose();
-      state = GameState.Ended;
-      endedAt = LocalDateTime.now();
-    }
     stateUpdated();
+    if (aliveShips == 0)
+      endSession();
 
     return aliveShips;
+  }
+
+  private void endSession() {
+    // TODO ужос ужос
+    failTask.dispose();
+    state = GameState.Ended;
+    endedAt = LocalDateTime.now();
+
+    var entity = entityFactory.toEntity(this);
+    sessionRepository.save(entity).subscribe();
+
   }
 
   /**
